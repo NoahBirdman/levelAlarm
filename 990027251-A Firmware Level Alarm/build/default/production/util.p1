@@ -85,6 +85,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S78 . . . ]
 "1827
 [v _ADCON1bits `VS78 ~T0 @X0 0 e@159 ]
+"270
+[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f876.h: 49: extern volatile unsigned char INDF @ 0x000;
@@ -1019,215 +1021,230 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;util.h: 40: void timer0_stop(void);
 [; ;util.h: 43: void adc_init_CH0(void);
 [; ;util.h: 46: void adc_start(void);
-"7 util.c
+"30 util.c
 [v _timer1_init `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 7: void timer1_init(){
+[; ;util.c: 30: void timer1_init(){
 [e :U _timer1_init ]
 [f ]
-[; ;util.c: 13: T1CONbits.T1CKPS = 0x03;
-"13
+[; ;util.c: 36: T1CONbits.T1CKPS = 0x03;
+"36
 [e = . . _T1CONbits 0 4 -> -> 3 `i `uc ]
-[; ;util.c: 14: T1CONbits.TMR1CS = 0;
-"14
+[; ;util.c: 37: T1CONbits.TMR1CS = 0;
+"37
 [e = . . _T1CONbits 0 1 -> -> 0 `i `uc ]
-[; ;util.c: 15: }
-"15
+[; ;util.c: 38: }
+"38
 [e :UE 84 ]
 }
-"18
+"41
 [v _timer1_start `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 18: void timer1_start(){
+[; ;util.c: 41: void timer1_start(){
 [e :U _timer1_start ]
 [f ]
-[; ;util.c: 19: T1CONbits.T1OSCEN = 1;
-"19
+[; ;util.c: 42: T1CONbits.T1OSCEN = 1;
+"42
 [e = . . _T1CONbits 0 3 -> -> 1 `i `uc ]
-[; ;util.c: 20: T1CONbits.TMR1ON = 1;
-"20
+[; ;util.c: 43: T1CONbits.TMR1ON = 1;
+"43
 [e = . . _T1CONbits 0 0 -> -> 1 `i `uc ]
-[; ;util.c: 21: PIE1bits.TMR1IE = 1;
-"21
+[; ;util.c: 44: PIE1bits.TMR1IE = 1;
+"44
 [e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-[; ;util.c: 22: INTCONbits.GIE = 1;
-"22
+[; ;util.c: 45: INTCONbits.GIE = 1;
+"45
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-[; ;util.c: 23: INTCONbits.PEIE = 1;
-"23
+[; ;util.c: 46: INTCONbits.PEIE = 1;
+"46
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-[; ;util.c: 25: }
-"25
+[; ;util.c: 48: }
+"48
 [e :UE 85 ]
 }
-"28
+"51
 [v _timer1_stop `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 28: void timer1_stop(){
+[; ;util.c: 51: void timer1_stop(){
 [e :U _timer1_stop ]
 [f ]
-[; ;util.c: 29: T1CONbits.TMR1ON = 0;
-"29
+[; ;util.c: 52: T1CONbits.TMR1ON = 0;
+"52
 [e = . . _T1CONbits 0 0 -> -> 0 `i `uc ]
-[; ;util.c: 30: T1CONbits.T1OSCEN =0;
-"30
+[; ;util.c: 53: T1CONbits.T1OSCEN =0;
+"53
 [e = . . _T1CONbits 0 3 -> -> 0 `i `uc ]
-[; ;util.c: 31: PIE1bits.TMR1IE = 0;
-"31
+[; ;util.c: 54: PIE1bits.TMR1IE = 0;
+"54
 [e = . . _PIE1bits 0 0 -> -> 0 `i `uc ]
-[; ;util.c: 32: }
-"32
+[; ;util.c: 55: }
+"55
 [e :UE 86 ]
 }
-"36
+"59
 [v _timer2_init `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 36: void timer2_init(){
+[; ;util.c: 59: void timer2_init(){
 [e :U _timer2_init ]
 [f ]
-[; ;util.c: 37: T2CONbits.T2CKPS = 0x02;
-"37
+[; ;util.c: 60: T2CONbits.T2CKPS = 0x02;
+"60
 [e = . . _T2CONbits 0 0 -> -> 2 `i `uc ]
-[; ;util.c: 38: T2CONbits.TOUTPS = 0x0F;
-"38
+[; ;util.c: 61: T2CONbits.TOUTPS = 0x0F;
+"61
 [e = . . _T2CONbits 0 2 -> -> 15 `i `uc ]
-[; ;util.c: 39: }
-"39
+[; ;util.c: 62: }
+"62
 [e :UE 87 ]
 }
-"41
+"64
 [v _timer2_start `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 41: void timer2_start(){
+[; ;util.c: 64: void timer2_start(){
 [e :U _timer2_start ]
 [f ]
-[; ;util.c: 42: PIE1bits.TMR2IE = 1;
-"42
+[; ;util.c: 65: PIE1bits.TMR2IE = 1;
+"65
 [e = . . _PIE1bits 0 1 -> -> 1 `i `uc ]
-[; ;util.c: 43: T2CONbits.TMR2ON = 1;
-"43
+[; ;util.c: 66: T2CONbits.TMR2ON = 1;
+"66
 [e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
-[; ;util.c: 44: INTCONbits.GIE = 1;
-"44
+[; ;util.c: 67: INTCONbits.GIE = 1;
+"67
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-[; ;util.c: 45: INTCONbits.PEIE = 1;
-"45
+[; ;util.c: 68: INTCONbits.PEIE = 1;
+"68
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-[; ;util.c: 46: }
-"46
+[; ;util.c: 69: }
+"69
 [e :UE 88 ]
 }
-"48
+"71
 [v _timer2_stop `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 48: void timer2_stop(){
+[; ;util.c: 71: void timer2_stop(){
 [e :U _timer2_stop ]
 [f ]
-[; ;util.c: 49: T2CONbits.TMR2ON = 0;
-"49
+[; ;util.c: 72: T2CONbits.TMR2ON = 0;
+"72
 [e = . . _T2CONbits 0 1 -> -> 0 `i `uc ]
-[; ;util.c: 50: PIE1bits.TMR2IE = 0;
-"50
+[; ;util.c: 73: PIE1bits.TMR2IE = 0;
+"73
 [e = . . _PIE1bits 0 1 -> -> 0 `i `uc ]
-[; ;util.c: 51: }
-"51
+[; ;util.c: 74: }
+"74
 [e :UE 89 ]
 }
-"54
+"77
 [v _timer0_init `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 54: void timer0_init(){
+[; ;util.c: 77: void timer0_init(){
 [e :U _timer0_init ]
 [f ]
-[; ;util.c: 55: OPTION_REGbits.T0CS = 0;
-"55
-[e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]
-[; ;util.c: 56: OPTION_REGbits.PSA = 0;
-"56
-[e = . . _OPTION_REGbits 0 1 -> -> 0 `i `uc ]
-[; ;util.c: 57: OPTION_REGbits.PS = 0x03;
-"57
-[e = . . _OPTION_REGbits 0 0 -> -> 3 `i `uc ]
-[; ;util.c: 58: }
-"58
-[e :UE 90 ]
-}
-"61
-[v _timer0_start `(v ~T0 @X0 1 ef ]
-{
-[; ;util.c: 61: void timer0_start(){
-[e :U _timer0_start ]
-[f ]
-[; ;util.c: 62: INTCONbits.TMR0IE = 1;
-"62
-[e = . . _INTCONbits 1 3 -> -> 1 `i `uc ]
-[; ;util.c: 63: INTCONbits.GIE = 1;
-"63
-[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-[; ;util.c: 64: INTCONbits.PEIE = 1;
-"64
-[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-[; ;util.c: 66: }
-"66
-[e :UE 91 ]
-}
-"68
-[v _timer0_stop `(v ~T0 @X0 1 ef ]
-{
-[; ;util.c: 68: void timer0_stop(){
-[e :U _timer0_stop ]
-[f ]
-[; ;util.c: 70: INTCONbits.TMR0IE = 0;
-"70
-[e = . . _INTCONbits 1 3 -> -> 0 `i `uc ]
-[; ;util.c: 71: }
-"71
-[e :UE 92 ]
-}
-"74
-[v _adc_init_CH0 `(v ~T0 @X0 1 ef ]
-{
-[; ;util.c: 74: void adc_init_CH0(){
-[e :U _adc_init_CH0 ]
-[f ]
-[; ;util.c: 75: ADCON0bits.ADCS = 0x00;
-"75
-[e = . . _ADCON0bits 0 4 -> -> 0 `i `uc ]
-[; ;util.c: 76: ADCON0bits.CHS = 0x00;
-"76
-[e = . . _ADCON0bits 0 3 -> -> 0 `i `uc ]
-[; ;util.c: 78: ADCON1bits.ADFM = 1;
+[; ;util.c: 78: OPTION_REGbits.T0CS = 0;
 "78
-[e = . . _ADCON1bits 0 2 -> -> 1 `i `uc ]
-[; ;util.c: 79: ADCON1bits.PCFG = 0x00;
+[e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]
+[; ;util.c: 79: OPTION_REGbits.PSA = 0;
 "79
-[e = . . _ADCON1bits 0 0 -> -> 0 `i `uc ]
+[e = . . _OPTION_REGbits 0 1 -> -> 0 `i `uc ]
+[; ;util.c: 80: OPTION_REGbits.PS = 0x04;
+"80
+[e = . . _OPTION_REGbits 0 0 -> -> 4 `i `uc ]
 [; ;util.c: 81: }
 "81
-[e :UE 93 ]
+[e :UE 90 ]
 }
 "84
+[v _timer0_start `(v ~T0 @X0 1 ef ]
+{
+[; ;util.c: 84: void timer0_start(){
+[e :U _timer0_start ]
+[f ]
+[; ;util.c: 85: INTCONbits.TMR0IE = 1;
+"85
+[e = . . _INTCONbits 1 3 -> -> 1 `i `uc ]
+[; ;util.c: 86: INTCONbits.GIE = 1;
+"86
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+[; ;util.c: 87: INTCONbits.PEIE = 1;
+"87
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+[; ;util.c: 89: }
+"89
+[e :UE 91 ]
+}
+"91
+[v _timer0_stop `(v ~T0 @X0 1 ef ]
+{
+[; ;util.c: 91: void timer0_stop(){
+[e :U _timer0_stop ]
+[f ]
+[; ;util.c: 93: INTCONbits.TMR0IE = 0;
+"93
+[e = . . _INTCONbits 1 3 -> -> 0 `i `uc ]
+[; ;util.c: 94: }
+"94
+[e :UE 92 ]
+}
+"97
+[v _adc_init_CH0 `(v ~T0 @X0 1 ef ]
+{
+[; ;util.c: 97: void adc_init_CH0(){
+[e :U _adc_init_CH0 ]
+[f ]
+[; ;util.c: 98: ADCON0bits.ADCS = 0x00;
+"98
+[e = . . _ADCON0bits 0 4 -> -> 0 `i `uc ]
+[; ;util.c: 99: ADCON0bits.CHS = 0x00;
+"99
+[e = . . _ADCON0bits 0 3 -> -> 0 `i `uc ]
+[; ;util.c: 101: ADCON1bits.ADFM = 1;
+"101
+[e = . . _ADCON1bits 0 2 -> -> 1 `i `uc ]
+[; ;util.c: 102: ADCON1bits.PCFG = 0x00;
+"102
+[e = . . _ADCON1bits 0 0 -> -> 0 `i `uc ]
+[; ;util.c: 104: }
+"104
+[e :UE 93 ]
+}
+"107
 [v _adc_start `(v ~T0 @X0 1 ef ]
 {
-[; ;util.c: 84: void adc_start(){
+[; ;util.c: 107: void adc_start(){
 [e :U _adc_start ]
 [f ]
-[; ;util.c: 85: ADCON0bits.ADON =1;
-"85
+[; ;util.c: 108: ADCON0bits.ADON =1;
+"108
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-[; ;util.c: 86: ADCON0bits.GO_nDONE = 1;
-"86
+[; ;util.c: 109: ADCON0bits.GO_nDONE = 1;
+"109
 [e = . . _ADCON0bits 0 2 -> -> 1 `i `uc ]
-[; ;util.c: 87: PIE1bits.ADIE =1;
-"87
+[; ;util.c: 110: PIE1bits.ADIE =1;
+"110
 [e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
-[; ;util.c: 88: INTCONbits.GIE =1;
-"88
+[; ;util.c: 111: INTCONbits.GIE =1;
+"111
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-[; ;util.c: 89: INTCONbits.PEIE = 1;
-"89
+[; ;util.c: 112: INTCONbits.PEIE = 1;
+"112
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-[; ;util.c: 90: }
-"90
+[; ;util.c: 113: }
+"113
 [e :UE 94 ]
+}
+"115
+[v _ledOff `(v ~T0 @X0 1 ef2`i`i ]
+{
+[; ;util.c: 115: void ledOff(int stateOne, int stateTwo){
+[e :U _ledOff ]
+[v _stateOne `i ~T0 @X0 1 r1 ]
+[v _stateTwo `i ~T0 @X0 1 r2 ]
+[f ]
+[; ;util.c: 116: PORTC |= (1<<3);
+"116
+[e =| _PORTC -> << -> 1 `i -> 3 `i `uc ]
+[; ;util.c: 118: }
+"118
+[e :UE 95 ]
 }

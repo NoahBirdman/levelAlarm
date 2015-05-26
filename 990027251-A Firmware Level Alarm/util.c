@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include "util.h"
 
+
+
 //Setup Timer 1 - 16bit
 void timer1_init(){
     //Prescalar 1:8 - 0x30
@@ -54,7 +56,7 @@ void timer2_stop(){
 void timer0_init(){
     OPTION_REGbits.T0CS = 0;    //Internal Clock
     OPTION_REGbits.PSA = 0;     //Prescale Select Timer0 vs. WDTMR
-    OPTION_REGbits.PS = 0x03;   //Prescale /16
+    OPTION_REGbits.PS = 0x04;   //Prescale /16
 }
 
 //Enable timer 0 - Enable the interrupt
@@ -87,4 +89,9 @@ void adc_start(){
     PIE1bits.ADIE =1;           //Enable Interrupt
     INTCONbits.GIE =1;
     INTCONbits.PEIE = 1;
+}
+
+void ledOff(int stateOne, int stateTwo, int counter0, int counter1, int counter2){
+    LEDPORT |= ALMLED;
+
 }

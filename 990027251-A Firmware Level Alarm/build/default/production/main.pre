@@ -1483,7 +1483,7 @@ void adc_start(void);
 #pragma config CPD = OFF
 #pragma config WRT = ON
 
-# 58
+# 39
 const int FILTERTMR_ISFULL = 50;
 const int FILTERTMR_ISEMPTY = 50;
 
@@ -1492,11 +1492,11 @@ volatile int counter2 = 0;
 volatile int counter1 = 0;
 volatile int counter0 = 0;
 
-# 71
+# 52
 volatile uint8_t alarmState = 0;
 volatile uint8_t lvlOneState = 0;
 volatile uint8_t lvlTwoState = 0;
-volatile int adcResult =0;
+volatile int adcResult = 100;
 
 
 void interrupt ISR(){
@@ -1504,8 +1504,16 @@ void interrupt ISR(){
 
 
 
+if(TMR0IF && TMR0IE){
+counter0 ++;
+LEDPORT |= ALMLED;
+TMR0IF = 0;
+
+}
+
+
 if(TMR1IE && TMR1IF){
-PORTC ^= (1<<3);
+LEDPORT ^= ALMLED;
 if(alarmState == 2){
 counter1 ++;
 }
@@ -1518,7 +1526,7 @@ TMR1IF = 0;
 
 if(TMR2IF && TMR2IE){
 counter2 ++;
-PORTC ^= (1<<3);
+LEDPORT ^= ALMLED;
 TMR2IF = 0;
 }
 
@@ -1529,7 +1537,8 @@ ALARMTMR = adcResult >> 2;
 ADIF = 0;
 }
 
-# 114
+
+
 }
 
 
@@ -1539,30 +1548,36 @@ int main(int argc, char** argv) {
 uint8_t sensorRead =0;
 uint8_t lvlOneRead = 0;
 uint8_t lvlTwoRead = 0;
-
+uint8_t adcDelay = 0;
 int i = 0;
 
 
-TRISC &= ~((1<<2)|(1<<3));
-TRISB |= (1<<4)|(1<<5);
-TRISB &= ~((1<<3)|(1<<2));
-PORTA |= (1<<0);
+LEDTRIS &= ~(POWLED|ALMLED);
+SNSTRIS |= LVLONE|LVLTWO;
+ALMTRIS &= ~(LGTOUT|ALMOUT);
+ADCPORT |= ADCPIN;
 
 timer1_init();
 timer2_init();
 adc_init_CH0();
 
-PORTC |= (1<<2);
-PORTB &= ~((1<<2)|(1<<3));
+LEDPORT |= POWLED;
+ALMPORT &= ~(ALMOUT|LGTOUT);
 
 
 while(1){
 
-sensorRead = PORTB & ((1<<5) | (1<<4));
-lvlOneRead = (sensorRead & (1<<4));
-lvlTwoRead = (sensorRead & (1<<5));
+if(adcDelay == 100 && ADCON0bits.GO_nDONE == 0){
+adc_start();
+adcDelay = 0;
+}else {adcDelay ++;}
 
-# 204
+
+sensorRead = SNSPORT & (LVLTWO | LVLONE);
+lvlOneRead = (sensorRead & LVLONE);
+lvlTwoRead = (sensorRead & LVLTWO);
+
+# 192
 if(lvlTwoState == 0){
 
 if((lvlTwoRead > 0) && (counter2 < 1)){
@@ -1572,7 +1587,7 @@ timer2_start();
 }else {
 timer2_stop();
 counter2 = 0;
-PORTC &= ~(1<<3);
+LEDPORT &= ~ALMLED;
 }
 
 }else if(lvlTwoState == 1){
@@ -1586,6 +1601,7 @@ lvlTwoState = 0;
 timer2_stop();
 counter2 = 0;
 lvlTwoState = 2;
+LEDPORT &= ~ALMLED;
 }
 
 }else if(lvlTwoState == 2){
@@ -1599,7 +1615,7 @@ counter2 = 1;
 }else if(lvlTwoRead > 0){
 timer2_stop();
 counter2 = 0;
-PORTC &= ~(1<<3);
+LEDPORT &= ~ALMLED;
 
 }else if(lvlTwoRead == 0 && counter2 > FILTERTMR_ISEMPTY){
 
@@ -1621,16 +1637,16 @@ alarmState ++;
 if(alarmState >= 1){
 
 if(counter1 == 0){
-PORTB |= (1<<3);
-PORTC |= (1<<3);
+ALMPORT |= LGTOUT;
+LEDPORT |= ALMLED;
 adc_start();
 timer1_start();
 counter1 = 1;
 
-}else if(counter1 >= ALARMTMR){
-PORTB |= (1<<2) |(1<<3);
+}else if(counter1 > ALARMTMR){
+ALMPORT |= ALMOUT |LGTOUT;
 timer1_stop();
-PORTC |= (1<<3);
+LEDPORT |= ALMLED;
 counter1 = 1;
 }
 }
@@ -1639,7 +1655,7 @@ counter1 = 1;
 }
 
 while(1){
-PORTC^=(1<<2);
+LEDPORT^=POWLED;
 for(i=0;i<10000;i++);
 
 }
