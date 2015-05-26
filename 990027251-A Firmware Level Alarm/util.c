@@ -92,6 +92,6 @@ void adc_start(){
 }
 
 void ledOff(int stateOne, int stateTwo, int counter0, int counter1, int counter2){
-    LEDPORT |= ALMLED;
+    //LEDPORT |= ALMLED;
 
 }
