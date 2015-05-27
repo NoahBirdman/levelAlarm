@@ -3,11 +3,11 @@ Microchip MPLAB XC8 Compiler V1.34 ()
 Linker command line:
 
 --edf=/opt/microchip/xc8/v1.34/dat/en_msgs.txt -cs \
-  -h+dist/default/production/990027251-A_Firmware_Level_Alarm.production.sym \
-  --cmf=dist/default/production/990027251-A_Firmware_Level_Alarm.production.cmf \
-  -z -Q16F876 -o/tmp/cgtUfYnUK \
-  -Mdist/default/production/990027251-A_Firmware_Level_Alarm.production.map \
-  -E1 -ver=XC8 -ASTACK=0110h-016fh -pstack=STACK -ACODE=00h-07FFhx4 \
+  -h+dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.sym \
+  --cmf=dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.cmf -z \
+  -Q16F876 -o/tmp/cgt4FnqbW \
+  -Mdist/default/debug/990027251-A_Firmware_Level_Alarm.debug.map -E1 \
+  -ver=XC8 -ASTACK=0110h-016fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
   -AENTRY=00h-0FFhx32 -ACOMMON=070h-07Fh -ABANK0=020h-06Fh \
   -ABANK1=0A0h-0EFh -ABANK2=0110h-016Fh -ABANK3=0190h-01EFh \
@@ -18,8 +18,8 @@ Linker command line:
   -pfunctab=CODE -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-  -DENTRY=2 -k /tmp/cgtPeoJst.obj \
-  dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj 
+  -DENTRY=2 -k /tmp/cgtVhLxwk.obj \
+  dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj 
 
 Object code version is 3.11
 
@@ -28,11 +28,11 @@ Machine type is 16F876
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/cgtPeoJst.obj
+/tmp/cgtVhLxwk.obj
                 end_init                             12       12        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        1     400E       0
-dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
                 cinit                                15       15       26        8       0
                 intentry                              4        4        E        8       0
                 text12                              239      239       4B        8       0

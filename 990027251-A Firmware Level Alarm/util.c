@@ -91,7 +91,14 @@ void adc_start(){
     INTCONbits.PEIE = 1;
 }
 
-void ledOff(int stateOne, int stateTwo, int counter0, int counter1, int counter2){
-    //LEDPORT |= ALMLED;
+void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState){
+    if(stateOne == 1 || stateOne == 3 || stateTwo == 1 || stateTwo == 3){
+        *blinkState = 1;    //Blink Fast
+    }else if(almState >= 1){
+        *blinkState = 2;
+    }else{
+        *blinkState = 0;
+        LEDPORT &= ~ALMLED;
+    }
 
 }

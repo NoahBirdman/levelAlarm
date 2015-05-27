@@ -11,6 +11,30 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    #define _bv(bit) (1<<bit)
+
+    //LEDs
+    #define ALMLED (1<<3) //Alarm Indicator
+    #define POWLED (1<<2) //Power / Error Indicator
+    #define LEDPORT PORTC
+    #define LEDTRIS TRISC
+
+    //Light and Siren
+    #define ALMOUT (1<<2)   //SIREN
+    #define LGTOUT (1<<3)   //STROBE
+    #define ALMPORT PORTB
+    #define ALMTRIS TRISB
+
+    //Sensor Inputs
+    #define LVLTWO (1<<5)
+    #define LVLONE (1<<4)
+    #define SNSPORT PORTB
+    #define SNSTRIS TRISB
+
+
+    #define ADCPIN (1<<0)   //RA0
+    #define ADCTRIS TRISA
+    #define ADCPORT PORTA   //ADC used for tuning siren delay
 
     //Timer 1 Initialize
     void timer1_init(void);
@@ -44,6 +68,9 @@ extern "C" {
 
     //Start ADC
     void adc_start(void);
+
+    //Select Appropriate Blinking
+    void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
 
 #ifdef	__cplusplus
 }

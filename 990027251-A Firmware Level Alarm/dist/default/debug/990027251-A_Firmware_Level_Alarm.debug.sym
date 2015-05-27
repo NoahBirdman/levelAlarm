@@ -245,8 +245,8 @@ cstackBANK0 20 3F BANK0 20 1
 strings 576 589 STRING 576 0
 text5 58A 619 CODE 58A 0
 %locals
-dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-/tmp/cgtfWZzMw
+dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+/tmp/cgtap2dZE
 404 15 0 CODE 0
 407 15 0 CODE 0
 456 15 0 CODE 0

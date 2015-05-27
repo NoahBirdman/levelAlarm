@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+$dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 cinit CODE 0 15 15 26 2
 text1 CODE 0 2FC 2FC 7 2
 text2 CODE 0 2D9 2D9 9 2
@@ -34,7 +34,7 @@ idataBANK0 CODE 0 309 309 4 2
 strings STRING 0 2BB 2BB A 2
 dataBANK0 BANK0 1 3C 3C 4 1
 bssCOMMON COMMON 1 7C 7C 2 1
-$/tmp/cgtPeoJst.obj
+$/tmp/cgtVhLxwk.obj
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 12 12 3 2
 config CONFIG 0 2007 2007 1 2
@@ -82,33 +82,33 @@ STRING 30D-1FFF 2
 # are in ascending order of addresses.
 # All other numeric values are in decimal.
 %LINETAB
-$dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+$dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 4 intentry CODE >63:/home/birdman/Documents/projects/altec/levelAlarm/990027251-A Firmware Level Alarm/main.c
-15 cinit CODE >404:/tmp/cgtfWZzMw
-15 cinit CODE >407:/tmp/cgtfWZzMw
-15 cinit CODE >456:/tmp/cgtfWZzMw
-16 cinit CODE >457:/tmp/cgtfWZzMw
-17 cinit CODE >460:/tmp/cgtfWZzMw
-18 cinit CODE >461:/tmp/cgtfWZzMw
-19 cinit CODE >462:/tmp/cgtfWZzMw
-1A cinit CODE >463:/tmp/cgtfWZzMw
-1B cinit CODE >464:/tmp/cgtfWZzMw
-1C cinit CODE >465:/tmp/cgtfWZzMw
-1D cinit CODE >466:/tmp/cgtfWZzMw
-1E cinit CODE >467:/tmp/cgtfWZzMw
-1F cinit CODE >468:/tmp/cgtfWZzMw
-20 cinit CODE >469:/tmp/cgtfWZzMw
-21 cinit CODE >474:/tmp/cgtfWZzMw
-26 cinit CODE >475:/tmp/cgtfWZzMw
-27 cinit CODE >476:/tmp/cgtfWZzMw
-2C cinit CODE >477:/tmp/cgtfWZzMw
-2D cinit CODE >478:/tmp/cgtfWZzMw
-32 cinit CODE >479:/tmp/cgtfWZzMw
-33 cinit CODE >480:/tmp/cgtfWZzMw
-36 cinit CODE >481:/tmp/cgtfWZzMw
-37 cinit CODE >487:/tmp/cgtfWZzMw
-37 cinit CODE >488:/tmp/cgtfWZzMw
-38 cinit CODE >489:/tmp/cgtfWZzMw
+15 cinit CODE >404:/tmp/cgtap2dZE
+15 cinit CODE >407:/tmp/cgtap2dZE
+15 cinit CODE >456:/tmp/cgtap2dZE
+16 cinit CODE >457:/tmp/cgtap2dZE
+17 cinit CODE >460:/tmp/cgtap2dZE
+18 cinit CODE >461:/tmp/cgtap2dZE
+19 cinit CODE >462:/tmp/cgtap2dZE
+1A cinit CODE >463:/tmp/cgtap2dZE
+1B cinit CODE >464:/tmp/cgtap2dZE
+1C cinit CODE >465:/tmp/cgtap2dZE
+1D cinit CODE >466:/tmp/cgtap2dZE
+1E cinit CODE >467:/tmp/cgtap2dZE
+1F cinit CODE >468:/tmp/cgtap2dZE
+20 cinit CODE >469:/tmp/cgtap2dZE
+21 cinit CODE >474:/tmp/cgtap2dZE
+26 cinit CODE >475:/tmp/cgtap2dZE
+27 cinit CODE >476:/tmp/cgtap2dZE
+2C cinit CODE >477:/tmp/cgtap2dZE
+2D cinit CODE >478:/tmp/cgtap2dZE
+32 cinit CODE >479:/tmp/cgtap2dZE
+33 cinit CODE >480:/tmp/cgtap2dZE
+36 cinit CODE >481:/tmp/cgtap2dZE
+37 cinit CODE >487:/tmp/cgtap2dZE
+37 cinit CODE >488:/tmp/cgtap2dZE
+38 cinit CODE >489:/tmp/cgtap2dZE
 3B maintext CODE >118:/home/birdman/Documents/projects/altec/levelAlarm/990027251-A Firmware Level Alarm/main.c
 3B maintext CODE >119:/home/birdman/Documents/projects/altec/levelAlarm/990027251-A Firmware Level Alarm/main.c
 3E maintext CODE >120:/home/birdman/Documents/projects/altec/levelAlarm/990027251-A Firmware Level Alarm/main.c
@@ -289,92 +289,92 @@ F3 maintext CODE >246:/home/birdman/Documents/projects/altec/levelAlarm/99002725
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-___latbits 2 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+___latbits 2 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __LdataBANK0 0 0 ABS 0 dataBANK0 -
 __Hspace_0 2008 0 ABS 0 - -
 __Hspace_1 7E 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
-_counter1 36 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_counter2 38 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_counter1 36 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_counter2 38 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __HidataBANK0 0 0 ABS 0 idataBANK0 -
-_FILTERTMR_ISEMPTY 582 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_FILTERTMR_ISEMPTY 582 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
-_T1CONbits 10 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ltemp0 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ltemp1 82 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ltemp2 86 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ltemp3 80 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-main@i 2E 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_T1CONbits 10 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ltemp0 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ltemp1 82 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ltemp2 86 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ltemp3 80 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+main@i 2E 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hstrings 0 0 ABS 0 strings -
-_ADIE 466 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_ADIF 66 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-___sp 0 0 STACK 2 stack /tmp/cgtPeoJst.obj
-_main 76 0 CODE 0 maintext dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-btemp 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ltemp 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-start 24 0 CODE 0 init /tmp/cgtPeoJst.obj
-ttemp 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of___awmod 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_main 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_ADIE 466 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_ADIF 66 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+___sp 0 0 STACK 2 stack /tmp/cgtVhLxwk.obj
+_main 76 0 CODE 0 maintext dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+btemp 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ltemp 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+start 24 0 CODE 0 init /tmp/cgtVhLxwk.obj
+ttemp 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of___awmod 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_main 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
-_blinkState 3B 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_blinkLed 508 0 CODE 0 text8 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_OPTION_REGbits 81 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_blinkState 3B 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_blinkLed 508 0 CODE 0 text8 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_OPTION_REGbits 81 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __LidataBANK0 0 0 ABS 0 idataBANK0 -
-blinkLed@blinkState 22 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_blinkLed 55E 0 CODE 0 text8 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+blinkLed@blinkState 22 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_blinkLed 55E 0 CODE 0 text8 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hpowerup 0 0 CODE 0 powerup -
-___awmod@sign 76 0 COMMON 1 cstackCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_lvlTwoState 7D 0 COMMON 1 bssCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ttemp0 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ttemp1 81 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ttemp2 84 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ttemp3 87 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-ttemp4 7F 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-intlevel0 0 0 CODE 0 functab /tmp/cgtPeoJst.obj
-intlevel1 0 0 CODE 0 functab /tmp/cgtPeoJst.obj
-intlevel2 0 0 CODE 0 functab /tmp/cgtPeoJst.obj
-intlevel3 0 0 CODE 0 functab /tmp/cgtPeoJst.obj
-intlevel4 0 0 CODE 0 functab /tmp/cgtPeoJst.obj
-intlevel5 0 0 CODE 0 functab /tmp/cgtPeoJst.obj
+___awmod@sign 76 0 COMMON 1 cstackCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_lvlTwoState 7D 0 COMMON 1 bssCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ttemp0 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ttemp1 81 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ttemp2 84 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ttemp3 87 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+ttemp4 7F 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+intlevel0 0 0 CODE 0 functab /tmp/cgtVhLxwk.obj
+intlevel1 0 0 CODE 0 functab /tmp/cgtVhLxwk.obj
+intlevel2 0 0 CODE 0 functab /tmp/cgtVhLxwk.obj
+intlevel3 0 0 CODE 0 functab /tmp/cgtVhLxwk.obj
+intlevel4 0 0 CODE 0 functab /tmp/cgtVhLxwk.obj
+intlevel5 0 0 CODE 0 functab /tmp/cgtVhLxwk.obj
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
-wtemp0 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp1 80 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp2 82 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp3 84 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp4 86 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp5 88 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-wtemp6 7F 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_timer0_init 5D6 0 CODE 0 text7 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+wtemp0 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp1 80 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp2 82 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp3 84 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp4 86 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp5 88 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+wtemp6 7F 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_timer0_init 5D6 0 CODE 0 text7 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hfunctab 0 0 CODE 0 functab -
-_timer1_init 606 0 CODE 0 text6 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_timer1_stop 5E8 0 CODE 0 text4 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_timer2_init 5C4 0 CODE 0 text3 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_timer2_stop 5F8 0 CODE 0 text1 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_timer1_init 606 0 CODE 0 text6 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_timer1_stop 5E8 0 CODE 0 text4 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_timer2_init 5C4 0 CODE 0 text3 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_timer2_stop 5F8 0 CODE 0 text1 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hclrtext 0 0 ABS 0 clrtext -
-_ADRESH 1E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_ADRESL 9E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-blinkLed@stateOne 24 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-blinkLed@stateTwo 20 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_ADRESH 1E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_ADRESL 9E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+blinkLed@stateOne 24 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+blinkLed@stateTwo 20 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lmaintext 0 0 ABS 0 maintext -
-__end_of___awmod 508 0 CODE 0 text12 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_timer1_start 58A 0 CODE 0 text5 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_adc_init_CH0 55E 0 CODE 0 text10 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-blinkLed@almState 21 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-start_initialization 2A 0 CODE 0 cinit dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-main@lvlOneRead 2C 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TMR0IE 5D 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TMR0IF 5A 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TMR1IE 460 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TMR1IF 60 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TMR2IE 461 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TMR2IF 61 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_timer1_start 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_adc_init_CH0 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-___int_sp 0 0 STACK 2 stack /tmp/cgtPeoJst.obj
+__end_of___awmod 508 0 CODE 0 text12 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_timer1_start 58A 0 CODE 0 text5 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_adc_init_CH0 55E 0 CODE 0 text10 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+blinkLed@almState 21 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+start_initialization 2A 0 CODE 0 cinit dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+main@lvlOneRead 2C 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TMR0IE 5D 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TMR0IF 5A 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TMR1IE 460 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TMR1IF 60 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TMR2IE 461 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TMR2IF 61 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_timer1_start 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_adc_init_CH0 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+___int_sp 0 0 STACK 2 stack /tmp/cgtVhLxwk.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -382,13 +382,13 @@ __Hbank3 0 0 ABS 0 bank3 -
 __Hcinit 76 0 CODE 0 cinit -
 __Hidloc 0 0 IDLOC 0 idloc -
 __Hstack 0 0 STACK 2 stack -
-main@sensorRead 30 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__stringbase 580 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+main@sensorRead 30 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__stringbase 580 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hmaintext 0 0 ABS 0 maintext -
 __Hcommon 0 0 ABS 0 common -
 __Hconfig 4010 0 CONFIG 0 config -
-__end_of_timer1_start 59E 0 CODE 0 text5 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_adc_init_CH0 576 0 CODE 0 text10 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__end_of_timer1_start 59E 0 CODE 0 text5 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_adc_init_CH0 576 0 CODE 0 text10 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lbank0 0 0 ABS 0 bank0 -
 __Lbank1 0 0 ABS 0 bank1 -
 __Lbank2 0 0 ABS 0 bank2 -
@@ -396,7 +396,7 @@ __Lbank3 0 0 ABS 0 bank3 -
 __Lcinit 2A 0 CODE 0 cinit -
 __Lidloc 0 0 IDLOC 0 idloc -
 __Lstack 0 0 STACK 2 stack -
-_INTCONbits B 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_INTCONbits B 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Habs1 0 0 ABS 0 abs1 -
 __Hcode 0 0 ABS 0 code -
 __Hinit 24 0 CODE 0 init -
@@ -415,118 +415,118 @@ __Lsfr3 0 0 ABS 0 sfr3 -
 __Ltext 0 0 ABS 0 text -
 __LcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-_ISR 32E 0 CODE 0 text11 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_ISR 32E 0 CODE 0 text11 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __S0 2008 0 ABS 0 - -
 __S1 7E 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
-saved_w 7E 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_blinkCounter 34 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_ISR 472 0 CODE 0 text11 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_BOREN$ON 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_timer0_init 5E8 0 CODE 0 text7 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+saved_w 7E 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_blinkCounter 34 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_ISR 472 0 CODE 0 text11 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_BOREN$ON 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_timer0_init 5E8 0 CODE 0 text7 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lintentry 8 0 CODE 0 intentry -
-__stringtab 576 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_timer1_init 612 0 CODE 0 text6 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_timer1_stop 5F8 0 CODE 0 text4 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-reset_vec 0 0 CODE 0 reset_vec /tmp/cgtPeoJst.obj
-__end_of_timer2_init 5D6 0 CODE 0 text3 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_timer2_stop 606 0 CODE 0 text1 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pdataBANK0 3C 0 BANK0 1 dataBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_timer2_start 5B2 0 CODE 0 text2 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__stringtab 576 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_timer1_init 612 0 CODE 0 text6 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_timer1_stop 5F8 0 CODE 0 text4 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+reset_vec 0 0 CODE 0 reset_vec /tmp/cgtVhLxwk.obj
+__end_of_timer2_init 5D6 0 CODE 0 text3 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_timer2_stop 606 0 CODE 0 text1 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pdataBANK0 3C 0 BANK0 1 dataBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_timer2_start 5B2 0 CODE 0 text2 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
-___awmod@counter 75 0 COMMON 1 cstackCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_PIE1bits 8C 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext10 55E 0 CODE 0 text10 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext11 32E 0 CODE 0 text11 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext12 472 0 CODE 0 text12 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-___awmod 472 0 CODE 0 text12 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pmaintext 76 0 CODE 0 maintext dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+___awmod@counter 75 0 COMMON 1 cstackCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_PIE1bits 8C 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext10 55E 0 CODE 0 text10 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext11 32E 0 CODE 0 text11 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext12 472 0 CODE 0 text12 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+___awmod 472 0 CODE 0 text12 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pmaintext 76 0 CODE 0 maintext dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 400E 0 CONFIG 0 config -
-__CFG_CP$OFF 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_WDTE$OFF 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_timer2_start 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-stackhi 0 0 ABS 0 - /tmp/cgtPeoJst.obj
-stacklo 0 0 ABS 0 - /tmp/cgtPeoJst.obj
-_adcResult 3C 0 BANK0 1 dataBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_ADCON0bits 1F 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_ADCON1bits 9F 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of__stringtab 582 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_LVP$OFF 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_FILTERTMR_ISFULL 586 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__CFG_CP$OFF 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_WDTE$OFF 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_timer2_start 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+stackhi 0 0 ABS 0 - /tmp/cgtVhLxwk.obj
+stacklo 0 0 ABS 0 - /tmp/cgtVhLxwk.obj
+_adcResult 3C 0 BANK0 1 dataBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_ADCON0bits 1F 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_ADCON1bits 9F 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of__stringtab 582 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_LVP$OFF 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_FILTERTMR_ISFULL 586 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
-__pbssCOMMON 7C 0 COMMON 1 bssCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_lvlOneState 3A 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__pbssCOMMON 7C 0 COMMON 1 bssCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_lvlOneState 3A 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __HcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __Lend_init 24 0 CODE 0 end_init -
 __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-end_of_initialization 6E 0 CODE 0 cinit dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+end_of_initialization 6E 0 CODE 0 cinit dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hintentry 24 0 CODE 0 intentry -
-__end_of_timer2_start 5C4 0 CODE 0 text2 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__end_of_timer2_start 5C4 0 CODE 0 text2 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lstrings 0 0 ABS 0 strings -
-__end_of_adc_start 5B2 0 CODE 0 text9 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-?___awmod 70 0 COMMON 1 cstackCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__end_of_adc_start 5B2 0 CODE 0 text9 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+?___awmod 70 0 COMMON 1 cstackCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hreset_vec 6 0 CODE 0 reset_vec -
-__size_of_adc_start 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__size_of_adc_start 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __HbssBANK0 0 0 ABS 0 bssBANK0 -
-___awmod@dividend 72 0 COMMON 1 cstackCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext1 5F8 0 CODE 0 text1 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext2 5B2 0 CODE 0 text2 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext3 5C4 0 CODE 0 text3 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext4 5E8 0 CODE 0 text4 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext5 58A 0 CODE 0 text5 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext6 606 0 CODE 0 text6 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext7 5D6 0 CODE 0 text7 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext8 508 0 CODE 0 text8 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__ptext9 59E 0 CODE 0 text9 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+___awmod@dividend 72 0 COMMON 1 cstackCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext1 5F8 0 CODE 0 text1 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext2 5B2 0 CODE 0 text2 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext3 5C4 0 CODE 0 text3 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext4 5E8 0 CODE 0 text4 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext5 58A 0 CODE 0 text5 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext6 606 0 CODE 0 text6 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext7 5D6 0 CODE 0 text7 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext8 508 0 CODE 0 text8 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__ptext9 59E 0 CODE 0 text9 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
-_adc_start 59E 0 CODE 0 text9 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_WRT$ON 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_adc_start 59E 0 CODE 0 text9 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_WRT$ON 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lreset_vec 0 0 CODE 0 reset_vec -
-__size_of_timer0_init 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_FOSC$HS 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_timer1_init 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_timer1_stop 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-main@adcDelay 2D 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_timer2_init 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_timer2_stop 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of__initialization 6E 0 CODE 0 cinit dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-___awmod@divisor 70 0 COMMON 1 cstackCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__size_of_timer0_init 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_FOSC$HS 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_timer1_init 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_timer1_stop 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+main@adcDelay 2D 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_timer2_init 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_timer2_stop 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of__initialization 6E 0 CODE 0 cinit dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+___awmod@divisor 70 0 COMMON 1 cstackCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lfunctab 0 0 CODE 0 functab -
-__end_of_FILTERTMR_ISEMPTY 586 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pidataBANK0 612 0 CODE 0 idataBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__end_of_FILTERTMR_ISEMPTY 586 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pidataBANK0 612 0 CODE 0 idataBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Lclrtext 0 0 ABS 0 clrtext -
-_almCounter 32 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_FILTERTMR_ISFULL 58A 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_almCounter 32 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_FILTERTMR_ISFULL 58A 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hend_init 2A 0 CODE 0 end_init -
-_alarmState 7C 0 COMMON 1 bssCOMMON dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_alarmTimer 3E 0 BANK0 1 dataBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__end_of_main 32E 0 CODE 0 maintext dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_PORTB 6 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_PORTC 7 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TRISA 85 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TRISB 86 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_TRISC 87 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+_alarmState 7C 0 COMMON 1 bssCOMMON dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_alarmTimer 3E 0 BANK0 1 dataBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__end_of_main 32E 0 CODE 0 maintext dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_PORTB 6 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_PORTC 7 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TRISA 85 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TRISB 86 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_TRISC 87 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
-interrupt_function 8 0 CODE 0 intentry dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_CPD$OFF 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pintentry 8 0 CODE 0 intentry dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-main@lvlTwoRead 31 0 BANK0 1 cstackBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__size_of_ISR 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+interrupt_function 8 0 CODE 0 intentry dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_CPD$OFF 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pintentry 8 0 CODE 0 intentry dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+main@lvlTwoRead 31 0 BANK0 1 cstackBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__size_of_ISR 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 __HdataBANK0 0 0 ABS 0 dataBANK0 -
-__size_of_blinkLed 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__initialization 2A 0 CODE 0 cinit dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__CFG_PWRTE$OFF 0 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pbssBANK0 32 0 BANK0 1 bssBANK0 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-_T2CONbits 12 0 ABS 0 - dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
-__pstrings 576 0 STRING 0 strings dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
+__size_of_blinkLed 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__initialization 2A 0 CODE 0 cinit dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__CFG_PWRTE$OFF 0 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pbssBANK0 32 0 BANK0 1 bssBANK0 dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+_T2CONbits 12 0 ABS 0 - dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
+__pstrings 576 0 STRING 0 strings dist/default/debug/990027251-A_Firmware_Level_Alarm.debug.obj
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
