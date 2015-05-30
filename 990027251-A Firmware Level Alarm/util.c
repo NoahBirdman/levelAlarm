@@ -93,9 +93,12 @@ void adc_start(){
 
 void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState){
     if(stateOne == 1 || stateOne == 3 || stateTwo == 1 || stateTwo == 3){
-        *blinkState = 1;    //Blink Fast
-    }else if(almState >= 1){
-        *blinkState = 2;
+        *blinkState |= 0x01;    //Blink Fast
+    }else if(almState >= 1 && almState < 3){
+        *blinkState |= 0x04;
+    }else if (almState >= 3){
+        *blinkState |= 0x08;
+        LEDPORT |= ALMLED;
     }else{
         *blinkState = 0;
         LEDPORT &= ~ALMLED;

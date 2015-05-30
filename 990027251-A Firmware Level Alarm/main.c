@@ -66,11 +66,10 @@ void interrupt ISR(){
 
     //Timer 0 Overflow - Filter for LVL One
     if(TMR0IF && TMR0IE){
-        
-        if((blinkState == 1) && (blinkCounter % 5 == 0)){
+        if((blinkState & (0x01)== 1) && (blinkCounter % 5 == 0)){
             LEDPORT ^= ALMLED;
-        }else if((blinkState == 4) && (blinkCounter % 10 == 0)){
-            LEDPORT ^= ALMLED; //Toggle if just Level One
+        }else if((blinkState == 4) && (blinkCounter % 20 == 0)){
+            LEDPORT ^= ALMLED; //Toggle if alm
         }
         blinkCounter ++;
         TMR0IF = 0;
@@ -78,13 +77,13 @@ void interrupt ISR(){
     
     //Timer 1 Overflow
     if(TMR1IE && TMR1IF){
-        LEDPORT ^= ALMLED;  //Toggle Only when just counting to alarm
 
-        if(alarmState == 2){
+
+        if(alarmState == 1){
             almCounter ++;
         }
-        if(alarmState == 3){
-            almCounter += 2;  //Double Time
+        if(alarmState == 2){
+            almCounter += 3;  //Double Time
         }
         TMR1IF = 0;
     }
@@ -104,8 +103,8 @@ void interrupt ISR(){
     //ADC Interrupt Flag
     if(ADIF && ADIE){
        adcResult = (ADRESH <<8) | (ADRESL);
-       //alarmTimer = adcResult >> 2;
-       alarmTimer = 20; //Debug
+       alarmTimer = adcResult >> 2;
+       //alarmTimer = 20; //Debug
        ADIF = 0;
     }
     
@@ -133,7 +132,7 @@ int main() {
     timer1_init();
     timer2_init();
     adc_init_CH0();
-
+   
     LEDPORT |= POWLED;
     ALMPORT &= ~(ALMOUT|LGTOUT);
 
@@ -143,7 +142,7 @@ int main() {
    while(1){
        
        //Refresh the ADC value every now and then
-       if(adcDelay >= 100 && ADCON0bits.GO_nDONE == 0){
+       if(adcDelay >= 1000 && ADCON0bits.GO_nDONE == 0){
            adc_start();
            adcDelay = 0;
        }else {adcDelay ++;}
@@ -165,6 +164,7 @@ int main() {
         }else if(lvlOneState == 1){                    //Filter Transistion to Empty - Flashing SNSLED
             //LEDPORT |= ALMLED;      //Debug
             if(lvlOneRead == 0){      //Full Tub - Restart Filter
+                
                 counter1 = 0;
                 lvlOneState = 0;
 
@@ -176,8 +176,9 @@ int main() {
 
         }else if(lvlOneState == 2){                                    //Idle While Empty
            // LEDPORT |= ALMLED;       //Debug
-            if(lvlOneRead == 0 && counter2 == 0){     //Full - Rising Edge Start Filter
+            if(lvlOneRead == 0 && counter1 == 0){     //Full - Rising Edge Start Filter
                 counter1 = 1;
+                lvlOneState = 3;
 
             }else{
                 //TODO: Sleep
@@ -194,13 +195,14 @@ int main() {
                 //LEDPORT |= ALMLED;    //Debug
                 counter1 = 0;
                 lvlOneState = 4;
-                alarmState = 1;
+                
             }
 
 
         }else if(lvlOneState == 4){                             //Alarm Started
             //ALMPORT |= LGTOUT;       //Debug
             lvlOneState = 5;    //Get out of this state
+            blinkState = 4;
             alarmState ++;      //Increment Priority Level for multiple sensors
         }
 
@@ -217,6 +219,7 @@ int main() {
         }else if(lvlTwoState == 1){                    //Filter Transistion to Empty - Flashing SNSLED
             //LEDPORT |= ALMLED;      //Debug
             if(lvlTwoRead == 0){      //Full Tub - Restart Filter
+                //LEDPORT |= ALMLED;
                 counter2 = 0;
                 lvlTwoState = 0;
 
@@ -230,8 +233,9 @@ int main() {
            // LEDPORT |= ALMLED;       //Debug
             if(lvlTwoRead == 0 && counter2 == 0){     //Full - Rising Edge Start Filter
                 counter2 = 1;
-
+                lvlTwoState = 3;
             }else{
+                counter2 = 0;
                 //TODO: Sleep
             }
 
@@ -246,13 +250,13 @@ int main() {
                 //LEDPORT |= ALMLED;    //Debug
                 counter2 = 0;
                 lvlTwoState = 4;
-                alarmState = 1;
             }
 
 
         }else if(lvlTwoState == 4){                             //Alarm Started
             //ALMPORT |= LGTOUT;       //Debug
             lvlTwoState = 5;    //Get out of this state
+            blinkState = 4;
             alarmState ++;      //Increment Priority Level for multiple sensors
         }
 
@@ -262,7 +266,6 @@ int main() {
             //TODO: Allow Toggling for second filter
             if(almCounter == 0){      //Timer Started - LEDS doing their thing
                 ALMPORT |= LGTOUT;
-                LEDPORT |= ALMLED;
                 adc_start();
                 timer1_start();
                 almCounter = 1;
@@ -270,8 +273,8 @@ int main() {
             }else if(almCounter > alarmTimer){ //Alarm Timer Reached - Engage Siren
                 ALMPORT |= ALMOUT |LGTOUT;      
                 timer1_stop();
-                LEDPORT |= ALMLED;
                 almCounter = 1;   //Don't allow timer1 to restart
+                alarmState = 3; //All Out Siren and Light
             }
         }
 

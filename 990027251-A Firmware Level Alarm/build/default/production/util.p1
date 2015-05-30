@@ -1248,37 +1248,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 "95
 [e $ ! || || || == -> _stateOne `i -> 1 `i == -> _stateOne `i -> 3 `i == -> _stateTwo `i -> 1 `i == -> _stateTwo `i -> 3 `i 96  ]
 {
-[; ;util.c: 96: *blinkState = 1;
+[; ;util.c: 96: *blinkState |= 0x01;
 "96
-[e = *U _blinkState -> -> 1 `i `uc ]
+[e =| *U _blinkState -> -> 1 `i `uc ]
 "97
 }
-[; ;util.c: 97: }else if(almState >= 1){
+[; ;util.c: 97: }else if(almState >= 1 && almState < 3){
 [e $U 97  ]
 [e :U 96 ]
-[e $ ! >= -> _almState `i -> 1 `i 98  ]
+[e $ ! && >= -> _almState `i -> 1 `i < -> _almState `i -> 3 `i 98  ]
 {
-[; ;util.c: 98: *blinkState = 2;
+[; ;util.c: 98: *blinkState |= 0x04;
 "98
-[e = *U _blinkState -> -> 2 `i `uc ]
+[e =| *U _blinkState -> -> 4 `i `uc ]
 "99
 }
-[; ;util.c: 99: }else{
+[; ;util.c: 99: }else if (almState >= 3){
 [e $U 99  ]
 [e :U 98 ]
+[e $ ! >= -> _almState `i -> 3 `i 100  ]
 {
-[; ;util.c: 100: *blinkState = 0;
+[; ;util.c: 100: *blinkState |= 0x08;
 "100
-[e = *U _blinkState -> -> 0 `i `uc ]
-[; ;util.c: 101: PORTC &= ~(1<<3);
+[e =| *U _blinkState -> -> 8 `i `uc ]
+[; ;util.c: 101: PORTC |= (1<<3);
 "101
-[e =& _PORTC -> ~ << -> 1 `i -> 3 `i `uc ]
+[e =| _PORTC -> << -> 1 `i -> 3 `i `uc ]
 "102
 }
+[; ;util.c: 102: }else{
+[e $U 101  ]
+[e :U 100 ]
+{
+[; ;util.c: 103: *blinkState = 0;
+"103
+[e = *U _blinkState -> -> 0 `i `uc ]
+[; ;util.c: 104: PORTC &= ~(1<<3);
+"104
+[e =& _PORTC -> ~ << -> 1 `i -> 3 `i `uc ]
+"105
+}
+[e :U 101 ]
 [e :U 99 ]
 [e :U 97 ]
-[; ;util.c: 102: }
-[; ;util.c: 104: }
-"104
+[; ;util.c: 105: }
+[; ;util.c: 107: }
+"107
 [e :UE 95 ]
 }
