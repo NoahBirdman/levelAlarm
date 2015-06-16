@@ -92,7 +92,7 @@ void adc_start(){
 }
 
 void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState){
-    if(stateOne == 1 || stateOne == 3 || stateTwo == 1 || stateTwo == 3){
+    if(stateOne == TRANSITION_TO_EMPTY || stateOne == TRANSITION_TO_FULL || stateTwo == TRANSITION_TO_EMPTY || stateTwo == TRANSITION_TO_FULL){
         *blinkState |= 0x01;    //Blink Fast
     }else if(almState >= 1 && almState < 3){
         *blinkState |= 0x04;

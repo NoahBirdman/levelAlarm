@@ -85,7 +85,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S78 . . . ]
 "1827
 [v _ADCON1bits `VS78 ~T0 @X0 0 e@159 ]
-"270
+"95 util.c
+[c E1003 0 1 2 3 4 5 .. ]
+[n E1003 . INITIAL_STATE TRANSITION_TO_EMPTY EMPTY TRANSITION_TO_FULL FULL ALARM_ON  ]
+"270 /opt/microchip/xc8/v1.34/include/pic16f876.h
 [v _PORTC `Vuc ~T0 @X0 0 e@7 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1010,18 +1013,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;util.h: 40: void timer1_init(void);
-[; ;util.h: 43: void timer1_start(void);
-[; ;util.h: 46: void timer1_stop(void);
-[; ;util.h: 49: void timer2_init(void);
-[; ;util.h: 52: void timer2_start(void);
-[; ;util.h: 55: void timer2_stop(void);
-[; ;util.h: 58: void timer0_init(void);
-[; ;util.h: 61: void timer0_start(void);
-[; ;util.h: 64: void timer0_stop(void);
-[; ;util.h: 67: void adc_init_CH0(void);
-[; ;util.h: 70: void adc_start(void);
-[; ;util.h: 73: void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
+[; ;util.h: 41: typedef enum
+[; ;util.h: 42: {
+[; ;util.h: 43: INITIAL_STATE,
+[; ;util.h: 44: TRANSITION_TO_EMPTY,
+[; ;util.h: 45: EMPTY,
+[; ;util.h: 46: TRANSITION_TO_FULL,
+[; ;util.h: 47: FULL,
+[; ;util.h: 48: ALARM_ON
+[; ;util.h: 49: }levelStates;
+[; ;util.h: 51: typedef struct{
+[; ;util.h: 52: levelStates levelState;
+[; ;util.h: 53: uint8_t sensorRead;
+[; ;util.h: 54: volatile int counter;
+[; ;util.h: 55: }levelSensor_t;
+[; ;util.h: 58: void timer1_init(void);
+[; ;util.h: 61: void timer1_start(void);
+[; ;util.h: 64: void timer1_stop(void);
+[; ;util.h: 67: void timer2_init(void);
+[; ;util.h: 70: void timer2_start(void);
+[; ;util.h: 73: void timer2_stop(void);
+[; ;util.h: 76: void timer0_init(void);
+[; ;util.h: 79: void timer0_start(void);
+[; ;util.h: 82: void timer0_stop(void);
+[; ;util.h: 85: void adc_init_CH0(void);
+[; ;util.h: 88: void adc_start(void);
+[; ;util.h: 91: void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
 "9 util.c
 [v _timer1_init `(v ~T0 @X0 1 ef ]
 {
@@ -1036,7 +1053,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _T1CONbits 0 1 -> -> 0 `i `uc ]
 [; ;util.c: 17: }
 "17
-[e :UE 84 ]
+[e :UE 85 ]
 }
 "20
 [v _timer1_start `(v ~T0 @X0 1 ef ]
@@ -1061,7 +1078,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 [; ;util.c: 27: }
 "27
-[e :UE 85 ]
+[e :UE 86 ]
 }
 "30
 [v _timer1_stop `(v ~T0 @X0 1 ef ]
@@ -1080,7 +1097,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PIE1bits 0 0 -> -> 0 `i `uc ]
 [; ;util.c: 34: }
 "34
-[e :UE 86 ]
+[e :UE 87 ]
 }
 "38
 [v _timer2_init `(v ~T0 @X0 1 ef ]
@@ -1096,7 +1113,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _T2CONbits 0 2 -> -> 15 `i `uc ]
 [; ;util.c: 41: }
 "41
-[e :UE 87 ]
+[e :UE 88 ]
 }
 "43
 [v _timer2_start `(v ~T0 @X0 1 ef ]
@@ -1118,7 +1135,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 [; ;util.c: 48: }
 "48
-[e :UE 88 ]
+[e :UE 89 ]
 }
 "50
 [v _timer2_stop `(v ~T0 @X0 1 ef ]
@@ -1134,7 +1151,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PIE1bits 0 1 -> -> 0 `i `uc ]
 [; ;util.c: 53: }
 "53
-[e :UE 89 ]
+[e :UE 90 ]
 }
 "56
 [v _timer0_init `(v ~T0 @X0 1 ef ]
@@ -1153,7 +1170,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _OPTION_REGbits 0 0 -> -> 4 `i `uc ]
 [; ;util.c: 60: }
 "60
-[e :UE 90 ]
+[e :UE 91 ]
 }
 "63
 [v _timer0_start `(v ~T0 @X0 1 ef ]
@@ -1172,7 +1189,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 [; ;util.c: 68: }
 "68
-[e :UE 91 ]
+[e :UE 92 ]
 }
 "70
 [v _timer0_stop `(v ~T0 @X0 1 ef ]
@@ -1185,7 +1202,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 3 -> -> 0 `i `uc ]
 [; ;util.c: 73: }
 "73
-[e :UE 92 ]
+[e :UE 93 ]
 }
 "76
 [v _adc_init_CH0 `(v ~T0 @X0 1 ef ]
@@ -1207,7 +1224,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _ADCON1bits 0 0 -> -> 0 `i `uc ]
 [; ;util.c: 83: }
 "83
-[e :UE 93 ]
+[e :UE 94 ]
 }
 "86
 [v _adc_start `(v ~T0 @X0 1 ef ]
@@ -1232,7 +1249,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 [; ;util.c: 92: }
 "92
-[e :UE 94 ]
+[e :UE 95 ]
 }
 "94
 [v _blinkLed `(v ~T0 @X0 1 ef4`uc`uc`uc`*uc ]
@@ -1244,9 +1261,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _almState `uc ~T0 @X0 1 r3 ]
 [v _blinkState `*uc ~T0 @X0 1 r4 ]
 [f ]
-[; ;util.c: 95: if(stateOne == 1 || stateOne == 3 || stateTwo == 1 || stateTwo == 3){
+[; ;util.c: 95: if(stateOne == TRANSITION_TO_EMPTY || stateOne == TRANSITION_TO_FULL || stateTwo == TRANSITION_TO_EMPTY || stateTwo == TRANSITION_TO_FULL){
 "95
-[e $ ! || || || == -> _stateOne `i -> 1 `i == -> _stateOne `i -> 3 `i == -> _stateTwo `i -> 1 `i == -> _stateTwo `i -> 3 `i 96  ]
+[e $ ! || || || == -> _stateOne `i -> . `E1003 1 `i == -> _stateOne `i -> . `E1003 3 `i == -> _stateTwo `i -> . `E1003 1 `i == -> _stateTwo `i -> . `E1003 3 `i 97  ]
 {
 [; ;util.c: 96: *blinkState |= 0x01;
 "96
@@ -1254,9 +1271,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "97
 }
 [; ;util.c: 97: }else if(almState >= 1 && almState < 3){
-[e $U 97  ]
-[e :U 96 ]
-[e $ ! && >= -> _almState `i -> 1 `i < -> _almState `i -> 3 `i 98  ]
+[e $U 98  ]
+[e :U 97 ]
+[e $ ! && >= -> _almState `i -> 1 `i < -> _almState `i -> 3 `i 99  ]
 {
 [; ;util.c: 98: *blinkState |= 0x04;
 "98
@@ -1264,9 +1281,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "99
 }
 [; ;util.c: 99: }else if (almState >= 3){
-[e $U 99  ]
-[e :U 98 ]
-[e $ ! >= -> _almState `i -> 3 `i 100  ]
+[e $U 100  ]
+[e :U 99 ]
+[e $ ! >= -> _almState `i -> 3 `i 101  ]
 {
 [; ;util.c: 100: *blinkState |= 0x08;
 "100
@@ -1277,8 +1294,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "102
 }
 [; ;util.c: 102: }else{
-[e $U 101  ]
-[e :U 100 ]
+[e $U 102  ]
+[e :U 101 ]
 {
 [; ;util.c: 103: *blinkState = 0;
 "103
@@ -1288,11 +1305,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e =& _PORTC -> ~ << -> 1 `i -> 3 `i `uc ]
 "105
 }
-[e :U 101 ]
-[e :U 99 ]
-[e :U 97 ]
+[e :U 102 ]
+[e :U 100 ]
+[e :U 98 ]
 [; ;util.c: 105: }
 [; ;util.c: 107: }
 "107
-[e :UE 95 ]
+[e :UE 96 ]
 }

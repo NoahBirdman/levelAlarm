@@ -1372,7 +1372,24 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 40 "util.h"
+# 41 "util.h"
+typedef enum
+{
+INITIAL_STATE,
+TRANSITION_TO_EMPTY,
+EMPTY,
+TRANSITION_TO_FULL,
+FULL,
+ALARM_ON
+}levelStates;
+
+typedef struct{
+levelStates levelState;
+uint8_t sensorRead;
+volatile int counter;
+}levelSensor_t;
+
+
 void timer1_init(void);
 
 
@@ -1492,7 +1509,7 @@ INTCONbits.PEIE = 1;
 }
 
 void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState){
-if(stateOne == 1 || stateOne == 3 || stateTwo == 1 || stateTwo == 3){
+if(stateOne == TRANSITION_TO_EMPTY || stateOne == TRANSITION_TO_FULL || stateTwo == TRANSITION_TO_EMPTY || stateTwo == TRANSITION_TO_FULL){
 *blinkState |= 0x01;
 }else if(almState >= 1 && almState < 3){
 *blinkState |= 0x04;

@@ -1,4 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"57 main.c
+[c E1121 0 1 2 3 4 5 .. ]
+[n E1121 . INITIAL_STATE TRANSITION_TO_EMPTY EMPTY TRANSITION_TO_FULL FULL ALARM_ON  ]
+"51 util.h
+[s S88 `E1121 1 `uc 1 `Vi 1 ]
+[n S88 . levelState sensorRead counter ]
 "2209 /opt/microchip/xc8/v1.34/include/pic16f876.h
 [v _TMR0IF `Vb ~T0 @X0 0 e@90 ]
 "2207
@@ -22,50 +28,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 "1803
 [v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
 [p mainexit ]
+"209
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
 "1185
 [v _TRISA `Vuc ~T0 @X0 0 e@133 ]
 "1234
 [v _TRISB `Vuc ~T0 @X0 0 e@134 ]
 "1295
 [v _TRISC `Vuc ~T0 @X0 0 e@135 ]
-"58 util.h
+"76 util.h
 [v _timer0_init `(v ~T0 @X0 0 ef ]
-"40
+"58
 [v _timer1_init `(v ~T0 @X0 0 ef ]
-"49
-[v _timer2_init `(v ~T0 @X0 0 ef ]
 "67
+[v _timer2_init `(v ~T0 @X0 0 ef ]
+"85
 [v _adc_init_CH0 `(v ~T0 @X0 0 ef ]
-"209 /opt/microchip/xc8/v1.34/include/pic16f876.h
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-"61 util.h
+"79
 [v _timer0_start `(v ~T0 @X0 0 ef ]
-"52
+"70
 [v _timer2_start `(v ~T0 @X0 0 ef ]
-"1027 /opt/microchip/xc8/v1.34/include/pic16f876.h
-[s S44 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :2 `uc 1 ]
-[n S44 . ADON . GO_nDONE CHS ADCS ]
-"1034
-[s S45 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S45 . . GO CHS0 CHS1 CHS2 ADCS0 ADCS1 ]
-"1043
-[s S46 :2 `uc 1 :1 `uc 1 ]
-[n S46 . . nDONE ]
-"1047
-[s S47 :2 `uc 1 :1 `uc 1 ]
-[n S47 . . GO_DONE ]
-"1026
-[u S43 `S44 1 `S45 1 `S46 1 `S47 1 ]
-[n S43 . . . . . ]
-"1052
-[v _ADCON0bits `VS43 ~T0 @X0 0 e@31 ]
-"70 util.h
+"88
 [v _adc_start `(v ~T0 @X0 0 ef ]
-"43
+"61
 [v _timer1_start `(v ~T0 @X0 0 ef ]
-"46
+"64
 [v _timer1_stop `(v ~T0 @X0 0 ef ]
-"73
+"91
 [v _blinkLed `(v ~T0 @X0 0 ef4`uc`uc`uc`*uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1039,18 +1028,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;util.h: 40: void timer1_init(void);
-[; ;util.h: 43: void timer1_start(void);
-[; ;util.h: 46: void timer1_stop(void);
-[; ;util.h: 49: void timer2_init(void);
-[; ;util.h: 52: void timer2_start(void);
-[; ;util.h: 55: void timer2_stop(void);
-[; ;util.h: 58: void timer0_init(void);
-[; ;util.h: 61: void timer0_start(void);
-[; ;util.h: 64: void timer0_stop(void);
-[; ;util.h: 67: void adc_init_CH0(void);
-[; ;util.h: 70: void adc_start(void);
-[; ;util.h: 73: void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
+[; ;util.h: 41: typedef enum
+[; ;util.h: 42: {
+[; ;util.h: 43: INITIAL_STATE,
+[; ;util.h: 44: TRANSITION_TO_EMPTY,
+[; ;util.h: 45: EMPTY,
+[; ;util.h: 46: TRANSITION_TO_FULL,
+[; ;util.h: 47: FULL,
+[; ;util.h: 48: ALARM_ON
+[; ;util.h: 49: }levelStates;
+[; ;util.h: 51: typedef struct{
+[; ;util.h: 52: levelStates levelState;
+[; ;util.h: 53: uint8_t sensorRead;
+[; ;util.h: 54: volatile int counter;
+[; ;util.h: 55: }levelSensor_t;
+[; ;util.h: 58: void timer1_init(void);
+[; ;util.h: 61: void timer1_start(void);
+[; ;util.h: 64: void timer1_stop(void);
+[; ;util.h: 67: void timer2_init(void);
+[; ;util.h: 70: void timer2_start(void);
+[; ;util.h: 73: void timer2_stop(void);
+[; ;util.h: 76: void timer0_init(void);
+[; ;util.h: 79: void timer0_start(void);
+[; ;util.h: 82: void timer0_stop(void);
+[; ;util.h: 85: void adc_init_CH0(void);
+[; ;util.h: 88: void adc_start(void);
+[; ;util.h: 91: void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
 "24 main.c
 [p x FOSC=HS ]
 "25
@@ -1115,635 +1118,634 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.c: 52: volatile uint8_t alarmState = 0;
-"53
-[v _lvlOneState `Vuc ~T0 @X0 1 e ]
-[i _lvlOneState
--> -> 0 `i `uc
-]
-[; ;main.c: 53: volatile uint8_t lvlOneState = 0;
-"54
-[v _lvlTwoState `Vuc ~T0 @X0 1 e ]
-[i _lvlTwoState
--> -> 0 `i `uc
-]
-[; ;main.c: 54: volatile uint8_t lvlTwoState = 0;
 "55
 [v _adcResult `Vi ~T0 @X0 1 e ]
 [i _adcResult
 -> 100 `i
 ]
 [; ;main.c: 55: volatile int adcResult = 100;
-"60
+"57
+[v _levelSensor `S88 ~T0 @X0 -> 2 `i e ]
+[; ;main.c: 57: levelSensor_t levelSensor[2];
+"62
 [v _blinkState `Vuc ~T0 @X0 1 e ]
 [i _blinkState
 -> -> 0 `i `uc
 ]
-[; ;main.c: 60: volatile uint8_t blinkState = 0;
-[v F1161 `(v ~T0 @X0 1 tf ]
-"63
-[v _ISR `IF1161 ~T0 @X0 1 e ]
+[; ;main.c: 62: volatile uint8_t blinkState = 0;
+[v F1173 `(v ~T0 @X0 1 tf ]
+"65
+[v _ISR `IF1173 ~T0 @X0 1 e ]
 {
-[; ;main.c: 63: void interrupt ISR(){
+[; ;main.c: 65: void interrupt ISR(){
 [e :U _ISR ]
 [f ]
-[; ;main.c: 68: if(TMR0IF && TMR0IE){
-"68
-[e $ ! && _TMR0IF _TMR0IE 89  ]
-{
-[; ;main.c: 69: if((blinkState & (0x01)== 1) && (blinkCounter % 5 == 0)){
-"69
-[e $ ! && != & -> _blinkState `i -> == -> 1 `i -> 1 `i `i -> 0 `i == % _blinkCounter -> 5 `i -> 0 `i 90  ]
-{
-[; ;main.c: 70: PORTC ^= (1<<3);
+[; ;main.c: 70: if(TMR0IF && TMR0IE){
 "70
-[e =^ _PORTC -> << -> 1 `i -> 3 `i `uc ]
+[e $ ! && _TMR0IF _TMR0IE 90  ]
+{
+[; ;main.c: 71: if((blinkState & (0x01)== 1) && (blinkCounter % 5 == 0)){
 "71
-}
-[; ;main.c: 71: }else if((blinkState == 4) && (blinkCounter % 20 == 0)){
-[e $U 91  ]
-[e :U 90 ]
-[e $ ! && == -> _blinkState `i -> 4 `i == % _blinkCounter -> 20 `i -> 0 `i 92  ]
+[e $ ! && != & -> _blinkState `i -> == -> 1 `i -> 1 `i `i -> 0 `i == % _blinkCounter -> 5 `i -> 0 `i 91  ]
 {
 [; ;main.c: 72: PORTC ^= (1<<3);
 "72
 [e =^ _PORTC -> << -> 1 `i -> 3 `i `uc ]
 "73
 }
-[e :U 92 ]
-"74
+[; ;main.c: 73: }else if((blinkState == 4) && (blinkCounter % 20 == 0)){
+[e $U 92  ]
 [e :U 91 ]
-[; ;main.c: 73: }
-[; ;main.c: 74: blinkCounter ++;
-[e ++ _blinkCounter -> 1 `i ]
-[; ;main.c: 75: TMR0IF = 0;
+[e $ ! && == -> _blinkState `i -> 4 `i == % _blinkCounter -> 20 `i -> 0 `i 93  ]
+{
+[; ;main.c: 74: PORTC ^= (1<<3);
+"74
+[e =^ _PORTC -> << -> 1 `i -> 3 `i `uc ]
 "75
-[e = _TMR0IF -> -> 0 `i `b ]
-"76
-}
-[e :U 89 ]
-[; ;main.c: 76: }
-[; ;main.c: 79: if(TMR1IE && TMR1IF){
-"79
-[e $ ! && _TMR1IE _TMR1IF 93  ]
-{
-[; ;main.c: 82: if(alarmState == 1){
-"82
-[e $ ! == -> _alarmState `i -> 1 `i 94  ]
-{
-[; ;main.c: 83: almCounter ++;
-"83
-[e ++ _almCounter -> 1 `i ]
-"84
-}
-[e :U 94 ]
-[; ;main.c: 84: }
-[; ;main.c: 85: if(alarmState == 2){
-"85
-[e $ ! == -> _alarmState `i -> 2 `i 95  ]
-{
-[; ;main.c: 86: almCounter += 3;
-"86
-[e =+ _almCounter -> 3 `i ]
-"87
-}
-[e :U 95 ]
-[; ;main.c: 87: }
-[; ;main.c: 88: TMR1IF = 0;
-"88
-[e = _TMR1IF -> -> 0 `i `b ]
-"89
 }
 [e :U 93 ]
-[; ;main.c: 89: }
-[; ;main.c: 92: if(TMR2IF && TMR2IE){
-"92
-[e $ ! && _TMR2IF _TMR2IE 96  ]
-{
-[; ;main.c: 93: if(lvlOneState == 1 || lvlOneState == 3){
-"93
-[e $ ! || == -> _lvlOneState `i -> 1 `i == -> _lvlOneState `i -> 3 `i 97  ]
-{
-[; ;main.c: 94: counter1++;
-"94
-[e ++ _counter1 -> 1 `i ]
-"95
+"76
+[e :U 92 ]
+[; ;main.c: 75: }
+[; ;main.c: 76: blinkCounter ++;
+[e ++ _blinkCounter -> 1 `i ]
+[; ;main.c: 77: TMR0IF = 0;
+"77
+[e = _TMR0IF -> -> 0 `i `b ]
+"78
 }
+[e :U 90 ]
+[; ;main.c: 78: }
+[; ;main.c: 81: if(TMR1IE && TMR1IF){
+"81
+[e $ ! && _TMR1IE _TMR1IF 94  ]
+{
+[; ;main.c: 84: if(alarmState == 1){
+"84
+[e $ ! == -> _alarmState `i -> 1 `i 95  ]
+{
+[; ;main.c: 85: almCounter ++;
+"85
+[e ++ _almCounter -> 1 `i ]
+"86
+}
+[; ;main.c: 86: }else if(alarmState == 2){
+[e $U 96  ]
+[e :U 95 ]
+[e $ ! == -> _alarmState `i -> 2 `i 97  ]
+{
+[; ;main.c: 87: almCounter += 3;
+"87
+[e =+ _almCounter -> 3 `i ]
+"88
+}
+[; ;main.c: 88: }else if(alarmState >= 3){
+[e $U 98  ]
 [e :U 97 ]
-[; ;main.c: 95: }
-[; ;main.c: 97: if(lvlTwoState == 1 || lvlTwoState == 3){
-"97
-[e $ ! || == -> _lvlTwoState `i -> 1 `i == -> _lvlTwoState `i -> 3 `i 98  ]
+[e $ ! >= -> _alarmState `i -> 3 `i 99  ]
 {
-[; ;main.c: 98: counter2++;
-"98
-[e ++ _counter2 -> 1 `i ]
-"99
-}
-[e :U 98 ]
-[; ;main.c: 99: }
-[; ;main.c: 100: TMR2IF = 0;
-"100
-[e = _TMR2IF -> -> 0 `i `b ]
-"101
-}
-[e :U 96 ]
-[; ;main.c: 101: }
-[; ;main.c: 104: if(ADIF && ADIE){
-"104
-[e $ ! && _ADIF _ADIE 99  ]
-{
-[; ;main.c: 105: adcResult = (ADRESH <<8) | (ADRESL);
-"105
-[e = _adcResult | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;main.c: 106: alarmTimer = adcResult >> 2;
-"106
-[e = _alarmTimer >> _adcResult -> 2 `i ]
-[; ;main.c: 108: ADIF = 0;
-"108
-[e = _ADIF -> -> 0 `i `b ]
-"109
+"90
 }
 [e :U 99 ]
-[; ;main.c: 109: }
-[; ;main.c: 113: }
-"113
-[e :UE 88 ]
+"92
+[e :U 98 ]
+[e :U 96 ]
+[; ;main.c: 90: }
+[; ;main.c: 92: TMR1IF = 0;
+[e = _TMR1IF -> -> 0 `i `b ]
+"93
 }
-"118
-[v _main `(i ~T0 @X0 1 ef ]
+[e :U 94 ]
+[; ;main.c: 93: }
+[; ;main.c: 96: if(TMR2IF && TMR2IE){
+"96
+[e $ ! && _TMR2IF _TMR2IE 100  ]
 {
-[; ;main.c: 118: int main() {
-[e :U _main ]
-[f ]
-"119
-[v _sensorRead `uc ~T0 @X0 1 a ]
-[; ;main.c: 119: uint8_t sensorRead =0;
-[e = _sensorRead -> -> 0 `i `uc ]
-"120
-[v _lvlOneRead `uc ~T0 @X0 1 a ]
-[; ;main.c: 120: uint8_t lvlOneRead = 0;
-[e = _lvlOneRead -> -> 0 `i `uc ]
-"121
-[v _lvlTwoRead `uc ~T0 @X0 1 a ]
-[; ;main.c: 121: uint8_t lvlTwoRead = 0;
-[e = _lvlTwoRead -> -> 0 `i `uc ]
-"122
-[v _adcDelay `uc ~T0 @X0 1 a ]
-[; ;main.c: 122: uint8_t adcDelay = 0;
-[e = _adcDelay -> -> 0 `i `uc ]
-"123
-[v _i `i ~T0 @X0 1 a ]
-[; ;main.c: 123: int i = 0;
-[e = _i -> 0 `i ]
-[; ;main.c: 125: TRISA |= (1<<0);
-"125
-[e =| _TRISA -> << -> 1 `i -> 0 `i `uc ]
-[; ;main.c: 126: TRISB |= (1<<4)|(1<<5);
-"126
-[e =| _TRISB -> | << -> 1 `i -> 4 `i << -> 1 `i -> 5 `i `uc ]
-[; ;main.c: 127: TRISC &= ~((1<<2)|(1<<3));
-"127
-[e =& _TRISC -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
-[; ;main.c: 128: TRISB &= ~((1<<3)|(1<<2));
-"128
-[e =& _TRISB -> ~ | << -> 1 `i -> 3 `i << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 131: timer0_init();
-"131
-[e ( _timer0_init ..  ]
-[; ;main.c: 132: timer1_init();
-"132
-[e ( _timer1_init ..  ]
-[; ;main.c: 133: timer2_init();
-"133
-[e ( _timer2_init ..  ]
-[; ;main.c: 134: adc_init_CH0();
-"134
-[e ( _adc_init_CH0 ..  ]
-[; ;main.c: 136: PORTC |= (1<<2);
-"136
-[e =| _PORTC -> << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 137: PORTB &= ~((1<<2)|(1<<3));
-"137
-[e =& _PORTB -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
-[; ;main.c: 139: timer0_start();
-"139
-[e ( _timer0_start ..  ]
-[; ;main.c: 140: timer2_start();
-"140
-[e ( _timer2_start ..  ]
-[; ;main.c: 142: while(1){
-"142
-[e :U 102 ]
+[; ;main.c: 97: if(levelSensor[0].levelState == TRANSITION_TO_EMPTY || levelSensor[0].levelState == TRANSITION_TO_FULL){
+"97
+[e $ ! || == -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> . `E1121 1 `i == -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> . `E1121 3 `i 101  ]
 {
-[; ;main.c: 145: if(adcDelay >= 1000 && ADCON0bits.GO_nDONE == 0){
-"145
-[e $ ! && >= -> _adcDelay `i -> 1000 `i == -> . . _ADCON0bits 0 2 `i -> 0 `i 104  ]
-{
-[; ;main.c: 146: adc_start();
-"146
-[e ( _adc_start ..  ]
-[; ;main.c: 147: adcDelay = 0;
-"147
-[e = _adcDelay -> -> 0 `i `uc ]
-"148
-}
-[; ;main.c: 148: }else {adcDelay ++;}
-[e $U 105  ]
-[e :U 104 ]
-{
-[e ++ _adcDelay -> -> 1 `i `uc ]
-}
-[e :U 105 ]
-[; ;main.c: 151: sensorRead = PORTB & ((1<<5) | (1<<4));
-"151
-[e = _sensorRead -> & -> _PORTB `i | << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i `uc ]
-[; ;main.c: 152: lvlOneRead = (sensorRead & (1<<4));
-"152
-[e = _lvlOneRead -> & -> _sensorRead `i << -> 1 `i -> 4 `i `uc ]
-[; ;main.c: 153: lvlTwoRead = (sensorRead & (1<<5));
-"153
-[e = _lvlTwoRead -> & -> _sensorRead `i << -> 1 `i -> 5 `i `uc ]
-[; ;main.c: 156: if(lvlOneState == 0){
-"156
-[e $ ! == -> _lvlOneState `i -> 0 `i 106  ]
-{
-[; ;main.c: 157: if(lvlOneRead > 0){
-"157
-[e $ ! > -> _lvlOneRead `i -> 0 `i 107  ]
-{
-[; ;main.c: 158: lvlOneState = 1;
-"158
-[e = _lvlOneState -> -> 1 `i `uc ]
-"159
-}
-[; ;main.c: 159: }else {
-[e $U 108  ]
-[e :U 107 ]
-{
-[; ;main.c: 160: counter1 = 0;
-"160
-[e = _counter1 -> 0 `i ]
-"161
-}
-[e :U 108 ]
-"164
-}
-[; ;main.c: 161: }
-[; ;main.c: 164: }else if(lvlOneState == 1){
-[e $U 109  ]
-[e :U 106 ]
-[e $ ! == -> _lvlOneState `i -> 1 `i 110  ]
-{
-[; ;main.c: 166: if(lvlOneRead == 0){
-"166
-[e $ ! == -> _lvlOneRead `i -> 0 `i 111  ]
-{
-[; ;main.c: 168: counter1 = 0;
-"168
-[e = _counter1 -> 0 `i ]
-[; ;main.c: 169: lvlOneState = 0;
-"169
-[e = _lvlOneState -> -> 0 `i `uc ]
-"171
-}
-[; ;main.c: 171: }else if(lvlOneRead > 0 && counter1 >= FILTERTMR_ISFULL){
-[e $U 112  ]
-[e :U 111 ]
-[e $ ! && > -> _lvlOneRead `i -> 0 `i >= _counter1 _FILTERTMR_ISFULL 113  ]
-{
-[; ;main.c: 172: counter1 = 0;
-"172
-[e = _counter1 -> 0 `i ]
-[; ;main.c: 173: lvlOneState = 2;
-"173
-[e = _lvlOneState -> -> 2 `i `uc ]
-"175
-}
-[e :U 113 ]
-"177
-[e :U 112 ]
-}
-[; ;main.c: 175: }
-[; ;main.c: 177: }else if(lvlOneState == 2){
-[e $U 114  ]
-[e :U 110 ]
-[e $ ! == -> _lvlOneState `i -> 2 `i 115  ]
-{
-[; ;main.c: 179: if(lvlOneRead == 0 && counter1 == 0){
-"179
-[e $ ! && == -> _lvlOneRead `i -> 0 `i == _counter1 -> 0 `i 116  ]
-{
-[; ;main.c: 180: counter1 = 1;
-"180
-[e = _counter1 -> 1 `i ]
-[; ;main.c: 181: lvlOneState = 3;
-"181
-[e = _lvlOneState -> -> 3 `i `uc ]
-"183
-}
-[; ;main.c: 183: }else{
-[e $U 117  ]
-[e :U 116 ]
-{
-"185
-}
-[e :U 117 ]
-"187
-}
-[; ;main.c: 185: }
-[; ;main.c: 187: }else if(lvlOneState == 3){
-[e $U 118  ]
-[e :U 115 ]
-[e $ ! == -> _lvlOneState `i -> 3 `i 119  ]
-{
-[; ;main.c: 189: if(lvlOneRead > 0){
-"189
-[e $ ! > -> _lvlOneRead `i -> 0 `i 120  ]
-{
-[; ;main.c: 190: counter1 = 0;
-"190
-[e = _counter1 -> 0 `i ]
-[; ;main.c: 191: lvlOneState = 2;
-"191
-[e = _lvlOneState -> -> 2 `i `uc ]
-"194
-}
-[; ;main.c: 194: }else if(lvlOneRead == 0 && counter1 > FILTERTMR_ISEMPTY){
-[e $U 121  ]
-[e :U 120 ]
-[e $ ! && == -> _lvlOneRead `i -> 0 `i > _counter1 _FILTERTMR_ISEMPTY 122  ]
-{
-[; ;main.c: 196: counter1 = 0;
-"196
-[e = _counter1 -> 0 `i ]
-[; ;main.c: 197: lvlOneState = 4;
-"197
-[e = _lvlOneState -> -> 4 `i `uc ]
-"199
-}
-[e :U 122 ]
-"202
-[e :U 121 ]
-}
-[; ;main.c: 199: }
-[; ;main.c: 202: }else if(lvlOneState == 4){
-[e $U 123  ]
-[e :U 119 ]
-[e $ ! == -> _lvlOneState `i -> 4 `i 124  ]
-{
-[; ;main.c: 204: lvlOneState = 5;
-"204
-[e = _lvlOneState -> -> 5 `i `uc ]
-[; ;main.c: 205: blinkState = 4;
-"205
-[e = _blinkState -> -> 4 `i `uc ]
-[; ;main.c: 206: alarmState ++;
-"206
-[e ++ _alarmState -> -> 1 `i `uc ]
-"207
-}
-[e :U 124 ]
-"211
-[e :U 123 ]
-[e :U 118 ]
-[e :U 114 ]
-[e :U 109 ]
-[; ;main.c: 207: }
-[; ;main.c: 211: if(lvlTwoState == 0){
-[e $ ! == -> _lvlTwoState `i -> 0 `i 125  ]
-{
-[; ;main.c: 212: if(lvlTwoRead > 0){
-"212
-[e $ ! > -> _lvlTwoRead `i -> 0 `i 126  ]
-{
-[; ;main.c: 213: lvlTwoState = 1;
-"213
-[e = _lvlTwoState -> -> 1 `i `uc ]
-"214
-}
-[; ;main.c: 214: }else {
-[e $U 127  ]
-[e :U 126 ]
-{
-[; ;main.c: 215: counter2 = 0;
-"215
-[e = _counter2 -> 0 `i ]
-"216
-}
-[e :U 127 ]
-"219
-}
-[; ;main.c: 216: }
-[; ;main.c: 219: }else if(lvlTwoState == 1){
-[e $U 128  ]
-[e :U 125 ]
-[e $ ! == -> _lvlTwoState `i -> 1 `i 129  ]
-{
-[; ;main.c: 221: if(lvlTwoRead == 0){
-"221
-[e $ ! == -> _lvlTwoRead `i -> 0 `i 130  ]
-{
-[; ;main.c: 223: counter2 = 0;
-"223
-[e = _counter2 -> 0 `i ]
-[; ;main.c: 224: lvlTwoState = 0;
-"224
-[e = _lvlTwoState -> -> 0 `i `uc ]
-"226
-}
-[; ;main.c: 226: }else if(lvlTwoRead > 0 && counter2 >= FILTERTMR_ISFULL){
-[e $U 131  ]
-[e :U 130 ]
-[e $ ! && > -> _lvlTwoRead `i -> 0 `i >= _counter2 _FILTERTMR_ISFULL 132  ]
-{
-[; ;main.c: 227: counter2 = 0;
-"227
-[e = _counter2 -> 0 `i ]
-[; ;main.c: 228: lvlTwoState = 2;
-"228
-[e = _lvlTwoState -> -> 2 `i `uc ]
-"230
-}
-[e :U 132 ]
-"232
-[e :U 131 ]
-}
-[; ;main.c: 230: }
-[; ;main.c: 232: }else if(lvlTwoState == 2){
-[e $U 133  ]
-[e :U 129 ]
-[e $ ! == -> _lvlTwoState `i -> 2 `i 134  ]
-{
-[; ;main.c: 234: if(lvlTwoRead == 0 && counter2 == 0){
-"234
-[e $ ! && == -> _lvlTwoRead `i -> 0 `i == _counter2 -> 0 `i 135  ]
-{
-[; ;main.c: 235: counter2 = 1;
-"235
-[e = _counter2 -> 1 `i ]
-[; ;main.c: 236: lvlTwoState = 3;
-"236
-[e = _lvlTwoState -> -> 3 `i `uc ]
-"237
-}
-[; ;main.c: 237: }else{
-[e $U 136  ]
-[e :U 135 ]
-{
-[; ;main.c: 238: counter2 = 0;
-"238
-[e = _counter2 -> 0 `i ]
-"240
-}
-[e :U 136 ]
-"242
-}
-[; ;main.c: 240: }
-[; ;main.c: 242: }else if(lvlTwoState == 3){
-[e $U 137  ]
-[e :U 134 ]
-[e $ ! == -> _lvlTwoState `i -> 3 `i 138  ]
-{
-[; ;main.c: 244: if(lvlTwoRead > 0){
-"244
-[e $ ! > -> _lvlTwoRead `i -> 0 `i 139  ]
-{
-[; ;main.c: 245: counter2 = 0;
-"245
-[e = _counter2 -> 0 `i ]
-[; ;main.c: 246: lvlTwoState = 2;
-"246
-[e = _lvlTwoState -> -> 2 `i `uc ]
-"249
-}
-[; ;main.c: 249: }else if(lvlTwoRead == 0 && counter2 > FILTERTMR_ISEMPTY){
-[e $U 140  ]
-[e :U 139 ]
-[e $ ! && == -> _lvlTwoRead `i -> 0 `i > _counter2 _FILTERTMR_ISEMPTY 141  ]
-{
-[; ;main.c: 251: counter2 = 0;
-"251
-[e = _counter2 -> 0 `i ]
-[; ;main.c: 252: lvlTwoState = 4;
-"252
-[e = _lvlTwoState -> -> 4 `i `uc ]
-"253
-}
-[e :U 141 ]
-"256
-[e :U 140 ]
-}
-[; ;main.c: 253: }
-[; ;main.c: 256: }else if(lvlTwoState == 4){
-[e $U 142  ]
-[e :U 138 ]
-[e $ ! == -> _lvlTwoState `i -> 4 `i 143  ]
-{
-[; ;main.c: 258: lvlTwoState = 5;
-"258
-[e = _lvlTwoState -> -> 5 `i `uc ]
-[; ;main.c: 259: blinkState = 4;
-"259
-[e = _blinkState -> -> 4 `i `uc ]
-[; ;main.c: 260: alarmState ++;
-"260
-[e ++ _alarmState -> -> 1 `i `uc ]
-"261
-}
-[e :U 143 ]
-"265
-[e :U 142 ]
-[e :U 137 ]
-[e :U 133 ]
-[e :U 128 ]
-[; ;main.c: 261: }
-[; ;main.c: 265: if(alarmState >= 1){
-[e $ ! >= -> _alarmState `i -> 1 `i 144  ]
-{
-[; ;main.c: 267: if(almCounter == 0){
-"267
-[e $ ! == _almCounter -> 0 `i 145  ]
-{
-[; ;main.c: 268: PORTB |= (1<<3);
-"268
-[e =| _PORTB -> << -> 1 `i -> 3 `i `uc ]
-[; ;main.c: 269: adc_start();
-"269
-[e ( _adc_start ..  ]
-[; ;main.c: 270: timer1_start();
-"270
-[e ( _timer1_start ..  ]
-[; ;main.c: 271: almCounter = 1;
-"271
-[e = _almCounter -> 1 `i ]
-"273
-}
-[; ;main.c: 273: }else if(almCounter > alarmTimer){
-[e $U 146  ]
-[e :U 145 ]
-[e $ ! > _almCounter _alarmTimer 147  ]
-{
-[; ;main.c: 274: PORTB |= (1<<2) |(1<<3);
-"274
-[e =| _PORTB -> | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
-[; ;main.c: 275: timer1_stop();
-"275
-[e ( _timer1_stop ..  ]
-[; ;main.c: 276: almCounter = 1;
-"276
-[e = _almCounter -> 1 `i ]
-[; ;main.c: 277: alarmState = 3;
-"277
-[e = _alarmState -> -> 3 `i `uc ]
-"278
-}
-[e :U 147 ]
-"279
-[e :U 146 ]
-}
-[e :U 144 ]
-[; ;main.c: 278: }
-[; ;main.c: 279: }
-[; ;main.c: 282: blinkLed(lvlOneState, lvlTwoState, alarmState, &blinkState);
-"282
-[e ( _blinkLed (4 , , , _lvlOneState _lvlTwoState _alarmState -> &U _blinkState `*uc ]
-"284
+[; ;main.c: 98: counter1++;
+"98
+[e ++ _counter1 -> 1 `i ]
+"99
 }
 [e :U 101 ]
-"142
-[e $U 102  ]
+[; ;main.c: 99: }
+[; ;main.c: 101: if(levelSensor[1].levelState == TRANSITION_TO_EMPTY || levelSensor[1].levelState == TRANSITION_TO_FULL){
+"101
+[e $ ! || == -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> . `E1121 1 `i == -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> . `E1121 3 `i 102  ]
+{
+[; ;main.c: 102: counter2++;
+"102
+[e ++ _counter2 -> 1 `i ]
+"103
+}
+[e :U 102 ]
+[; ;main.c: 103: }
+[; ;main.c: 104: TMR2IF = 0;
+"104
+[e = _TMR2IF -> -> 0 `i `b ]
+"105
+}
+[e :U 100 ]
+[; ;main.c: 105: }
+[; ;main.c: 108: if(ADIF && ADIE){
+"108
+[e $ ! && _ADIF _ADIE 103  ]
+{
+[; ;main.c: 109: adcResult = (ADRESH <<8) | (ADRESL);
+"109
+[e = _adcResult | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
+[; ;main.c: 110: alarmTimer = adcResult >> 2;
+"110
+[e = _alarmTimer >> _adcResult -> 2 `i ]
+[; ;main.c: 112: ADIF = 0;
+"112
+[e = _ADIF -> -> 0 `i `b ]
+"113
+}
 [e :U 103 ]
-[; ;main.c: 284: }
-[; ;main.c: 288: while(1){
-"288
-[e :U 149 ]
+[; ;main.c: 113: }
+[; ;main.c: 117: }
+"117
+[e :UE 89 ]
+}
+"122
+[v _main `(i ~T0 @X0 1 ef ]
 {
-[; ;main.c: 289: PORTC^=(1<<2);
+[; ;main.c: 122: int main() {
+[e :U _main ]
+[f ]
+"124
+[v _sensorRead `uc ~T0 @X0 1 a ]
+[; ;main.c: 124: uint8_t sensorRead =0;
+[e = _sensorRead -> -> 0 `i `uc ]
+[v _levelSensor `S88 ~T0 @X0 -> 2 `i a ]
+[; ;main.c: 126: levelSensor_t levelSensor[2];
+[; ;main.c: 127: sensorRead = PORTB & ((1<<5) | (1<<4));
+"127
+[e = _sensorRead -> & -> _PORTB `i | << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i `uc ]
+[; ;main.c: 128: levelSensor[0].sensorRead = (sensorRead & (1<<4));
+"128
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 -> & -> _sensorRead `i << -> 1 `i -> 4 `i `uc ]
+[; ;main.c: 129: levelSensor[1].sensorRead = (sensorRead & (1<<5));
+"129
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 -> & -> _sensorRead `i << -> 1 `i -> 5 `i `uc ]
+[; ;main.c: 131: TRISA |= (1<<0);
+"131
+[e =| _TRISA -> << -> 1 `i -> 0 `i `uc ]
+[; ;main.c: 132: TRISB |= (1<<4)|(1<<5);
+"132
+[e =| _TRISB -> | << -> 1 `i -> 4 `i << -> 1 `i -> 5 `i `uc ]
+[; ;main.c: 133: TRISC &= ~((1<<2)|(1<<3));
+"133
+[e =& _TRISC -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
+[; ;main.c: 134: TRISB &= ~((1<<3)|(1<<2));
+"134
+[e =& _TRISB -> ~ | << -> 1 `i -> 3 `i << -> 1 `i -> 2 `i `uc ]
+[; ;main.c: 137: timer0_init();
+"137
+[e ( _timer0_init ..  ]
+[; ;main.c: 138: timer1_init();
+"138
+[e ( _timer1_init ..  ]
+[; ;main.c: 139: timer2_init();
+"139
+[e ( _timer2_init ..  ]
+[; ;main.c: 140: adc_init_CH0();
+"140
+[e ( _adc_init_CH0 ..  ]
+[; ;main.c: 142: PORTC |= (1<<2);
+"142
+[e =| _PORTC -> << -> 1 `i -> 2 `i `uc ]
+[; ;main.c: 143: PORTB &= ~((1<<2)|(1<<3));
+"143
+[e =& _PORTB -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
+[; ;main.c: 145: timer0_start();
+"145
+[e ( _timer0_start ..  ]
+[; ;main.c: 146: timer2_start();
+"146
+[e ( _timer2_start ..  ]
+[; ;main.c: 149: while(1)
+"149
+[e :U 106 ]
+[; ;main.c: 150: {
+"150
+{
+[; ;main.c: 161: switch(levelSensor[0].levelState){
+"161
+[e $U 109  ]
+{
+[; ;main.c: 162: case INITIAL_STATE :
+"162
+[e :U 110 ]
+[; ;main.c: 163: if(levelSensor[0].sensorRead > 0){
+"163
+[e $ ! > -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 `i -> 0 `i 111  ]
+{
+[; ;main.c: 164: levelSensor[0].levelState = TRANSITION_TO_EMPTY;
+"164
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 1 ]
+"165
+}
+[; ;main.c: 165: }else {
+[e $U 112  ]
+[e :U 111 ]
+{
+[; ;main.c: 166: counter1 = 0;
+"166
+[e = _counter1 -> 0 `i ]
+"167
+}
+[e :U 112 ]
+[; ;main.c: 167: }
+[; ;main.c: 168: break;
+"168
+[e $U 108  ]
+[; ;main.c: 170: case TRANSITION_TO_EMPTY :
+"170
+[e :U 113 ]
+[; ;main.c: 172: if(levelSensor[0].sensorRead == 0){
+"172
+[e $ ! == -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 `i -> 0 `i 114  ]
+{
+[; ;main.c: 174: counter1 = 0;
+"174
+[e = _counter1 -> 0 `i ]
+[; ;main.c: 175: levelSensor[0].levelState = INITIAL_STATE;
+"175
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 0 ]
+"177
+}
+[; ;main.c: 177: }else if(levelSensor[0].sensorRead > 0 && counter1 >= FILTERTMR_ISFULL){
+[e $U 115  ]
+[e :U 114 ]
+[e $ ! && > -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 `i -> 0 `i >= _counter1 _FILTERTMR_ISFULL 116  ]
+{
+[; ;main.c: 178: counter1 = 0;
+"178
+[e = _counter1 -> 0 `i ]
+[; ;main.c: 179: levelSensor[0].levelState = EMPTY;
+"179
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 2 ]
+"181
+}
+[e :U 116 ]
+"182
+[e :U 115 ]
+[; ;main.c: 181: }
+[; ;main.c: 182: break;
+[e $U 108  ]
+[; ;main.c: 184: case EMPTY:
+"184
+[e :U 117 ]
+[; ;main.c: 187: if(levelSensor[0].sensorRead == 0 && counter1 == 0){
+"187
+[e $ ! && == -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 `i -> 0 `i == _counter1 -> 0 `i 118  ]
+{
+[; ;main.c: 188: counter1 = 1;
+"188
+[e = _counter1 -> 1 `i ]
+[; ;main.c: 189: levelSensor[0].levelState = TRANSITION_TO_FULL;
+"189
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 3 ]
+"191
+}
+[; ;main.c: 191: }else{
+[e $U 119  ]
+[e :U 118 ]
+{
+[; ;main.c: 192: counter1 = 0;
+"192
+[e = _counter1 -> 0 `i ]
+"194
+}
+[e :U 119 ]
+[; ;main.c: 194: }
+[; ;main.c: 195: break;
+"195
+[e $U 108  ]
+[; ;main.c: 197: case TRANSITION_TO_FULL:
+"197
+[e :U 120 ]
+[; ;main.c: 199: if(levelSensor[0].sensorRead > 0){
+"199
+[e $ ! > -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 `i -> 0 `i 121  ]
+{
+[; ;main.c: 200: counter1 = 0;
+"200
+[e = _counter1 -> 0 `i ]
+[; ;main.c: 201: levelSensor[0].levelState = EMPTY;
+"201
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 2 ]
+"204
+}
+[; ;main.c: 204: }else if(levelSensor[0].sensorRead == 0 && counter1 > FILTERTMR_ISEMPTY){
+[e $U 122  ]
+[e :U 121 ]
+[e $ ! && == -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 1 `i -> 0 `i > _counter1 _FILTERTMR_ISEMPTY 123  ]
+{
+[; ;main.c: 206: counter1 = 0;
+"206
+[e = _counter1 -> 0 `i ]
+[; ;main.c: 207: levelSensor[0].levelState = FULL;
+"207
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 4 ]
+"209
+}
+[e :U 123 ]
+"210
+[e :U 122 ]
+[; ;main.c: 209: }
+[; ;main.c: 210: break;
+[e $U 108  ]
+[; ;main.c: 213: case FULL :
+"213
+[e :U 124 ]
+[; ;main.c: 215: levelSensor[0].levelState = ALARM_ON;
+"215
+[e = . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 5 ]
+[; ;main.c: 216: blinkState = 4;
+"216
+[e = _blinkState -> -> 4 `i `uc ]
+[; ;main.c: 217: alarmState ++;
+"217
+[e ++ _alarmState -> -> 1 `i `uc ]
+[; ;main.c: 219: break;
+"219
+[e $U 108  ]
+"220
+}
+[; ;main.c: 220: }
+[e $U 108  ]
+"161
+[e :U 109 ]
+[e [\ . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 , $ . `E1121 0 110
+ , $ . `E1121 1 113
+ , $ . `E1121 2 117
+ , $ . `E1121 3 120
+ , $ . `E1121 4 124
+ 108 ]
+"220
+[e :U 108 ]
+[; ;main.c: 279: switch (levelSensor[1].levelState)
+"279
+[e $U 126  ]
+[; ;main.c: 280: {
+"280
+{
+[; ;main.c: 282: case INITIAL_STATE :
+"282
+[e :U 127 ]
+[; ;main.c: 283: if(levelSensor[1].levelState > 0)
+"283
+[e $ ! > -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> 0 `i 128  ]
+[; ;main.c: 284: {
+"284
+{
+[; ;main.c: 285: levelSensor[1].levelState = TRANSITION_TO_EMPTY;
+"285
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 1 ]
+"286
+}
+[; ;main.c: 286: }else
+[e $U 129  ]
+[e :U 128 ]
+[; ;main.c: 287: {
+"287
+{
+[; ;main.c: 288: counter2 = 0;
+"288
+[e = _counter2 -> 0 `i ]
 "289
-[e =^ _PORTC -> << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 290: for(i=0;i<10000;i++);
-"290
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 151  ]
-[e $U 152  ]
-[e :U 151 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 151  ]
-[e :U 152 ]
 }
+[e :U 129 ]
+[; ;main.c: 289: }
+[; ;main.c: 292: case TRANSITION_TO_EMPTY :
 "292
-}
-[e :U 148 ]
-"288
-[e $U 149  ]
-[e :U 150 ]
-[; ;main.c: 292: }
-[; ;main.c: 293: return (0);
-"293
-[e ) -> 0 `i ]
-[e $UE 100  ]
-[; ;main.c: 294: }
+[e :U 130 ]
+[; ;main.c: 294: if(levelSensor[1].levelState == 0)
 "294
-[e :UE 100 ]
+[e $ ! == -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> 0 `i 131  ]
+[; ;main.c: 295: {
+"295
+{
+[; ;main.c: 297: counter2 = 0;
+"297
+[e = _counter2 -> 0 `i ]
+[; ;main.c: 298: levelSensor[1].levelState = INITIAL_STATE;
+"298
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 0 ]
+"300
+}
+[; ;main.c: 300: }else if(levelSensor[1].levelState > 0 && counter2 >= FILTERTMR_ISFULL)
+[e $U 132  ]
+[e :U 131 ]
+[e $ ! && > -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> 0 `i >= _counter2 _FILTERTMR_ISFULL 133  ]
+[; ;main.c: 301: {
+"301
+{
+[; ;main.c: 302: counter2 = 0;
+"302
+[e = _counter2 -> 0 `i ]
+[; ;main.c: 303: levelSensor[1].levelState = EMPTY;
+"303
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 2 ]
+"305
+}
+[e :U 133 ]
+"307
+[e :U 132 ]
+[; ;main.c: 305: }
+[; ;main.c: 307: case EMPTY :
+[e :U 134 ]
+[; ;main.c: 309: if(levelSensor[1].levelState == 0 && counter2 == 0)
+"309
+[e $ ! && == -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> 0 `i == _counter2 -> 0 `i 135  ]
+[; ;main.c: 310: {
+"310
+{
+[; ;main.c: 311: counter2 = 1;
+"311
+[e = _counter2 -> 1 `i ]
+[; ;main.c: 312: levelSensor[1].levelState = TRANSITION_TO_FULL;
+"312
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 3 ]
+"313
+}
+[; ;main.c: 313: }else
+[e $U 136  ]
+[e :U 135 ]
+[; ;main.c: 314: {
+"314
+{
+[; ;main.c: 315: counter2 = 0;
+"315
+[e = _counter2 -> 0 `i ]
+"317
+}
+[e :U 136 ]
+[; ;main.c: 317: }
+[; ;main.c: 319: case TRANSITION_TO_FULL :
+"319
+[e :U 137 ]
+[; ;main.c: 321: if(levelSensor[1].levelState > 0)
+"321
+[e $ ! > -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> 0 `i 138  ]
+[; ;main.c: 322: {
+"322
+{
+[; ;main.c: 323: counter2 = 0;
+"323
+[e = _counter2 -> 0 `i ]
+[; ;main.c: 324: levelSensor[1].levelState = EMPTY;
+"324
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 2 ]
+"325
+}
+[; ;main.c: 325: }else if(levelSensor[1].levelState == 0 && counter2 > FILTERTMR_ISEMPTY)
+[e $U 139  ]
+[e :U 138 ]
+[e $ ! && == -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `i -> 0 `i > _counter2 _FILTERTMR_ISEMPTY 140  ]
+[; ;main.c: 326: {
+"326
+{
+[; ;main.c: 328: counter2 = 0;
+"328
+[e = _counter2 -> 0 `i ]
+[; ;main.c: 329: levelSensor[1].levelState = FULL;
+"329
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 4 ]
+"330
+}
+[e :U 140 ]
+"332
+[e :U 139 ]
+[; ;main.c: 330: }
+[; ;main.c: 332: case FULL :
+[e :U 141 ]
+[; ;main.c: 334: levelSensor[1].levelState = ALARM_ON;
+"334
+[e = . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 . `E1121 5 ]
+[; ;main.c: 335: blinkState = 4;
+"335
+[e = _blinkState -> -> 4 `i `uc ]
+[; ;main.c: 336: alarmState ++;
+"336
+[e ++ _alarmState -> -> 1 `i `uc ]
+"339
+}
+[; ;main.c: 339: }
+[e $U 125  ]
+"279
+[e :U 126 ]
+[e [\ . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 , $ . `E1121 0 127
+ , $ . `E1121 1 130
+ , $ . `E1121 2 134
+ , $ . `E1121 3 137
+ , $ . `E1121 4 141
+ 125 ]
+"339
+[e :U 125 ]
+[; ;main.c: 341: if(alarmState >= 1)
+"341
+[e $ ! >= -> _alarmState `i -> 1 `i 142  ]
+[; ;main.c: 342: {
+"342
+{
+[; ;main.c: 344: if(almCounter == 0)
+"344
+[e $ ! == _almCounter -> 0 `i 143  ]
+[; ;main.c: 345: {
+"345
+{
+[; ;main.c: 346: PORTB |= (1<<3);
+"346
+[e =| _PORTB -> << -> 1 `i -> 3 `i `uc ]
+[; ;main.c: 347: adc_start();
+"347
+[e ( _adc_start ..  ]
+[; ;main.c: 348: timer1_start();
+"348
+[e ( _timer1_start ..  ]
+[; ;main.c: 349: almCounter = 1;
+"349
+[e = _almCounter -> 1 `i ]
+"351
+}
+[; ;main.c: 351: }else if(almCounter > alarmTimer)
+[e $U 144  ]
+[e :U 143 ]
+[e $ ! > _almCounter _alarmTimer 145  ]
+[; ;main.c: 352: {
+"352
+{
+[; ;main.c: 353: PORTB |= (1<<2) |(1<<3);
+"353
+[e =| _PORTB -> | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
+[; ;main.c: 354: timer1_stop();
+"354
+[e ( _timer1_stop ..  ]
+[; ;main.c: 355: almCounter = 1;
+"355
+[e = _almCounter -> 1 `i ]
+[; ;main.c: 356: alarmState = 3;
+"356
+[e = _alarmState -> -> 3 `i `uc ]
+"357
+}
+[e :U 145 ]
+"358
+[e :U 144 ]
+}
+[e :U 142 ]
+[; ;main.c: 357: }
+[; ;main.c: 358: }
+[; ;main.c: 361: blinkLed(levelSensor[0].levelState, levelSensor[1].levelState, alarmState, &blinkState);
+"361
+[e ( _blinkLed (4 , , , -> . *U + &U _levelSensor * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `uc -> . *U + &U _levelSensor * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensor `ui `ux 0 `uc _alarmState -> &U _blinkState `*uc ]
+"363
+}
+[e :U 105 ]
+"149
+[e $U 106  ]
+[e :U 107 ]
+[; ;main.c: 363: }
+[; ;main.c: 368: while(1)
+"368
+[e :U 147 ]
+[; ;main.c: 369: {
+"369
+{
+[; ;main.c: 370: PORTC^=(1<<2);
+"370
+[e =^ _PORTC -> << -> 1 `i -> 2 `i `uc ]
+[; ;main.c: 371: for(int i=0;i<10000;i++);
+"371
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 10000 `i 149  ]
+[e $U 150  ]
+[e :U 149 ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 10000 `i 149  ]
+[e :U 150 ]
+}
+"373
+}
+[e :U 146 ]
+"368
+[e $U 147  ]
+[e :U 148 ]
+[; ;main.c: 373: }
+[; ;main.c: 374: return (0);
+"374
+[e ) -> 0 `i ]
+[e $UE 104  ]
+[; ;main.c: 375: }
+"375
+[e :UE 104 ]
 }

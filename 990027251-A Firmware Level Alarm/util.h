@@ -36,6 +36,34 @@ extern "C" {
     #define ADCTRIS TRISA
     #define ADCPORT PORTA   //ADC used for tuning siren delay
 
+
+    //The states that are allowed
+    typedef enum
+    {
+        INITIAL_STATE,
+        TRANSITION_TO_EMPTY,
+        EMPTY,
+        TRANSITION_TO_FULL,
+        FULL,
+        ALARM_ON
+    }levelStates_t;
+
+    //The options for blinking
+    typedef enum
+    {
+        LIGHTS_OFF,
+        FILTER_BLINK_FAST,
+        ALARM_BLINK_SLOW,
+        ALARM_SOLID_ON
+
+    }blinkStates_t;
+
+    typedef struct{
+        levelStates_t levelState;
+        uint8_t sensorRead;
+        volatile int counter;
+    }levelSensor_t;
+
     //Timer 1 Initialize
     void timer1_init(void);
 
