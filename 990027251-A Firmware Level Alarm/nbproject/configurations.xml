@@ -5,6 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>util.h</itemPath>
+      <itemPath>alarm_source.c</itemPath>
+      <itemPath>alarm_source.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

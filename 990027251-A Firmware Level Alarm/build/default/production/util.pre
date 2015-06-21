@@ -1372,22 +1372,85 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 41 "util.h"
-typedef enum
+# 21 "alarm_source.h"
+void hello_world(void);
+
+typedef enum alarmStates
+{
+ALARM_OFF,
+ALARM_ON,
+ALARM_DOUBLE_TIME,
+ALARM_FINAL_STATE
+}alarmStates_t;
+
+typedef struct Alarm
+{
+enum alarmStates ALARM_STATE;
+uint8_t current_value;
+uint8_t trigger_value;
+
+
+
+}Alarm_t;
+
+void checkAlarmState(struct levelSensor *theSensor, struct Alarm *theAlarm);
+void turnAlarmOn(alarmStates_t theAlarmState);
+
+# 46 "util.h"
+const int FILTERTMR_TO_FULL = 50;
+const int FILTERTMR_TO_EMPTY = 50;
+
+
+
+
+typedef enum blinkStates
+{
+LIGHTS_OFF,
+POWER_ON,
+FILTER_BLINK_FAST,
+ALARM_BLINK_SLOW,
+ALARM_SOLID_ON
+
+}blinkStates_t;
+
+
+
+typedef enum levelStates
 {
 INITIAL_STATE,
 TRANSITION_TO_EMPTY,
 EMPTY,
 TRANSITION_TO_FULL,
-FULL,
-ALARM_ON
-}levelStates;
+TURN_ON_ALARM,
+FINAL_STATE
+}levelStates_t;
 
-typedef struct{
-levelStates levelState;
+typedef enum tankStates
+{
+TANK_IS_FULL,
+TANK_IS_EMPTY
+}tankStates_t;
+
+typedef struct levelSensor{
+enum levelStates LEVEL_STATE;
 uint8_t sensorRead;
+enum tankStates TANK_STATE;
 volatile int counter;
 }levelSensor_t;
+
+
+
+
+void checkTankStatus(levelSensor_t *theTankSensor);
+
+
+void checkSensorState(struct levelSensor *theSensor);
+
+
+void init_sensor(levelSensor_t *theSensor_init);
+
+
+void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 
 
 void timer1_init(void);
@@ -1422,13 +1485,127 @@ void adc_init_CH0(void);
 
 void adc_start(void);
 
+# 4 "util.c"
+void checkTankStatus(levelSensor_t *theSensor){
 
-void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
 
-# 9 "util.c"
+
+if (theSensor->sensorRead > 0)
+{
+theSensor->TANK_STATE = TANK_IS_EMPTY;
+
+}else
+{
+theSensor->TANK_STATE = TANK_IS_FULL;
+
+}
+
+
+}
+void checkSensorState(struct levelSensor *theSensor)
+{
+switch(theSensor->LEVEL_STATE){
+case INITIAL_STATE :
+
+
+if(theSensor->TANK_STATE == TANK_IS_EMPTY)
+{
+theSensor->LEVEL_STATE = TRANSITION_TO_EMPTY;
+}else
+{
+theSensor->counter = 0;
+}
+break;
+
+case TRANSITION_TO_EMPTY :
+
+
+
+if(theSensor->TANK_STATE == TANK_IS_FULL)
+{
+theSensor->counter = 0;
+theSensor->LEVEL_STATE = INITIAL_STATE;
+
+}else if(theSensor->TANK_STATE == TANK_IS_EMPTY && theSensor->counter >= FILTERTMR_TO_EMPTY)
+{
+theSensor->counter = 0;
+theSensor->LEVEL_STATE = EMPTY;
+
+}
+break;
+
+case EMPTY:
+
+if(theSensor->TANK_STATE == TANK_IS_FULL && theSensor->counter == 0){
+theSensor->LEVEL_STATE = TRANSITION_TO_FULL;
+
+}else{
+theSensor->counter = 0;
+
+}
+break;
+
+case TRANSITION_TO_FULL:
+
+if(theSensor->TANK_STATE == TANK_IS_EMPTY){
+theSensor->counter = 0;
+theSensor->LEVEL_STATE = EMPTY;
+
+
+}else if(theSensor->TANK_STATE == TANK_IS_FULL && theSensor->counter > FILTERTMR_TO_FULL){
+
+theSensor->counter = 0;
+theSensor->LEVEL_STATE = TURN_ON_ALARM;
+
+}
+break;
+
+
+case TURN_ON_ALARM :
+
+
+break;
+}
+}
+
+
+
+
+void init_sensor(levelSensor_t *theSensor_init)
+{
+theSensor_init->counter = 0;
+theSensor_init->LEVEL_STATE = INITIAL_STATE;
+theSensor_init->sensorRead = 0;
+theSensor_init->TANK_STATE = TANK_IS_EMPTY;
+
+}
+
+void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, enum blinkStates *blinkState)
+{
+if(*stateOne == TRANSITION_TO_EMPTY || *stateOne == TRANSITION_TO_FULL || *stateTwo == TRANSITION_TO_EMPTY || *stateTwo == TRANSITION_TO_FULL)
+{
+*blinkState = FILTER_BLINK_FAST ;
+
+}else if(*almState == ALARM_ON || *almState == ALARM_DOUBLE_TIME)
+{
+*blinkState = ALARM_BLINK_SLOW;
+
+}else if (*almState == ALARM_FINAL_STATE)
+{
+*blinkState = ALARM_SOLID_ON;
+
+}else
+{
+*blinkState = LIGHTS_OFF;
+
+}
+
+}
+
+
 void timer1_init(){
 
-# 15
+# 127
 T1CONbits.T1CKPS = 0x03;
 T1CONbits.TMR1CS = 0;
 }
@@ -1508,17 +1685,3 @@ INTCONbits.GIE =1;
 INTCONbits.PEIE = 1;
 }
 
-void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState){
-if(stateOne == TRANSITION_TO_EMPTY || stateOne == TRANSITION_TO_FULL || stateTwo == TRANSITION_TO_EMPTY || stateTwo == TRANSITION_TO_FULL){
-*blinkState |= 0x01;
-}else if(almState >= 1 && almState < 3){
-*blinkState |= 0x04;
-}else if (almState >= 3){
-*blinkState |= 0x08;
-PORTC |= (1<<3);
-}else{
-*blinkState = 0;
-PORTC &= ~(1<<3);
-}
-
-}

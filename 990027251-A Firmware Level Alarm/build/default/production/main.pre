@@ -1,6 +1,17 @@
 
 # 1 "main.c"
 
+
+# 20
+#pragma config FOSC = HS
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config CP = OFF
+#pragma config BOREN = ON
+#pragma config LVP = OFF
+#pragma config CPD = OFF
+#pragma config WRT = ON
+
 # 26 "/opt/microchip/xc8/v1.34/include/htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
@@ -1439,22 +1450,85 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 41 "util.h"
-typedef enum
+# 21 "alarm_source.h"
+void hello_world(void);
+
+typedef enum alarmStates
+{
+ALARM_OFF,
+ALARM_ON,
+ALARM_DOUBLE_TIME,
+ALARM_FINAL_STATE
+}alarmStates_t;
+
+typedef struct Alarm
+{
+enum alarmStates ALARM_STATE;
+uint8_t current_value;
+uint8_t trigger_value;
+
+
+
+}Alarm_t;
+
+void checkAlarmState(struct levelSensor *theSensor, struct Alarm *theAlarm);
+void turnAlarmOn(alarmStates_t theAlarmState);
+
+# 46 "util.h"
+const int FILTERTMR_TO_FULL = 50;
+const int FILTERTMR_TO_EMPTY = 50;
+
+
+
+
+typedef enum blinkStates
+{
+LIGHTS_OFF,
+POWER_ON,
+FILTER_BLINK_FAST,
+ALARM_BLINK_SLOW,
+ALARM_SOLID_ON
+
+}blinkStates_t;
+
+
+
+typedef enum levelStates
 {
 INITIAL_STATE,
 TRANSITION_TO_EMPTY,
 EMPTY,
 TRANSITION_TO_FULL,
-FULL,
-ALARM_ON
-}levelStates;
+TURN_ON_ALARM,
+FINAL_STATE
+}levelStates_t;
 
-typedef struct{
-levelStates levelState;
+typedef enum tankStates
+{
+TANK_IS_FULL,
+TANK_IS_EMPTY
+}tankStates_t;
+
+typedef struct levelSensor{
+enum levelStates LEVEL_STATE;
 uint8_t sensorRead;
+enum tankStates TANK_STATE;
 volatile int counter;
 }levelSensor_t;
+
+
+
+
+void checkTankStatus(levelSensor_t *theTankSensor);
+
+
+void checkSensorState(struct levelSensor *theSensor);
+
+
+void init_sensor(levelSensor_t *theSensor_init);
+
+
+void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 
 
 void timer1_init(void);
@@ -1489,56 +1563,45 @@ void adc_init_CH0(void);
 
 void adc_start(void);
 
-
-void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
-
-
-# 24 "main.c"
-#pragma config FOSC = HS
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config CP = OFF
-#pragma config BOREN = ON
-#pragma config LVP = OFF
-#pragma config CPD = OFF
-#pragma config WRT = ON
-
-# 37
-const int FILTERTMR_ISFULL = 50;
-const int FILTERTMR_ISEMPTY = 50;
-
-volatile int alarmTimer = 100;
-volatile int counter1 = 0;
-volatile int counter2 = 0;
-volatile int blinkCounter = 0;
-volatile int almCounter = 0;
-
-# 52
-volatile uint8_t alarmState = 0;
-
-
-volatile int adcResult = 100;
-
-levelSensor_t levelSensor[2];
-
-
-
-
-volatile uint8_t blinkState = 0;
-
+# 39 "main.c"
+struct levelSensor levelSensors[2];
+enum blinkStates blinkState = LIGHTS_OFF;
+volatile struct Alarm theAlarm;
 
 void interrupt ISR(){
-
+static int adcResult = 0;
+static int blinkCounter =0;
 
 
 
 if(TMR0IF && TMR0IE){
-if((blinkState & (0x01)== 1) && (blinkCounter % 5 == 0)){
-PORTC ^= (1<<3);
-}else if((blinkState == 4) && (blinkCounter % 20 == 0)){
+
+switch(blinkState)
+{
+case FILTER_BLINK_FAST:
+if((blinkCounter % 5) == 0)
+{
 PORTC ^= (1<<3);
 }
+break;
+
+case ALARM_BLINK_SLOW:
+if((blinkCounter % 15) == 0)
+{
+PORTC ^= (1<<3);
+}
+break;
+
+case ALARM_SOLID_ON:
+PORTC |= (1<<3);
+break;
+
+case LIGHTS_OFF:
+default:
+PORTC &= ~((1<<3));
+}
 blinkCounter ++;
+blinkCounter %= 100;
 TMR0IF = 0;
 }
 
@@ -1546,12 +1609,15 @@ TMR0IF = 0;
 if(TMR1IE && TMR1IF){
 
 
-if(alarmState == 1){
-almCounter ++;
-}else if(alarmState == 2){
-almCounter += 3;
-}else if(alarmState >= 3){
-
+switch(theAlarm.ALARM_STATE){
+case ALARM_ON:
+theAlarm.current_value += 1;
+break;
+case ALARM_DOUBLE_TIME:
+theAlarm.current_value += 3;
+break;
+case ALARM_FINAL_STATE:
+timer1_stop();
 }
 
 TMR1IF = 0;
@@ -1559,12 +1625,12 @@ TMR1IF = 0;
 
 
 if(TMR2IF && TMR2IE){
-if(levelSensor[0].levelState == TRANSITION_TO_EMPTY || levelSensor[0].levelState == TRANSITION_TO_FULL){
-counter1++;
+if(levelSensors[0].LEVEL_STATE == TRANSITION_TO_EMPTY || levelSensors[0].LEVEL_STATE == TRANSITION_TO_FULL){
+levelSensors[0].counter++;
 }
 
-if(levelSensor[1].levelState == TRANSITION_TO_EMPTY || levelSensor[1].levelState == TRANSITION_TO_FULL){
-counter2++;
+if(levelSensors[1].LEVEL_STATE == TRANSITION_TO_EMPTY || levelSensors[1].LEVEL_STATE == TRANSITION_TO_FULL){
+levelSensors[1].counter++;
 }
 TMR2IF = 0;
 }
@@ -1572,8 +1638,7 @@ TMR2IF = 0;
 
 if(ADIF && ADIE){
 adcResult = (ADRESH <<8) | (ADRESL);
-alarmTimer = adcResult >> 2;
-
+theAlarm.trigger_value = adcResult >> 2;
 ADIF = 0;
 }
 
@@ -1586,17 +1651,15 @@ ADIF = 0;
 
 int main() {
 
-uint8_t sensorRead =0;
-
-levelSensor_t levelSensor[2];
-sensorRead = PORTB & ((1<<5) | (1<<4));
-levelSensor[0].sensorRead = (sensorRead & (1<<4));
-levelSensor[1].sensorRead = (sensorRead & (1<<5));
-
 TRISA |= (1<<0);
 TRISB |= (1<<4)|(1<<5);
 TRISC &= ~((1<<2)|(1<<3));
 TRISB &= ~((1<<3)|(1<<2));
+
+
+init_sensor(&levelSensors[0]);
+init_sensor(&levelSensors[1]);
+
 
 
 timer0_init();
@@ -1614,153 +1677,17 @@ timer2_start();
 while(1)
 {
 
-# 161
-switch(levelSensor[0].levelState){
-case INITIAL_STATE :
-if(levelSensor[0].sensorRead > 0){
-levelSensor[0].levelState = TRANSITION_TO_EMPTY;
-}else {
-counter1 = 0;
-}
-break;
-
-case TRANSITION_TO_EMPTY :
-
-if(levelSensor[0].sensorRead == 0){
-
-counter1 = 0;
-levelSensor[0].levelState = INITIAL_STATE;
-
-}else if(levelSensor[0].sensorRead > 0 && counter1 >= FILTERTMR_ISFULL){
-counter1 = 0;
-levelSensor[0].levelState = EMPTY;
-
-}
-break;
-
-case EMPTY:
+levelSensors[0].sensorRead = (PORTB & (1<<4));
+levelSensors[1].sensorRead = (PORTB & (1<<5));
 
 
-if(levelSensor[0].sensorRead == 0 && counter1 == 0){
-counter1 = 1;
-levelSensor[0].levelState = TRANSITION_TO_FULL;
-
-}else{
-counter1 = 0;
-
-}
-break;
-
-case TRANSITION_TO_FULL:
-
-if(levelSensor[0].sensorRead > 0){
-counter1 = 0;
-levelSensor[0].levelState = EMPTY;
+checkTankStatus(&levelSensors[1]);
 
 
-}else if(levelSensor[0].sensorRead == 0 && counter1 > FILTERTMR_ISEMPTY){
+checkSensorState(&levelSensors[1]);
+hello_world();
 
-counter1 = 0;
-levelSensor[0].levelState = FULL;
-
-}
-break;
-
-
-case FULL :
-
-levelSensor[0].levelState = ALARM_ON;
-blinkState = 4;
-alarmState ++;
-
-break;
-}
-
-# 279
-switch (levelSensor[1].levelState)
-{
-
-case INITIAL_STATE :
-if(levelSensor[1].levelState > 0)
-{
-levelSensor[1].levelState = TRANSITION_TO_EMPTY;
-}else
-{
-counter2 = 0;
-}
-
-
-case TRANSITION_TO_EMPTY :
-
-if(levelSensor[1].levelState == 0)
-{
-
-counter2 = 0;
-levelSensor[1].levelState = INITIAL_STATE;
-
-}else if(levelSensor[1].levelState > 0 && counter2 >= FILTERTMR_ISFULL)
-{
-counter2 = 0;
-levelSensor[1].levelState = EMPTY;
-
-}
-
-case EMPTY :
-
-if(levelSensor[1].levelState == 0 && counter2 == 0)
-{
-counter2 = 1;
-levelSensor[1].levelState = TRANSITION_TO_FULL;
-}else
-{
-counter2 = 0;
-
-}
-
-case TRANSITION_TO_FULL :
-
-if(levelSensor[1].levelState > 0)
-{
-counter2 = 0;
-levelSensor[1].levelState = EMPTY;
-}else if(levelSensor[1].levelState == 0 && counter2 > FILTERTMR_ISEMPTY)
-{
-
-counter2 = 0;
-levelSensor[1].levelState = FULL;
-}
-
-case FULL :
-
-levelSensor[1].levelState = ALARM_ON;
-blinkState = 4;
-alarmState ++;
-
-
-}
-
-if(alarmState >= 1)
-{
-
-if(almCounter == 0)
-{
-PORTB |= (1<<3);
-adc_start();
-timer1_start();
-almCounter = 1;
-
-}else if(almCounter > alarmTimer)
-{
-PORTB |= (1<<2) |(1<<3);
-timer1_stop();
-almCounter = 1;
-alarmState = 3;
-}
-}
-
-
-blinkLed(levelSensor[0].levelState, levelSensor[1].levelState, alarmState, &blinkState);
-
+# 167
 }
 
 

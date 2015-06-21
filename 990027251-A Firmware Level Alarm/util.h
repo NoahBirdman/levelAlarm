@@ -11,6 +11,12 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+
+    #include <xc.h>
+    #include <stdio.h>
+    #include <stdint.h>
+    #include "alarm_source.h"
+
     #define _bv(bit) (1<<bit)
 
     //LEDs
@@ -36,33 +42,61 @@ extern "C" {
     #define ADCTRIS TRISA
     #define ADCPORT PORTA   //ADC used for tuning siren delay
 
+    //Delays for Timers
+    const int FILTERTMR_TO_FULL = 50;   //Counter going from Full to Empty
+    const int FILTERTMR_TO_EMPTY = 50;   //Counter going from Empty to Full
 
-    //The states that are allowed
-    typedef enum
-    {
-        INITIAL_STATE,
-        TRANSITION_TO_EMPTY,
-        EMPTY,
-        TRANSITION_TO_FULL,
-        FULL,
-        ALARM_ON
-    }levelStates_t;
+
 
     //The options for blinking
-    typedef enum
+    typedef enum blinkStates
     {
         LIGHTS_OFF,
+        POWER_ON,
         FILTER_BLINK_FAST,
         ALARM_BLINK_SLOW,
         ALARM_SOLID_ON
 
     }blinkStates_t;
 
-    typedef struct{
-        levelStates_t levelState;
+
+    //The states that are allowed
+    typedef enum levelStates
+    {
+        INITIAL_STATE,
+        TRANSITION_TO_EMPTY,
+        EMPTY,
+        TRANSITION_TO_FULL,
+        TURN_ON_ALARM,
+        FINAL_STATE
+    }levelStates_t;
+
+    typedef enum tankStates
+    {
+        TANK_IS_FULL,
+        TANK_IS_EMPTY
+    }tankStates_t;
+
+    typedef struct levelSensor{
+        enum levelStates  LEVEL_STATE;
         uint8_t sensorRead;
+        enum tankStates TANK_STATE;
         volatile int counter;
     }levelSensor_t;
+
+
+
+    //Take the pin input and convert to full or empty tank
+    void checkTankStatus(levelSensor_t *theTankSensor);
+
+    //Check the states and inputs for a sensor
+    void checkSensorState(struct levelSensor *theSensor);
+
+    //Initiallizes the variables to zero
+    void init_sensor(levelSensor_t *theSensor_init);
+    
+    //Select Appropriate Blinking
+    void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 
     //Timer 1 Initialize
     void timer1_init(void);
@@ -97,8 +131,8 @@ extern "C" {
     //Start ADC
     void adc_start(void);
 
-    //Select Appropriate Blinking
-    void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState);
+
+    
 
 #ifdef	__cplusplus
 }

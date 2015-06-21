@@ -1,9 +1,121 @@
-#include <xc.h>
-#include <stdio.h>
-#include <stdint.h>
 #include "util.h"
 
 
+void checkTankStatus(levelSensor_t *theSensor){
+
+   // theSensor.sensorRead = SNSPORT & (LVLONE | LVLTWO);
+    //Choose whatport??? Save pin and port?
+    if (theSensor->sensorRead > 0)
+    {
+        theSensor->TANK_STATE = TANK_IS_EMPTY;
+        //LEDPORT |= ALMLED; //Debug
+    }else
+    {
+        theSensor->TANK_STATE = TANK_IS_FULL;
+        //LEDPORT &= ~(ALMLED);     //Debug
+    }
+    
+
+}
+void checkSensorState(struct levelSensor *theSensor)
+{
+    switch(theSensor->LEVEL_STATE){
+            case INITIAL_STATE :                           //Initial State - Wait for tub to be empty
+                //LEDPORT &= ~(ALMLED);     //Debug
+                //LEDPORT |= ALMLED;      //Debug
+                if(theSensor->TANK_STATE == TANK_IS_EMPTY)
+                {
+                    theSensor->LEVEL_STATE = TRANSITION_TO_EMPTY;
+                }else
+                {
+                    theSensor->counter = 0;
+                }
+                break;
+
+            case TRANSITION_TO_EMPTY :                   //Filter Transistion to Empty - Flashing SNSLED
+                 //LEDPORT &= ~(ALMLED);     //Debug
+               // LEDPORT |= ALMLED;      //Debug
+
+                if(theSensor->TANK_STATE == TANK_IS_FULL)      //Full Tub - Restart Filter
+                {
+                    theSensor->counter = 0;
+                    theSensor->LEVEL_STATE = INITIAL_STATE;
+
+                }else if(theSensor->TANK_STATE == TANK_IS_EMPTY && theSensor->counter >= FILTERTMR_TO_EMPTY)//Empty Tub - Stop Timer, Next State
+                {
+                    theSensor->counter = 0;
+                    theSensor->LEVEL_STATE = EMPTY;
+
+                }
+                break;
+
+            case EMPTY:                                  //Idle While Empty
+                //LEDPORT |= ALMLED;       //Debug
+                if(theSensor->TANK_STATE == TANK_IS_FULL && theSensor->counter == 0){     //Full - Rising Edge Start Filter
+                    theSensor->LEVEL_STATE = TRANSITION_TO_FULL;
+
+                }else{
+                    theSensor->counter = 0;
+                    //TODO: Sleep
+                }
+                break;
+
+            case TRANSITION_TO_FULL:                             //Transition to Full
+
+                if(theSensor->TANK_STATE == TANK_IS_EMPTY){                //Temp Full - Back to Idle
+                    theSensor->counter = 0;
+                    theSensor->LEVEL_STATE = EMPTY;
+
+
+                }else if(theSensor->TANK_STATE == TANK_IS_FULL && theSensor->counter > FILTERTMR_TO_FULL){
+                    //LEDPORT |= ALMLED;    //Debug
+                    theSensor->counter = 0;
+                    theSensor->LEVEL_STATE = TURN_ON_ALARM;
+
+                }
+                break;
+
+
+            case TURN_ON_ALARM :                          //Alarm Started
+                //ALMPORT |= LGTOUT;       //Debug
+                //Do Nothing at this point
+                break;
+        }
+}
+
+
+
+//Initialize all variables to
+void init_sensor(levelSensor_t *theSensor_init)
+{
+    theSensor_init->counter = 0;
+    theSensor_init->LEVEL_STATE = INITIAL_STATE;
+    theSensor_init->sensorRead = 0;
+    theSensor_init->TANK_STATE = TANK_IS_EMPTY;
+
+}
+
+void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, enum blinkStates *blinkState)
+{
+    if(*stateOne == TRANSITION_TO_EMPTY || *stateOne == TRANSITION_TO_FULL || *stateTwo == TRANSITION_TO_EMPTY || *stateTwo == TRANSITION_TO_FULL)
+    {
+        *blinkState = FILTER_BLINK_FAST ;    //Blink Fast
+
+    }else if(*almState == ALARM_ON || *almState == ALARM_DOUBLE_TIME)
+    {
+        *blinkState = ALARM_BLINK_SLOW;
+
+    }else if (*almState == ALARM_FINAL_STATE)
+    {
+        *blinkState = ALARM_SOLID_ON;
+
+    }else
+    {
+        *blinkState = LIGHTS_OFF;
+
+    }
+
+}
 
 //Setup Timer 1 - 16bit
 void timer1_init(){
@@ -91,17 +203,4 @@ void adc_start(){
     INTCONbits.PEIE = 1;
 }
 
-void blinkLed(uint8_t stateOne, uint8_t stateTwo, uint8_t almState, uint8_t *blinkState){
-    if(stateOne == TRANSITION_TO_EMPTY || stateOne == TRANSITION_TO_FULL || stateTwo == TRANSITION_TO_EMPTY || stateTwo == TRANSITION_TO_FULL){
-        *blinkState |= 0x01;    //Blink Fast
-    }else if(almState >= 1 && almState < 3){
-        *blinkState |= 0x04;
-    }else if (almState >= 3){
-        *blinkState |= 0x08;
-        LEDPORT |= ALMLED;
-    }else{
-        *blinkState = 0;
-        LEDPORT &= ~ALMLED;
-    }
 
-}
