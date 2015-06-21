@@ -1464,15 +1464,16 @@ ALARM_FINAL_STATE
 typedef struct Alarm
 {
 enum alarmStates ALARM_STATE;
-uint8_t current_value;
-uint8_t trigger_value;
-
-
+volatile uint8_t current_value;
+volatile uint8_t trigger_value;
 
 }Alarm_t;
 
 void checkAlarmState(struct levelSensor *theSensor, struct Alarm *theAlarm);
-void turnAlarmOn(alarmStates_t theAlarmState);
+
+void turnAlarmOn(struct Alarm *theAlarm);
+
+void turnAlarmOff(struct Alarm *theAlarm);
 
 # 46 "util.h"
 const int FILTERTMR_TO_FULL = 50;
@@ -1528,7 +1529,7 @@ void checkSensorState(struct levelSensor *theSensor);
 void init_sensor(levelSensor_t *theSensor_init);
 
 
-void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
+void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 
 
 void timer1_init(void);
@@ -1566,7 +1567,7 @@ void adc_start(void);
 # 39 "main.c"
 struct levelSensor levelSensors[2];
 enum blinkStates blinkState = LIGHTS_OFF;
-volatile struct Alarm theAlarm;
+struct Alarm theAlarm;
 
 void interrupt ISR(){
 static int adcResult = 0;
@@ -1601,13 +1602,12 @@ default:
 PORTC &= ~((1<<3));
 }
 blinkCounter ++;
-blinkCounter %= 100;
+blinkCounter %= 1000;
 TMR0IF = 0;
 }
 
 
 if(TMR1IE && TMR1IF){
-
 
 switch(theAlarm.ALARM_STATE){
 case ALARM_ON:
@@ -1617,9 +1617,9 @@ case ALARM_DOUBLE_TIME:
 theAlarm.current_value += 3;
 break;
 case ALARM_FINAL_STATE:
+default:
 timer1_stop();
 }
-
 TMR1IF = 0;
 }
 
@@ -1651,7 +1651,10 @@ ADIF = 0;
 
 int main() {
 
+char i = 0x00;
+
 TRISA |= (1<<0);
+i = 0;
 TRISB |= (1<<4)|(1<<5);
 TRISC &= ~((1<<2)|(1<<3));
 TRISB &= ~((1<<3)|(1<<2));
@@ -1676,18 +1679,21 @@ timer2_start();
 
 while(1)
 {
-
 levelSensors[0].sensorRead = (PORTB & (1<<4));
 levelSensors[1].sensorRead = (PORTB & (1<<5));
 
+for(i = 0; i < 2;i++)
+{
+checkTankStatus(&levelSensors[i]);
 
-checkTankStatus(&levelSensors[1]);
+checkSensorState(&levelSensors[i]);
 
+checkAlarmState(&levelSensors[i], &theAlarm);
+}
 
-checkSensorState(&levelSensors[1]);
-hello_world();
+# 175
+blinkLed(&(levelSensors[0].LEVEL_STATE), &(levelSensors[1].LEVEL_STATE), &(theAlarm.ALARM_STATE), &blinkState);
 
-# 167
 }
 
 

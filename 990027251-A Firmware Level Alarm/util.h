@@ -11,11 +11,11 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    #include "alarm_source.h"
     #include <xc.h>
     #include <stdio.h>
     #include <stdint.h>
-    #include "alarm_source.h"
+    
 
     #define _bv(bit) (1<<bit)
 
@@ -96,7 +96,7 @@ extern "C" {
     void init_sensor(levelSensor_t *theSensor_init);
     
     //Select Appropriate Blinking
-    void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
+    void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 
     //Timer 1 Initialize
     void timer1_init(void);

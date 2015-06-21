@@ -5,7 +5,7 @@ Linker command line:
 --edf=/opt/microchip/xc8/v1.34/dat/en_msgs.txt -cs \
   -h+dist/default/production/990027251-A_Firmware_Level_Alarm.production.sym \
   --cmf=dist/default/production/990027251-A_Firmware_Level_Alarm.production.cmf \
-  -z -Q16F876 -o/tmp/cgtpRYbKy \
+  -z -Q16F876 -o/tmp/cgt1Nvh50 \
   -Mdist/default/production/990027251-A_Firmware_Level_Alarm.production.map \
   -E1 -ver=XC8 -ASTACK=0110h-016fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -pfunctab=CODE -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-  -DENTRY=2 -k /tmp/cgtQq6ahj.obj \
+  -DENTRY=2 -k /tmp/cgtiZmFb8.obj \
   dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj 
 
 Object code version is 3.11
@@ -28,32 +28,38 @@ Machine type is 16F876
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/cgtQq6ahj.obj
+/tmp/cgtiZmFb8.obj
                 end_init                             12       12        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        1     400E       0
 dist/default/production/990027251-A_Firmware_Level_Alarm.production.obj
                 cinit                                15       15        B        8       0
                 intentry                              4        4        E        8       0
-                text13                              24D      24D       4B        8       0
-                text12                              2FF      2FF        8      5B8       0
-                text11                              101      101       C6        8       0
-                text10                              2C6      2C6        C        8       0
-                text9                                20       20       E1        8       0
-                text8                               2B0      2B0       16        8       0
-                text7                               311      311        1      5B8       0
-                text6                               298      298       18        8       0
-                text5                               2EE      2EE        9      5B8       0
-                text4                               30D      30D        4      5B8       0
-                text3                               307      307        6      5B8       0
-                text2                               2E5      2E5        9      5B8       0
-                text1                               2DC      2DC        9      5B8       0
-                maintext                            1C7      1C7       86        8       0
-                cstackBANK0                          32       32        9       20       1
+                text19                              2A3      2A3       4B        8       0
+                text18                              431      431        8      7E4       0
+                text17                              1DD      1DD       C6        8       0
+                text16                              3C9      3C9       13        8       0
+                text15                              3DC      3DC        C        8       0
+                text14                              2EE      2EE       44        8       0
+                text13                              429      429        8      7E4       0
+                text12                              3FC      3FC        A      7E4       0
+                text11                              3F2      3F2        A      7E4       0
+                text10                              332      332       3F        8       0
+                text9                               371      371       2A        8       0
+                text8                                20       20       EB        8       0
+                text7                               3B3      3B3       16        8       0
+                text6                               39B      39B       18        8       0
+                text5                               418      418        9      7E4       0
+                text4                               43F      43F        4      7E4       0
+                text3                               439      439        6      7E4       0
+                text2                               40F      40F        9      7E4       0
+                text1                               406      406        9      7E4       0
+                maintext                            10B      10B       D2        8       0
+                cstackBANK0                          32       32        E       20       1
                 cstackCOMMON                         70       70        E       70       1
-                clrtext                             2F7      2F7        8      5B8       0
+                clrtext                             421      421        8      7E4       0
                 bssBANK0                             20       20       12       20       1
-                strings                             2D2      2D2        A      5A4       0
+                strings                             3E8      3E8        A      7D0       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -63,26 +69,32 @@ TOTAL           Name                               Link     Load   Length     Sp
                 cinit                                15       15        B         0
                 intentry                              4        4        E         0
                 reset_vec                             0        0        3         0
-                text13                              24D      24D       4B         0
-                text12                              2FF      2FF        8         0
-                text11                              101      101       C6         0
-                text10                              2C6      2C6        C         0
-                text9                                20       20       E1         0
-                text8                               2B0      2B0       16         0
-                text7                               311      311        1         0
-                text6                               298      298       18         0
-                text5                               2EE      2EE        9         0
-                text4                               30D      30D        4         0
-                text3                               307      307        6         0
-                text2                               2E5      2E5        9         0
-                text1                               2DC      2DC        9         0
-                maintext                            1C7      1C7       86         0
-                clrtext                             2F7      2F7        8         0
+                text19                              2A3      2A3       4B         0
+                text18                              431      431        8         0
+                text17                              1DD      1DD       C6         0
+                text16                              3C9      3C9       13         0
+                text15                              3DC      3DC        C         0
+                text14                              2EE      2EE       44         0
+                text13                              429      429        8         0
+                text12                              3FC      3FC        A         0
+                text11                              3F2      3F2        A         0
+                text10                              332      332       3F         0
+                text9                               371      371       2A         0
+                text8                                20       20       EB         0
+                text7                               3B3      3B3       16         0
+                text6                               39B      39B       18         0
+                text5                               418      418        9         0
+                text4                               43F      43F        4         0
+                text3                               439      439        6         0
+                text2                               40F      40F        9         0
+                text1                               406      406        9         0
+                maintext                            10B      10B       D2         0
+                clrtext                             421      421        8         0
 
         CLASS   STRCODE        
 
         CLASS   STRING         
-                strings                             2D2      2D2        A         0
+                strings                             3E8      3E8        A         0
 
         CLASS   CONST          
 
@@ -92,7 +104,7 @@ TOTAL           Name                               Link     Load   Length     Sp
                 cstackCOMMON                         70       70        E         1
 
         CLASS   BANK0          
-                cstackBANK0                          32       32        9         1
+                cstackBANK0                          32       32        E         1
                 bssBANK0                             20       20       12         1
 
         CLASS   BANK1          
@@ -126,30 +138,30 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000003  000003         0       0  CODE        2
-                intentry                       000004  0002CE  0002D2         8       0  CODE        2
-                bssBANK0                       000020  00001B  00003B        20       1  BANK0       1
+                intentry                       000004  0003E4  0003E8         8       0  CODE        2
+                bssBANK0                       000020  000020  000040        20       1  BANK0       1
                 cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
-                strings                        0002D2  00000A  0002DC       5A4       0  STRING      2
-                text1                          0002DC  000036  000312       5B8       0  CODE        2
+                strings                        0003E8  00000A  0003F2       7D0       0  STRING      2
+                text11                         0003F2  000051  000443       7E4       0  CODE        2
                 config                         002007  000001  002008      400E       0  CONFIG      2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            003B-006F             35           1
+        BANK0            0040-006F             30           1
         BANK1            00A0-00EF             50           1
         BANK2            0110-016F             60           1
         BANK3            0190-01EF             60           1
         CODE             0003-0003              1           2
-                         0312-1FFF            800
+                         0443-1FFF            800
         CONST            0003-0003              1           2
-                         0312-1FFF            100
+                         0443-1FFF            100
         EEDATA           2100-21FF            100           2
         ENTRY            0003-0003              1           2
-                         0312-1FFF            100
+                         0443-1FFF            100
         IDLOC            2000-2003              4           2
-        RAM              003B-006F             35           1
+        RAM              0040-006F             30           1
                          00A0-00EF             50
                          0110-016F             60
                          0190-01EF             60
@@ -159,25 +171,25 @@ UNUSED ADDRESS RANGES
         SFR3             0180-018F             10           1
         STACK            0110-016F             60           1
         STRCODE          0003-0003              1           2
-                         0312-1FFF           1CEE
+                         0443-1FFF           1BBD
         STRING           0003-0003              1           2
-                         0312-1FFF            100
+                         0443-1FFF            100
 
                                   Symbol Table
 
 ?___awmod                   cstackCOMMON 0070
-ISR@adcResult               bssBANK0     0023
-ISR@blinkCounter            bssBANK0     0025
+ISR@adcResult               bssBANK0     0020
+ISR@blinkCounter            bssBANK0     0022
 _ADCON0bits                 (abs)        001F
 _ADCON1bits                 (abs)        009F
 _ADIE                       (abs)        0466
 _ADIF                       (abs)        0066
 _ADRESH                     (abs)        001E
 _ADRESL                     (abs)        009E
-_FILTERTMR_TO_EMPTY         strings      02D8
-_FILTERTMR_TO_FULL          strings      02DA
+_FILTERTMR_TO_EMPTY         strings      03EE
+_FILTERTMR_TO_FULL          strings      03F0
 _INTCONbits                 (abs)        000B
-_ISR                        text11       0101
+_ISR                        text17       01DD
 _OPTION_REGbits             (abs)        0081
 _PIE1bits                   (abs)        008C
 _PORTB                      (abs)        0006
@@ -273,88 +285,121 @@ __S0                        (abs)        2008
 __S1                        (abs)        007E
 __S2                        (abs)        0000
 __S3                        (abs)        0000
-___awmod                    text13       024D
+___awmod                    text19       02A3
 ___awmod@counter            cstackCOMMON 0075
 ___awmod@dividend           cstackCOMMON 0072
 ___awmod@divisor            cstackCOMMON 0070
 ___awmod@sign               cstackCOMMON 0076
+___bmul                     text16       03C9
+___bmul@multiplicand        cstackBANK0  0032
+___bmul@multiplier          cstackBANK0  0035
+___bmul@product             cstackBANK0  0034
 ___int_sp                   stack        0000
 ___latbits                  (abs)        0002
 ___sp                       stack        0000
-__end_of_FILTERTMR_TO_EMPTY strings      02DA
-__end_of_FILTERTMR_TO_FULL  strings      02DC
-__end_of_ISR                text11       01C7
-__end_of___awmod            text13       0298
+__end_of_FILTERTMR_TO_EMPTY strings      03F0
+__end_of_FILTERTMR_TO_FULL  strings      03F2
+__end_of_ISR                text17       02A3
+__end_of___awmod            text19       02EE
+__end_of___bmul             text16       03DC
 __end_of__initialization    cinit        001C
-__end_of__stringtab         strings      02D8
-__end_of_adc_init_CH0       text10       02D2
-__end_of_checkSensorState   text9        0101
-__end_of_checkTankStatus    text8        02C6
-__end_of_hello_world        text7        0312
-__end_of_init_sensor        text6        02B0
-__end_of_main               maintext     024D
-__end_of_timer0_init        text5        02F7
-__end_of_timer0_start       text4        0311
-__end_of_timer1_init        text3        030D
-__end_of_timer1_stop        text12       0307
-__end_of_timer2_init        text2        02EE
-__end_of_timer2_start       text1        02E5
+__end_of__stringtab         strings      03EE
+__end_of_adc_init_CH0       text15       03E8
+__end_of_adc_start          text12       0406
+__end_of_blinkLed           text14       0332
+__end_of_checkAlarmState    text9        039B
+__end_of_checkSensorState   text8        010B
+__end_of_checkTankStatus    text7        03C9
+__end_of_init_sensor        text6        03B3
+__end_of_main               maintext     01DD
+__end_of_timer0_init        text5        0421
+__end_of_timer0_start       text4        0443
+__end_of_timer1_init        text3        043F
+__end_of_timer1_start       text11       03FC
+__end_of_timer1_stop        text13       0431
+__end_of_timer2_init        text2        0418
+__end_of_timer2_start       text1        040F
+__end_of_turnAlarmOn        text10       0371
+__end_ofi1_timer1_stop      text18       0439
 __initialization            cinit        0015
 __pbssBANK0                 bssBANK0     0020
 __pcstackBANK0              cstackBANK0  0032
 __pcstackCOMMON             cstackCOMMON 0070
 __pintentry                 intentry     0004
-__pmaintext                 maintext     01C7
-__pstrings                  strings      02D2
-__ptext1                    text1        02DC
-__ptext10                   text10       02C6
-__ptext11                   text11       0101
-__ptext12                   text12       02FF
-__ptext13                   text13       024D
-__ptext2                    text2        02E5
-__ptext3                    text3        0307
-__ptext4                    text4        030D
-__ptext5                    text5        02EE
-__ptext6                    text6        0298
-__ptext7                    text7        0311
-__ptext8                    text8        02B0
-__ptext9                    text9        0020
+__pmaintext                 maintext     010B
+__pstrings                  strings      03E8
+__ptext1                    text1        0406
+__ptext10                   text10       0332
+__ptext11                   text11       03F2
+__ptext12                   text12       03FC
+__ptext13                   text13       0429
+__ptext14                   text14       02EE
+__ptext15                   text15       03DC
+__ptext16                   text16       03C9
+__ptext17                   text17       01DD
+__ptext18                   text18       0431
+__ptext19                   text19       02A3
+__ptext2                    text2        040F
+__ptext3                    text3        0439
+__ptext4                    text4        043F
+__ptext5                    text5        0418
+__ptext6                    text6        039B
+__ptext7                    text7        03B3
+__ptext8                    text8        0020
+__ptext9                    text9        0371
 __size_of_ISR               (abs)        0000
 __size_of___awmod           (abs)        0000
+__size_of___bmul            (abs)        0000
 __size_of_adc_init_CH0      (abs)        0000
+__size_of_adc_start         (abs)        0000
+__size_of_blinkLed          (abs)        0000
+__size_of_checkAlarmState   (abs)        0000
 __size_of_checkSensorState  (abs)        0000
 __size_of_checkTankStatus   (abs)        0000
-__size_of_hello_world       (abs)        0000
 __size_of_init_sensor       (abs)        0000
 __size_of_main              (abs)        0000
 __size_of_timer0_init       (abs)        0000
 __size_of_timer0_start      (abs)        0000
 __size_of_timer1_init       (abs)        0000
+__size_of_timer1_start      (abs)        0000
 __size_of_timer1_stop       (abs)        0000
 __size_of_timer2_init       (abs)        0000
 __size_of_timer2_start      (abs)        0000
-__stringbase                strings      02D7
-__stringtab                 strings      02D2
-_adc_init_CH0               text10       02C6
-_blinkState                 bssBANK0     0027
-_checkSensorState           text9        0020
-_checkTankStatus            text8        02B0
-_hello_world                text7        0311
-_init_sensor                text6        0298
-_levelSensors               bssBANK0     0028
-_main                       maintext     01C7
-_theAlarm                   bssBANK0     0020
-_timer0_init                text5        02EE
-_timer0_start               text4        030D
-_timer1_init                text3        0307
-_timer1_stop                text12       02FF
-_timer2_init                text2        02E5
-_timer2_start               text1        02DC
+__size_of_turnAlarmOn       (abs)        0000
+__size_ofi1_timer1_stop     (abs)        0000
+__stringbase                strings      03ED
+__stringtab                 strings      03E8
+_adc_init_CH0               text15       03DC
+_adc_start                  text12       03FC
+_blinkLed                   text14       02EE
+_blinkState                 bssBANK0     0031
+_checkAlarmState            text9        0371
+_checkSensorState           text8        0020
+_checkTankStatus            text7        03B3
+_init_sensor                text6        039B
+_levelSensors               bssBANK0     0024
+_main                       maintext     010B
+_theAlarm                   bssBANK0     002E
+_timer0_init                text5        0418
+_timer0_start               text4        043F
+_timer1_init                text3        0439
+_timer1_start               text11       03F2
+_timer1_stop                text13       0429
+_timer2_init                text2        040F
+_timer2_start               text1        0406
+_turnAlarmOn                text10       0332
+blinkLed@almState           cstackBANK0  0033
+blinkLed@blinkState         cstackBANK0  0034
+blinkLed@stateOne           cstackBANK0  0036
+blinkLed@stateTwo           cstackBANK0  0032
 btemp                       (abs)        007E
+checkAlarmState@theAlarm    cstackBANK0  0036
+checkAlarmState@theSensor   cstackBANK0  0039
 checkSensorState@theSensor  cstackBANK0  0037
 checkTankStatus@theSensor   cstackBANK0  0033
-clear_ram0                  clrtext      02F7
+clear_ram0                  clrtext      0421
 end_of_initialization       cinit        001C
+i1_timer1_stop              text18       0431
 init_sensor@theSensor_init  cstackBANK0  0033
 interrupt_function          intentry     0004
 intlevel0                   functab      0000
@@ -368,7 +413,8 @@ ltemp0                      (abs)        007E
 ltemp1                      (abs)        0082
 ltemp2                      (abs)        0086
 ltemp3                      (abs)        0080
-main@i                      cstackBANK0  0039
+main@i                      cstackBANK0  003F
+main@i_139                  cstackBANK0  003D
 reset_vec                   reset_vec    0000
 saved_w                     (abs)        007E
 stackhi                     (abs)        0000
@@ -381,6 +427,7 @@ ttemp1                      (abs)        0081
 ttemp2                      (abs)        0084
 ttemp3                      (abs)        0087
 ttemp4                      (abs)        007F
+turnAlarmOn@theAlarm        cstackBANK0  0033
 wtemp                       (abs)        007E
 wtemp0                      (abs)        007E
 wtemp1                      (abs)        0080
@@ -395,13 +442,14 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 124 in file "main.c"
+		line 123 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  i               2    7[BANK0 ] int 
+  i               2   11[BANK0 ] int 
+  i               1   13[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
-                  2   95[None  ] int 
+                  2   98[None  ] int 
  Registers used:
 		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
  Tracked objects:
@@ -410,16 +458,18 @@ FUNCTION INFORMATION:
 		Unchanged: 
  Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
       Params:         0       0       0       0       0
-      Locals:         0       2       0       0       0
-      Temps:          0       1       0       0       0
-      Totals:         0       3       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels required when called:    3
+      Locals:         0       3       0       0       0
+      Temps:          0       3       0       0       0
+      Totals:         0       6       0       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels required when called:    5
  This function calls:
+		___bmul
 		_adc_init_CH0
+		_blinkLed
+		_checkAlarmState
 		_checkSensorState
 		_checkTankStatus
-		_hello_world
 		_init_sensor
 		_timer0_init
 		_timer0_start
@@ -433,7 +483,7 @@ Total ram usage:        3 bytes
 
  *************** function _timer2_start *****************
  Defined at:
-		line 155 in file "util.c"
+		line 162 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -463,7 +513,7 @@ Total ram usage:        0 bytes
 
  *************** function _timer2_init *****************
  Defined at:
-		line 150 in file "util.c"
+		line 157 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -493,7 +543,7 @@ Total ram usage:        0 bytes
 
  *************** function _timer1_init *****************
  Defined at:
-		line 121 in file "util.c"
+		line 128 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -523,7 +573,7 @@ Total ram usage:        0 bytes
 
  *************** function _timer0_start *****************
  Defined at:
-		line 175 in file "util.c"
+		line 182 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -553,7 +603,7 @@ Total ram usage:        0 bytes
 
  *************** function _timer0_init *****************
  Defined at:
-		line 168 in file "util.c"
+		line 175 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -583,7 +633,7 @@ Total ram usage:        0 bytes
 
  *************** function _init_sensor *****************
  Defined at:
-		line 89 in file "util.c"
+		line 95 in file "util.c"
  Parameters:    Size  Location     Type
   theSensor_in    1    wreg     PTR volatile struct leve
 		 -> levelSensors(10), 
@@ -604,36 +654,6 @@ Total ram usage:        0 bytes
       Temps:          0       1       0       0       0
       Totals:         0       2       0       0       0
 Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _hello_world *****************
- Defined at:
-		line 34 in file "alarm_source.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		None
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       0       0       0       0
-Total ram usage:        0 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    2
  This function calls:
@@ -707,9 +727,206 @@ Total ram usage:        6 bytes
  This function uses a non-reentrant model
 
 
+ *************** function _checkAlarmState *****************
+ Defined at:
+		line 4 in file "alarm_source.c"
+ Parameters:    Size  Location     Type
+  theSensor       1    wreg     PTR volatile struct leve
+		 -> levelSensors(10), 
+  theAlarm        1    4[BANK0 ] PTR volatile struct Alar
+		 -> theAlarm(3), 
+ Auto vars:     Size  Location     Type
+  theSensor       1    7[BANK0 ] PTR volatile struct leve
+		 -> levelSensors(10), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       1       0       0       0
+      Locals:         0       1       0       0       0
+      Temps:          0       2       0       0       0
+      Totals:         0       4       0       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    4
+ This function calls:
+		_timer1_stop
+		_turnAlarmOn
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _turnAlarmOn *****************
+ Defined at:
+		line 21 in file "alarm_source.c"
+ Parameters:    Size  Location     Type
+  theAlarm        1    wreg     PTR volatile struct Alar
+		 -> theAlarm(3), 
+ Auto vars:     Size  Location     Type
+  theAlarm        1    1[BANK0 ] PTR volatile struct Alar
+		 -> theAlarm(3), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         0       1       0       0       0
+      Temps:          0       1       0       0       0
+      Totals:         0       2       0       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    3
+ This function calls:
+		_adc_start
+		_timer1_start
+ This function is called by:
+		_checkAlarmState
+ This function uses a non-reentrant model
+
+
+ *************** function _timer1_start *****************
+ Defined at:
+		line 139 in file "util.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         0       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_turnAlarmOn
+ This function uses a non-reentrant model
+
+
+ *************** function _adc_start *****************
+ Defined at:
+		line 205 in file "util.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         0       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_turnAlarmOn
+ This function uses a non-reentrant model
+
+
+ *************** function _timer1_stop *****************
+ Defined at:
+		line 149 in file "util.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         0       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_checkAlarmState
+		_turnAlarmOff
+ This function uses a non-reentrant model
+
+
+ *************** function _blinkLed *****************
+ Defined at:
+		line 104 in file "util.c"
+ Parameters:    Size  Location     Type
+  stateOne        1    wreg     PTR enum E1033
+		 -> levelSensors(10), 
+  stateTwo        1    0[BANK0 ] PTR enum E1033
+		 -> levelSensors(10), 
+  almState        1    1[BANK0 ] PTR enum E1005
+		 -> theAlarm(3), 
+  blinkState      1    2[BANK0 ] PTR enum E1026
+		 -> blinkState(1), 
+ Auto vars:     Size  Location     Type
+  stateOne        1    4[BANK0 ] PTR enum E1033
+		 -> levelSensors(10), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       3       0       0       0
+      Locals:         0       1       0       0       0
+      Temps:          0       1       0       0       0
+      Totals:         0       5       0       0       0
+Total ram usage:        5 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
  *************** function _adc_init_CH0 *****************
  Defined at:
-		line 188 in file "util.c"
+		line 195 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -728,6 +945,38 @@ Total ram usage:        6 bytes
       Temps:          0       0       0       0       0
       Totals:         0       0       0       0       0
 Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function ___bmul *****************
+ Defined at:
+		line 4 in file "/opt/microchip/xc8/v1.34/sources/common/Umul8.c"
+ Parameters:    Size  Location     Type
+  multiplier      1    wreg     unsigned char 
+  multiplicand    1    0[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+  multiplier      1    3[BANK0 ] unsigned char 
+  product         1    2[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       1       0       0       0
+      Locals:         0       2       0       0       0
+      Temps:          0       1       0       0       0
+      Totals:         0       4       0       0       0
+Total ram usage:        4 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    2
  This function calls:
@@ -762,15 +1011,15 @@ Total ram usage:        7 bytes
  Hardware stack levels required when called:    1
  This function calls:
 		___awmod
-		_timer1_stop
+		i1_timer1_stop
  This function is called by:
 		Interrupt level 1
  This function uses a non-reentrant model
 
 
- *************** function _timer1_stop *****************
+ *************** function i1_timer1_stop *****************
  Defined at:
-		line 142 in file "util.c"
+		line 149 in file "util.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -833,40 +1082,50 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 /opt/microchip/xc8/v1.34/sources/common/awmod.c
-		___awmod       		CODE           	024D	0000	76
+		___awmod       		CODE           	02A3	0000	76
 
 /opt/microchip/xc8/v1.34/sources/common/awmod.c estimated size: 76
 
 shared
-		__stringtab    		STRING         	02D2	0000	7
-		_FILTERTMR_TO_E		STRING         	02D8	0000	3
-		_FILTERTMR_TO_F		STRING         	02DA	0000	3
+		__stringtab    		STRING         	03E8	0000	7
+		_FILTERTMR_TO_E		STRING         	03EE	0000	3
+		_FILTERTMR_TO_F		STRING         	03F0	0000	3
 		__initializatio		CODE           	0015	0000	8
+		i1_timer1_stop 		CODE           	0431	0000	9
 
-shared estimated size: 21
+shared estimated size: 30
 
 alarm_source.c
-		_hello_world   		CODE           	0311	0000	2
+		_turnAlarmOn   		CODE           	0332	0000	64
+		_checkAlarmStat		CODE           	0371	0000	43
 
-alarm_source.c estimated size: 2
+alarm_source.c estimated size: 107
 
 util.c
-		_timer2_init   		CODE           	02E5	0000	10
-		_timer2_start  		CODE           	02DC	0000	10
-		_timer0_init   		CODE           	02EE	0000	10
-		_init_sensor   		CODE           	0298	0000	25
-		_timer0_start  		CODE           	030D	0000	5
-		_checkSensorSta		CODE           	0020	0000	226
-		_timer1_init   		CODE           	0307	0000	7
-		_timer1_stop   		CODE           	02FF	0000	9
-		_adc_init_CH0  		CODE           	02C6	0000	13
-		_checkTankStatu		CODE           	02B0	0000	23
+		_adc_start     		CODE           	03FC	0000	11
+		_timer2_init   		CODE           	040F	0000	10
+		_timer2_start  		CODE           	0406	0000	10
+		_blinkLed      		CODE           	02EE	0000	69
+		_timer0_init   		CODE           	0418	0000	10
+		_init_sensor   		CODE           	039B	0000	25
+		_timer0_start  		CODE           	043F	0000	5
+		_checkSensorSta		CODE           	0020	0000	236
+		_timer1_init   		CODE           	0439	0000	7
+		_timer1_stop   		CODE           	0429	0000	9
+		_timer1_start  		CODE           	03F2	0000	11
+		_adc_init_CH0  		CODE           	03DC	0000	13
+		_checkTankStatu		CODE           	03B3	0000	23
 
-util.c estimated size: 338
+util.c estimated size: 439
+
+/opt/microchip/xc8/v1.34/sources/common/Umul8.c
+		___bmul        		CODE           	03C9	0000	20
+
+/opt/microchip/xc8/v1.34/sources/common/Umul8.c estimated size: 20
 
 main.c
-		_ISR           		CODE           	0101	0000	199
-		_main          		CODE           	01C7	0000	135
+		_ISR           		CODE           	01DD	0000	199
+		_main          		CODE           	010B	0000	211
 
-main.c estimated size: 334
+main.c estimated size: 410
 

@@ -31,14 +31,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-
-#include "alarm_source.h"
 #include "util.h"
+#include "alarm_source.h"
+
 
 
 struct  levelSensor levelSensors[2];
 enum blinkStates blinkState = LIGHTS_OFF; //Determines the blinking pattern of ALMLED
-volatile struct Alarm theAlarm;
+struct Alarm theAlarm;
 
 void interrupt ISR(){
     static int adcResult = 0;
@@ -73,13 +73,12 @@ void interrupt ISR(){
                 LEDPORT &= ~(ALMLED);
         }
         blinkCounter ++;
-        blinkCounter %= 100;
+        blinkCounter %= 1000;
         TMR0IF = 0;
     }
     
     //Timer 1 Overflow
     if(TMR1IE && TMR1IF){
-
 
         switch(theAlarm.ALARM_STATE){
             case ALARM_ON:
@@ -89,9 +88,9 @@ void interrupt ISR(){
                 theAlarm.current_value += 3;
                 break;
             case ALARM_FINAL_STATE:
+            default:
                 timer1_stop();
         }
-
         TMR1IF = 0;
     }
 
@@ -123,7 +122,10 @@ void interrupt ISR(){
 
 int main() {
 
+    char i = 0x00;
+    
     ADCTRIS |= ADCPIN;
+    i = 0;
     SNSTRIS |= LVLONE|LVLTWO;
     LEDTRIS &= ~(POWLED|ALMLED);
     ALMTRIS &= ~(LGTOUT|ALMOUT);
@@ -148,21 +150,29 @@ int main() {
     
    while(1)
    {
-
        levelSensors[0].sensorRead = (SNSPORT & LVLONE);
        levelSensors[1].sensorRead = (SNSPORT & LVLTWO);
 
-       //checkTankStatus(&levelSensors[0]);
-       checkTankStatus(&levelSensors[1]);
+       for(i = 0; i < 2;i++)
+       {
+           checkTankStatus(&levelSensors[i]);
 
-       //checkSensorState(&levelSensors[0]);
-       checkSensorState(&levelSensors[1]);
-       hello_world();
+       checkSensorState(&levelSensors[i]);
+
+       checkAlarmState(&levelSensors[i], &theAlarm);
+       }
        
-       //checkAlarmState(&levelSensors[1], &theAlarm);
-        //checkAlarmState();
-       //turnAlarmOn(theAlarm.ALARM_STATE);
-        //blinkLed(levelSensors[0].LEVEL_STATE, levelSensors[1].LEVEL_STATE, theAlarm.ALARM_STATE, &blinkState);
+
+//       checkTankStatus(&levelSensors[0]);
+//       checkTankStatus(&levelSensors[1]);
+//
+//       checkSensorState(&levelSensors[0]);
+//       checkSensorState(&levelSensors[1]);
+//
+//       checkAlarmState(&levelSensors[0], &theAlarm);
+//       checkAlarmState(&levelSensors[1], &theAlarm);
+
+       blinkLed(&(levelSensors[0].LEVEL_STATE), &(levelSensors[1].LEVEL_STATE), &(theAlarm.ALARM_STATE), &blinkState);
 
     }
 

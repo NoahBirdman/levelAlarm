@@ -1386,15 +1386,16 @@ ALARM_FINAL_STATE
 typedef struct Alarm
 {
 enum alarmStates ALARM_STATE;
-uint8_t current_value;
-uint8_t trigger_value;
-
-
+volatile uint8_t current_value;
+volatile uint8_t trigger_value;
 
 }Alarm_t;
 
 void checkAlarmState(struct levelSensor *theSensor, struct Alarm *theAlarm);
-void turnAlarmOn(alarmStates_t theAlarmState);
+
+void turnAlarmOn(struct Alarm *theAlarm);
+
+void turnAlarmOff(struct Alarm *theAlarm);
 
 # 46 "util.h"
 const int FILTERTMR_TO_FULL = 50;
@@ -1450,7 +1451,7 @@ void checkSensorState(struct levelSensor *theSensor);
 void init_sensor(levelSensor_t *theSensor_init);
 
 
-void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
+void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 
 
 void timer1_init(void);
@@ -1564,6 +1565,12 @@ break;
 case TURN_ON_ALARM :
 
 
+theSensor->LEVEL_STATE = FINAL_STATE;
+break;
+
+case FINAL_STATE:
+default:
+
 break;
 }
 }
@@ -1580,13 +1587,14 @@ theSensor_init->TANK_STATE = TANK_IS_EMPTY;
 
 }
 
-void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, enum blinkStates *blinkState)
+void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, enum alarmStates *almState, blinkStates_t *blinkState)
 {
 if(*stateOne == TRANSITION_TO_EMPTY || *stateOne == TRANSITION_TO_FULL || *stateTwo == TRANSITION_TO_EMPTY || *stateTwo == TRANSITION_TO_FULL)
 {
 *blinkState = FILTER_BLINK_FAST ;
 
-}else if(*almState == ALARM_ON || *almState == ALARM_DOUBLE_TIME)
+}
+else if(*almState == ALARM_ON || *almState == ALARM_DOUBLE_TIME)
 {
 *blinkState = ALARM_BLINK_SLOW;
 
@@ -1605,7 +1613,7 @@ if(*stateOne == TRANSITION_TO_EMPTY || *stateOne == TRANSITION_TO_FULL || *state
 
 void timer1_init(){
 
-# 127
+# 134
 T1CONbits.T1CKPS = 0x03;
 T1CONbits.TMR1CS = 0;
 }

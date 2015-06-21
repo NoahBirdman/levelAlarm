@@ -1,20 +1,20 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "39 main.c
-[c E1149 0 1 2 3 4 5 .. ]
-[n E1149 levelStates INITIAL_STATE TRANSITION_TO_EMPTY EMPTY TRANSITION_TO_FULL TURN_ON_ALARM FINAL_STATE  ]
-[c E1157 0 1 .. ]
-[n E1157 tankStates TANK_IS_FULL TANK_IS_EMPTY  ]
+[c E1151 0 1 2 3 4 5 .. ]
+[n E1151 levelStates INITIAL_STATE TRANSITION_TO_EMPTY EMPTY TRANSITION_TO_FULL TURN_ON_ALARM FINAL_STATE  ]
+[c E1159 0 1 .. ]
+[n E1159 tankStates TANK_IS_FULL TANK_IS_EMPTY  ]
 "80 util.h
-[s S89 `E1149 1 `uc 1 `E1157 1 `Vi 1 ]
+[s S89 `E1151 1 `uc 1 `E1159 1 `Vi 1 ]
 [n S89 levelSensor LEVEL_STATE sensorRead TANK_STATE counter ]
 "40 main.c
-[c E1142 0 1 2 3 4 .. ]
-[n E1142 blinkStates LIGHTS_OFF POWER_ON FILTER_BLINK_FAST ALARM_BLINK_SLOW ALARM_SOLID_ON  ]
+[c E1144 0 1 2 3 4 .. ]
+[n E1144 blinkStates LIGHTS_OFF POWER_ON FILTER_BLINK_FAST ALARM_BLINK_SLOW ALARM_SOLID_ON  ]
 "41
 [c E1123 0 1 2 3 .. ]
 [n E1123 alarmStates ALARM_OFF ALARM_ON ALARM_DOUBLE_TIME ALARM_FINAL_STATE  ]
 "31 alarm_source.h
-[s S88 `E1123 1 `uc 1 `uc 1 ]
+[s S88 `E1123 1 `Vuc 1 `Vuc 1 ]
 [n S88 Alarm ALARM_STATE current_value trigger_value ]
 "2209 /opt/microchip/xc8/v1.34/include/pic16f876.h
 [v _TMR0IF `Vb ~T0 @X0 0 e@90 ]
@@ -67,8 +67,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _checkTankStatus `(v ~T0 @X0 0 ef1`*S89 ]
 "93
 [v _checkSensorState `(v ~T0 @X0 0 ef1`*S89 ]
-"21 alarm_source.h
-[v _hello_world `(v ~T0 @X0 0 ef ]
+"39 alarm_source.h
+[v _checkAlarmState `(v ~T0 @X0 0 ef2`*S89`*S88 ]
+"99 util.h
+[v _blinkLed `(v ~T0 @X0 0 ef4`*E1151`*E1151`*E1123`*E1144 ]
 "20 main.c
 [p x FOSC=HS ]
 "21
@@ -1068,11 +1070,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;alarm_source.h: 31: typedef struct Alarm
 [; ;alarm_source.h: 32: {
 [; ;alarm_source.h: 33: enum alarmStates ALARM_STATE;
-[; ;alarm_source.h: 34: uint8_t current_value;
-[; ;alarm_source.h: 35: uint8_t trigger_value;
-[; ;alarm_source.h: 39: }Alarm_t;
-[; ;alarm_source.h: 41: void checkAlarmState(struct levelSensor *theSensor, struct Alarm *theAlarm);
-[; ;alarm_source.h: 42: void turnAlarmOn(alarmStates_t theAlarmState);
+[; ;alarm_source.h: 34: volatile uint8_t current_value;
+[; ;alarm_source.h: 35: volatile uint8_t trigger_value;
+[; ;alarm_source.h: 37: }Alarm_t;
+[; ;alarm_source.h: 39: void checkAlarmState(struct levelSensor *theSensor, struct Alarm *theAlarm);
+[; ;alarm_source.h: 41: void turnAlarmOn(struct Alarm *theAlarm);
+[; ;alarm_source.h: 43: void turnAlarmOff(struct Alarm *theAlarm);
 "46 util.h
 [v _FILTERTMR_TO_FULL `Ci ~T0 @X0 1 e ]
 [i _FILTERTMR_TO_FULL
@@ -1116,7 +1119,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;util.h: 90: void checkTankStatus(levelSensor_t *theTankSensor);
 [; ;util.h: 93: void checkSensorState(struct levelSensor *theSensor);
 [; ;util.h: 96: void init_sensor(levelSensor_t *theSensor_init);
-[; ;util.h: 99: void blinkLed(levelStates_t *stateOne, levelStates_t *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
+[; ;util.h: 99: void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, blinkStates_t *blinkState);
 [; ;util.h: 102: void timer1_init(void);
 [; ;util.h: 105: void timer1_start(void);
 [; ;util.h: 108: void timer1_stop(void);
@@ -1132,29 +1135,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _levelSensors `S89 ~T0 @X0 -> 2 `i e ]
 [; ;main.c: 39: struct levelSensor levelSensors[2];
 "40
-[v _blinkState `E1142 ~T0 @X0 1 e ]
+[v _blinkState `E1144 ~T0 @X0 1 e ]
 [i _blinkState
-. `E1142 0
+. `E1144 0
 ]
 [; ;main.c: 40: enum blinkStates blinkState = LIGHTS_OFF;
 "41
-[v _theAlarm `VS88 ~T0 @X0 1 e ]
-[; ;main.c: 41: volatile struct Alarm theAlarm;
-[v F1203 `(v ~T0 @X0 1 tf ]
+[v _theAlarm `S88 ~T0 @X0 1 e ]
+[; ;main.c: 41: struct Alarm theAlarm;
+[v F1205 `(v ~T0 @X0 1 tf ]
 "43
-[v _ISR `IF1203 ~T0 @X0 1 e ]
+[v _ISR `IF1205 ~T0 @X0 1 e ]
 {
 [; ;main.c: 43: void interrupt ISR(){
 [e :U _ISR ]
 [f ]
 "44
-[v F1204 `i ~T0 @X0 1 s adcResult ]
-[i F1204
+[v F1206 `i ~T0 @X0 1 s adcResult ]
+[i F1206
 -> 0 `i
 ]
 "45
-[v F1205 `i ~T0 @X0 1 s blinkCounter ]
-[i F1205
+[v F1207 `i ~T0 @X0 1 s blinkCounter ]
+[i F1207
 -> 0 `i
 ]
 [; ;main.c: 44: static int adcResult = 0;
@@ -1174,7 +1177,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 94 ]
 [; ;main.c: 54: if((blinkCounter % 5) == 0)
 "54
-[e $ ! == % F1205 -> 5 `i -> 0 `i 95  ]
+[e $ ! == % F1207 -> 5 `i -> 0 `i 95  ]
 [; ;main.c: 55: {
 "55
 {
@@ -1193,7 +1196,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 96 ]
 [; ;main.c: 61: if((blinkCounter % 15) == 0)
 "61
-[e $ ! == % F1205 -> 15 `i -> 0 `i 97  ]
+[e $ ! == % F1207 -> 15 `i -> 0 `i 97  ]
 [; ;main.c: 62: {
 "62
 {
@@ -1231,19 +1234,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 92  ]
 "51
 [e :U 93 ]
-[e [\ _blinkState , $ . `E1142 2 94
- , $ . `E1142 3 96
- , $ . `E1142 4 98
- , $ . `E1142 0 99
+[e [\ _blinkState , $ . `E1144 2 94
+ , $ . `E1144 3 96
+ , $ . `E1144 4 98
+ , $ . `E1144 0 99
  100 ]
 "74
 [e :U 92 ]
 [; ;main.c: 75: blinkCounter ++;
 "75
-[e ++ F1205 -> 1 `i ]
-[; ;main.c: 76: blinkCounter %= 100;
+[e ++ F1207 -> 1 `i ]
+[; ;main.c: 76: blinkCounter %= 1000;
 "76
-[e =% F1205 -> -> 100 `uc `i ]
+[e =% F1207 -> -> 1000 `us `i ]
 [; ;main.c: 77: TMR0IF = 0;
 "77
 [e = _TMR0IF -> -> 0 `i `b ]
@@ -1255,31 +1258,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 "81
 [e $ ! && _TMR1IE _TMR1IF 101  ]
 {
-[; ;main.c: 84: switch(theAlarm.ALARM_STATE){
-"84
+[; ;main.c: 83: switch(theAlarm.ALARM_STATE){
+"83
 [e $U 103  ]
 {
-[; ;main.c: 85: case ALARM_ON:
-"85
+[; ;main.c: 84: case ALARM_ON:
+"84
 [e :U 104 ]
-[; ;main.c: 86: theAlarm.current_value += 1;
-"86
+[; ;main.c: 85: theAlarm.current_value += 1;
+"85
 [e =+ . _theAlarm 1 -> -> 1 `i `uc ]
-[; ;main.c: 87: break;
+[; ;main.c: 86: break;
+"86
+[e $U 102  ]
+[; ;main.c: 87: case ALARM_DOUBLE_TIME:
 "87
-[e $U 102  ]
-[; ;main.c: 88: case ALARM_DOUBLE_TIME:
-"88
 [e :U 105 ]
-[; ;main.c: 89: theAlarm.current_value += 3;
-"89
+[; ;main.c: 88: theAlarm.current_value += 3;
+"88
 [e =+ . _theAlarm 1 -> -> 3 `i `uc ]
-[; ;main.c: 90: break;
-"90
+[; ;main.c: 89: break;
+"89
 [e $U 102  ]
-[; ;main.c: 91: case ALARM_FINAL_STATE:
-"91
+[; ;main.c: 90: case ALARM_FINAL_STATE:
+"90
 [e :U 106 ]
+[; ;main.c: 91: default:
+"91
+[e :U 107 ]
 [; ;main.c: 92: timer1_stop();
 "92
 [e ( _timer1_stop ..  ]
@@ -1287,184 +1293,213 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [; ;main.c: 93: }
 [e $U 102  ]
-"84
+"83
 [e :U 103 ]
 [e [\ . _theAlarm 0 , $ . `E1123 1 104
  , $ . `E1123 2 105
  , $ . `E1123 3 106
- 102 ]
+ 107 ]
 "93
 [e :U 102 ]
-[; ;main.c: 95: TMR1IF = 0;
-"95
+[; ;main.c: 94: TMR1IF = 0;
+"94
 [e = _TMR1IF -> -> 0 `i `b ]
-"96
+"95
 }
 [e :U 101 ]
-[; ;main.c: 96: }
-[; ;main.c: 99: if(TMR2IF && TMR2IE){
+[; ;main.c: 95: }
+[; ;main.c: 98: if(TMR2IF && TMR2IE){
+"98
+[e $ ! && _TMR2IF _TMR2IE 108  ]
+{
+[; ;main.c: 99: if(levelSensors[0].LEVEL_STATE == TRANSITION_TO_EMPTY || levelSensors[0].LEVEL_STATE == TRANSITION_TO_FULL){
 "99
-[e $ ! && _TMR2IF _TMR2IE 107  ]
+[e $ ! || == -> . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1151 1 `i == -> . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1151 3 `i 109  ]
 {
-[; ;main.c: 100: if(levelSensors[0].LEVEL_STATE == TRANSITION_TO_EMPTY || levelSensors[0].LEVEL_STATE == TRANSITION_TO_FULL){
+[; ;main.c: 100: levelSensors[0].counter++;
 "100
-[e $ ! || == -> . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1149 1 `i == -> . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1149 3 `i 108  ]
-{
-[; ;main.c: 101: levelSensors[0].counter++;
-"101
 [e ++ . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 3 -> 1 `i ]
-"102
-}
-[e :U 108 ]
-[; ;main.c: 102: }
-[; ;main.c: 104: if(levelSensors[1].LEVEL_STATE == TRANSITION_TO_EMPTY || levelSensors[1].LEVEL_STATE == TRANSITION_TO_FULL){
-"104
-[e $ ! || == -> . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1149 1 `i == -> . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1149 3 `i 109  ]
-{
-[; ;main.c: 105: levelSensors[1].counter++;
-"105
-[e ++ . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 3 -> 1 `i ]
-"106
+"101
 }
 [e :U 109 ]
-[; ;main.c: 106: }
-[; ;main.c: 107: TMR2IF = 0;
-"107
-[e = _TMR2IF -> -> 0 `i `b ]
-"108
-}
-[e :U 107 ]
-[; ;main.c: 108: }
-[; ;main.c: 111: if(ADIF && ADIE){
-"111
-[e $ ! && _ADIF _ADIE 110  ]
+[; ;main.c: 101: }
+[; ;main.c: 103: if(levelSensors[1].LEVEL_STATE == TRANSITION_TO_EMPTY || levelSensors[1].LEVEL_STATE == TRANSITION_TO_FULL){
+"103
+[e $ ! || == -> . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1151 1 `i == -> . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 `i -> . `E1151 3 `i 110  ]
 {
-[; ;main.c: 112: adcResult = (ADRESH <<8) | (ADRESL);
-"112
-[e = F1204 | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;main.c: 113: theAlarm.trigger_value = adcResult >> 2;
-"113
-[e = . _theAlarm 2 -> >> F1204 -> 2 `i `uc ]
-[; ;main.c: 114: ADIF = 0;
-"114
-[e = _ADIF -> -> 0 `i `b ]
-"115
+[; ;main.c: 104: levelSensors[1].counter++;
+"104
+[e ++ . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 3 -> 1 `i ]
+"105
 }
 [e :U 110 ]
-[; ;main.c: 115: }
-[; ;main.c: 119: }
-"119
+[; ;main.c: 105: }
+[; ;main.c: 106: TMR2IF = 0;
+"106
+[e = _TMR2IF -> -> 0 `i `b ]
+"107
+}
+[e :U 108 ]
+[; ;main.c: 107: }
+[; ;main.c: 110: if(ADIF && ADIE){
+"110
+[e $ ! && _ADIF _ADIE 111  ]
+{
+[; ;main.c: 111: adcResult = (ADRESH <<8) | (ADRESL);
+"111
+[e = F1206 | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
+[; ;main.c: 112: theAlarm.trigger_value = adcResult >> 2;
+"112
+[e = . _theAlarm 2 -> >> F1206 -> 2 `i `uc ]
+[; ;main.c: 113: ADIF = 0;
+"113
+[e = _ADIF -> -> 0 `i `b ]
+"114
+}
+[e :U 111 ]
+[; ;main.c: 114: }
+[; ;main.c: 118: }
+"118
 [e :UE 90 ]
 }
-"124
+"123
 [v _main `(i ~T0 @X0 1 ef ]
 {
-[; ;main.c: 124: int main() {
+[; ;main.c: 123: int main() {
 [e :U _main ]
 [f ]
-[; ;main.c: 126: TRISA |= (1<<0);
-"126
-[e =| _TRISA -> << -> 1 `i -> 0 `i `uc ]
-[; ;main.c: 127: TRISB |= (1<<4)|(1<<5);
+"125
+[v _i `uc ~T0 @X0 1 a ]
+[; ;main.c: 125: char i = 0x00;
+[e = _i -> -> 0 `i `uc ]
+[; ;main.c: 127: TRISA |= (1<<0);
 "127
-[e =| _TRISB -> | << -> 1 `i -> 4 `i << -> 1 `i -> 5 `i `uc ]
-[; ;main.c: 128: TRISC &= ~((1<<2)|(1<<3));
+[e =| _TRISA -> << -> 1 `i -> 0 `i `uc ]
+[; ;main.c: 128: i = 0;
 "128
-[e =& _TRISC -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
-[; ;main.c: 129: TRISB &= ~((1<<3)|(1<<2));
+[e = _i -> -> 0 `i `uc ]
+[; ;main.c: 129: TRISB |= (1<<4)|(1<<5);
 "129
+[e =| _TRISB -> | << -> 1 `i -> 4 `i << -> 1 `i -> 5 `i `uc ]
+[; ;main.c: 130: TRISC &= ~((1<<2)|(1<<3));
+"130
+[e =& _TRISC -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
+[; ;main.c: 131: TRISB &= ~((1<<3)|(1<<2));
+"131
 [e =& _TRISB -> ~ | << -> 1 `i -> 3 `i << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 132: init_sensor(&levelSensors[0]);
-"132
+[; ;main.c: 134: init_sensor(&levelSensors[0]);
+"134
 [e ( _init_sensor (1 &U *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux ]
-[; ;main.c: 133: init_sensor(&levelSensors[1]);
-"133
+[; ;main.c: 135: init_sensor(&levelSensors[1]);
+"135
 [e ( _init_sensor (1 &U *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux ]
-[; ;main.c: 137: timer0_init();
-"137
-[e ( _timer0_init ..  ]
-[; ;main.c: 138: timer1_init();
-"138
-[e ( _timer1_init ..  ]
-[; ;main.c: 139: timer2_init();
+[; ;main.c: 139: timer0_init();
 "139
-[e ( _timer2_init ..  ]
-[; ;main.c: 140: adc_init_CH0();
+[e ( _timer0_init ..  ]
+[; ;main.c: 140: timer1_init();
 "140
-[e ( _adc_init_CH0 ..  ]
-[; ;main.c: 142: PORTC |= (1<<2);
+[e ( _timer1_init ..  ]
+[; ;main.c: 141: timer2_init();
+"141
+[e ( _timer2_init ..  ]
+[; ;main.c: 142: adc_init_CH0();
 "142
+[e ( _adc_init_CH0 ..  ]
+[; ;main.c: 144: PORTC |= (1<<2);
+"144
 [e =| _PORTC -> << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 143: PORTB &= ~((1<<2)|(1<<3));
-"143
-[e =& _PORTB -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
-[; ;main.c: 145: timer0_start();
+[; ;main.c: 145: PORTB &= ~((1<<2)|(1<<3));
 "145
+[e =& _PORTB -> ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
+[; ;main.c: 147: timer0_start();
+"147
 [e ( _timer0_start ..  ]
-[; ;main.c: 146: timer2_start();
-"146
+[; ;main.c: 148: timer2_start();
+"148
 [e ( _timer2_start ..  ]
-[; ;main.c: 149: while(1)
-"149
-[e :U 113 ]
-[; ;main.c: 150: {
-"150
-{
-[; ;main.c: 152: levelSensors[0].sensorRead = (PORTB & (1<<4));
-"152
-[e = . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 1 -> & -> _PORTB `i << -> 1 `i -> 4 `i `uc ]
-[; ;main.c: 153: levelSensors[1].sensorRead = (PORTB & (1<<5));
-"153
-[e = . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 1 -> & -> _PORTB `i << -> 1 `i -> 5 `i `uc ]
-[; ;main.c: 156: checkTankStatus(&levelSensors[1]);
-"156
-[e ( _checkTankStatus (1 &U *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux ]
-[; ;main.c: 159: checkSensorState(&levelSensors[1]);
-"159
-[e ( _checkSensorState (1 &U *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux ]
-[; ;main.c: 160: hello_world();
-"160
-[e ( _hello_world ..  ]
-"167
-}
-[e :U 112 ]
-"149
-[e $U 113  ]
+[; ;main.c: 151: while(1)
+"151
 [e :U 114 ]
-[; ;main.c: 167: }
-[; ;main.c: 172: while(1)
-"172
-[e :U 116 ]
-[; ;main.c: 173: {
-"173
+[; ;main.c: 152: {
+"152
 {
-[; ;main.c: 174: PORTC^=(1<<2);
-"174
-[e =^ _PORTC -> << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 175: for(int i=0;i<10000;i++);
+[; ;main.c: 153: levelSensors[0].sensorRead = (PORTB & (1<<4));
+"153
+[e = . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 1 -> & -> _PORTB `i << -> 1 `i -> 4 `i `uc ]
+[; ;main.c: 154: levelSensors[1].sensorRead = (PORTB & (1<<5));
+"154
+[e = . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 1 -> & -> _PORTB `i << -> 1 `i -> 5 `i `uc ]
+[; ;main.c: 156: for(i = 0; i < 2;i++)
+"156
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 2 `i 116  ]
+[e $U 117  ]
+"157
+[e :U 116 ]
+[; ;main.c: 157: {
+{
+[; ;main.c: 158: checkTankStatus(&levelSensors[i]);
+"158
+[e ( _checkTankStatus (1 &U *U + &U _levelSensors * -> _i `ux -> -> # *U &U _levelSensors `ui `ux ]
+[; ;main.c: 160: checkSensorState(&levelSensors[i]);
+"160
+[e ( _checkSensorState (1 &U *U + &U _levelSensors * -> _i `ux -> -> # *U &U _levelSensors `ui `ux ]
+[; ;main.c: 162: checkAlarmState(&levelSensors[i], &theAlarm);
+"162
+[e ( _checkAlarmState (2 , &U *U + &U _levelSensors * -> _i `ux -> -> # *U &U _levelSensors `ui `ux &U _theAlarm ]
+"163
+}
+"156
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 2 `i 116  ]
+[e :U 117 ]
+"163
+}
+[; ;main.c: 163: }
+[; ;main.c: 175: blinkLed(&(levelSensors[0].LEVEL_STATE), &(levelSensors[1].LEVEL_STATE), &(theAlarm.ALARM_STATE), &blinkState);
 "175
+[e ( _blinkLed (4 , , , &U . *U + &U _levelSensors * -> -> -> 0 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 &U . *U + &U _levelSensors * -> -> -> 1 `i `ui `ux -> -> # *U &U _levelSensors `ui `ux 0 &U . _theAlarm 0 &U _blinkState ]
+"177
+}
+[e :U 113 ]
+"151
+[e $U 114  ]
+[e :U 115 ]
+[; ;main.c: 177: }
+[; ;main.c: 182: while(1)
+"182
+[e :U 120 ]
+[; ;main.c: 183: {
+"183
+{
+[; ;main.c: 184: PORTC^=(1<<2);
+"184
+[e =^ _PORTC -> << -> 1 `i -> 2 `i `uc ]
+[; ;main.c: 185: for(int i=0;i<10000;i++);
+"185
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 118  ]
-[e $U 119  ]
-[e :U 118 ]
+[e $ < _i -> 10000 `i 122  ]
+[e $U 123  ]
+[e :U 122 ]
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 118  ]
+[e $ < _i -> 10000 `i 122  ]
+[e :U 123 ]
+}
+"187
+}
 [e :U 119 ]
-}
-"177
-}
-[e :U 115 ]
-"172
-[e $U 116  ]
-[e :U 117 ]
-[; ;main.c: 177: }
-[; ;main.c: 178: return (0);
-"178
+"182
+[e $U 120  ]
+[e :U 121 ]
+[; ;main.c: 187: }
+[; ;main.c: 188: return (0);
+"188
 [e ) -> 0 `i ]
-[e $UE 111  ]
-[; ;main.c: 179: }
-"179
-[e :UE 111 ]
+[e $UE 112  ]
+[; ;main.c: 189: }
+"189
+[e :UE 112 ]
 }

@@ -79,7 +79,13 @@ void checkSensorState(struct levelSensor *theSensor)
             case TURN_ON_ALARM :                          //Alarm Started
                 //ALMPORT |= LGTOUT;       //Debug
                 //Do Nothing at this point
+                theSensor->LEVEL_STATE = FINAL_STATE;
                 break;
+
+        case FINAL_STATE:
+        default:
+            //Do Nothing
+            break;
         }
 }
 
@@ -95,13 +101,14 @@ void init_sensor(levelSensor_t *theSensor_init)
 
 }
 
-void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, alarmStates_t *almState, enum blinkStates *blinkState)
+void blinkLed(enum levelStates *stateOne, enum levelStates *stateTwo, enum alarmStates *almState, blinkStates_t *blinkState)
 {
     if(*stateOne == TRANSITION_TO_EMPTY || *stateOne == TRANSITION_TO_FULL || *stateTwo == TRANSITION_TO_EMPTY || *stateTwo == TRANSITION_TO_FULL)
     {
         *blinkState = FILTER_BLINK_FAST ;    //Blink Fast
 
-    }else if(*almState == ALARM_ON || *almState == ALARM_DOUBLE_TIME)
+    }
+    else if(*almState == ALARM_ON || *almState == ALARM_DOUBLE_TIME)
     {
         *blinkState = ALARM_BLINK_SLOW;
 
