@@ -1637,8 +1637,8 @@ TMR2IF = 0;
 
 
 if(ADIF && ADIE){
-adcResult = (ADRESH <<8) | (ADRESL);
-theAlarm.trigger_value = adcResult >> 2;
+
+theAlarm.trigger_value = ADRESH;
 ADIF = 0;
 }
 

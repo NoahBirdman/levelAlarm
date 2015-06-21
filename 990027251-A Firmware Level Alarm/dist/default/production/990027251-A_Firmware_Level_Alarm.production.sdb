@@ -128,7 +128,7 @@ ALARM_FINAL_STATE 3
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "270
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
-[s S223 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S222 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -138,38 +138,38 @@ ALARM_FINAL_STATE 3
 `uc 1 GIE 1 0 :1:7 
 ]
 "373
-[s S232 . 1 `uc 1 . 1 0 :2:0 
+[s S231 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S237 . 1 `S223 1 . 1 0 `S232 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES237  1 e 1 @11 ]
-[s S166 . 1 `uc 1 TMR1ON 1 0 :1:0 
+[u S236 . 1 `S222 1 . 1 0 `S231 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES236  1 e 1 @11 ]
+[s S165 . 1 `uc 1 TMR1ON 1 0 :1:0 
 `uc 1 TMR1CS 1 0 :1:1 
 `uc 1 nT1SYNC 1 0 :1:2 
 `uc 1 T1OSCEN 1 0 :1:3 
 `uc 1 T1CKPS 1 0 :2:4 
 ]
 "559
-[s S172 . 1 `uc 1 . 1 0 :4:0 
+[s S171 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 T1CKPS0 1 0 :1:4 
 `uc 1 T1CKPS1 1 0 :1:5 
 ]
-[s S176 . 1 `uc 1 . 1 0 :2:0 
+[s S175 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T1INSYNC 1 0 :1:2 
 ]
-[s S179 . 1 `uc 1 . 1 0 :2:0 
+[s S178 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T1SYNC 1 0 :1:2 
 ]
-[u S182 . 1 `S166 1 . 1 0 `S172 1 . 1 0 `S176 1 . 1 0 `S179 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES182  1 e 1 @16 ]
-[s S255 . 1 `uc 1 T2CKPS 1 0 :2:0 
+[u S181 . 1 `S165 1 . 1 0 `S171 1 . 1 0 `S175 1 . 1 0 `S178 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES181  1 e 1 @16 ]
+[s S254 . 1 `uc 1 T2CKPS 1 0 :2:0 
 `uc 1 TMR2ON 1 0 :1:2 
 `uc 1 TOUTPS 1 0 :4:3 
 ]
 "635
-[s S259 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+[s S258 . 1 `uc 1 T2CKPS0 1 0 :1:0 
 `uc 1 T2CKPS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 TOUTPS0 1 0 :1:3 
@@ -177,18 +177,18 @@ ALARM_FINAL_STATE 3
 `uc 1 TOUTPS2 1 0 :1:5 
 `uc 1 TOUTPS3 1 0 :1:6 
 ]
-[u S267 . 1 `S255 1 . 1 0 `S259 1 . 1 0 ]
-[v _T2CONbits T2CONbits `VES267  1 e 1 @18 ]
+[u S266 . 1 `S254 1 . 1 0 `S258 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES266  1 e 1 @18 ]
 "1015
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
-[s S309 . 1 `uc 1 ADON 1 0 :1:0 
+[s S308 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 GO_nDONE 1 0 :1:2 
 `uc 1 CHS 1 0 :3:3 
 `uc 1 ADCS 1 0 :2:6 
 ]
 "1052
-[s S315 . 1 `uc 1 . 1 0 :2:0 
+[s S314 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GO 1 0 :1:2 
 `uc 1 CHS0 1 0 :1:3 
 `uc 1 CHS1 1 0 :1:4 
@@ -196,15 +196,15 @@ ALARM_FINAL_STATE 3
 `uc 1 ADCS0 1 0 :1:6 
 `uc 1 ADCS1 1 0 :1:7 
 ]
-[s S323 . 1 `uc 1 . 1 0 :2:0 
+[s S322 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nDONE 1 0 :1:2 
 ]
-[s S326 . 1 `uc 1 . 1 0 :2:0 
+[s S325 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GO_DONE 1 0 :1:2 
 ]
-[u S329 . 1 `S309 1 . 1 0 `S315 1 . 1 0 `S323 1 . 1 0 `S326 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES329  1 e 1 @31 ]
-[s S283 . 1 `uc 1 PS 1 0 :3:0 
+[u S328 . 1 `S308 1 . 1 0 `S314 1 . 1 0 `S322 1 . 1 0 `S325 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES328  1 e 1 @31 ]
+[s S282 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -212,19 +212,19 @@ ALARM_FINAL_STATE 3
 `uc 1 nRBPU 1 0 :1:7 
 ]
 "1136
-[s S290 . 1 `uc 1 PS0 1 0 :1:0 
+[s S289 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 ]
-[u S294 . 1 `S283 1 . 1 0 `S290 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES294  1 e 1 @129 ]
+[u S293 . 1 `S282 1 . 1 0 `S289 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES293  1 e 1 @129 ]
 "1185
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1234
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "1295
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
-[s S204 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S203 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -233,22 +233,20 @@ ALARM_FINAL_STATE 3
 `uc 1 ADIE 1 0 :1:6 
 ]
 "1372
-[u S212 . 1 `S204 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES212  1 e 1 @140 ]
-"1803
-[v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
-[s S355 . 1 `uc 1 PCFG 1 0 :4:0 
+[u S211 . 1 `S203 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES211  1 e 1 @140 ]
+[s S354 . 1 `uc 1 PCFG 1 0 :4:0 
 `uc 1 . 1 0 :3:4 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "1827
-[s S359 . 1 `uc 1 PCFG0 1 0 :1:0 
+[s S358 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
 `uc 1 PCFG3 1 0 :1:3 
 ]
-[u S364 . 1 `S355 1 . 1 0 `S359 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES364  1 e 1 @159 ]
+[u S363 . 1 `S354 1 . 1 0 `S358 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES363  1 e 1 @159 ]
 "1955
 [v _ADIE ADIE `VEb  1 e 0 @1126 ]
 "1957
@@ -281,7 +279,7 @@ ALARM_FINAL_STATE 3
 [v _main main `(i  1 e 2 0 ]
 {
 "185
-[v main@i_139 i `i  1 a 2 11 ]
+[v main@i_138 i `i  1 a 2 11 ]
 "125
 [v main@i i `uc  1 a 1 13 ]
 "189
@@ -386,7 +384,7 @@ ALARM_FINAL_STATE 3
 [v blinkLed@stateOne stateOne `*.4E1033  1 a 1 wreg ]
 [v blinkLed@stateTwo stateTwo `*.4E1033  1 p 1 0 ]
 [v blinkLed@almState almState `*.4E1005  1 p 1 1 ]
-[v blinkLed@blinkState blinkState `*.4E1026  1 p 1 2 ]
+[v blinkLed@blinkState blinkState `*.1E1026  1 p 1 2 ]
 "106
 [v blinkLed@stateOne stateOne `*.4E1033  1 a 1 4 ]
 "125
@@ -412,8 +410,6 @@ ALARM_FINAL_STATE 3
 "43 /home/birdman/Documents/projects/altec/levelAlarm/990027251-A Firmware Level Alarm/main.c
 [v _ISR ISR `II(v  1 e 0 0 ]
 {
-"44
-[v ISR@adcResult adcResult `i  1 s 2 adcResult ]
 "45
 [v ISR@blinkCounter blinkCounter `i  1 s 2 blinkCounter ]
 "118

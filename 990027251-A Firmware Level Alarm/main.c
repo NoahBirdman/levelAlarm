@@ -41,9 +41,7 @@ enum blinkStates blinkState = LIGHTS_OFF; //Determines the blinking pattern of A
 struct Alarm theAlarm;
 
 void interrupt ISR(){
-    static int adcResult = 0;
     static int blinkCounter =0;
-   // TODO: Fix patterns for ALMLED Blinking
 
    //Timer 0 Overflow - Filter for LVL One
     if(TMR0IF && TMR0IE){
@@ -108,8 +106,7 @@ void interrupt ISR(){
 
     //ADC Interrupt Flag
     if(ADIF && ADIE){
-       adcResult = (ADRESH <<8) | (ADRESL);
-       theAlarm.trigger_value = adcResult >> 2;
+       theAlarm.trigger_value = ADRESH;
        ADIF = 0;
     }
     

@@ -196,7 +196,7 @@ void adc_init_CH0(){
     ADCON0bits.ADCS = 0x00;     //Clock /2
     ADCON0bits.CHS = 0x00;      //Channel 0 - RA0
 
-    ADCON1bits.ADFM = 1;        //Right Justified
+    ADCON1bits.ADFM = 0;        //Left Justified
     ADCON1bits.PCFG = 0x00;     //Channel 0 - VDD
 
 }

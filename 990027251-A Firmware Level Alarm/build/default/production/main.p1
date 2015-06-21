@@ -38,8 +38,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADIE `Vb ~T0 @X0 0 e@1126 ]
 "1015
 [v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
-"1803
-[v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
 [p mainexit ]
 "1185
 [v _TRISA `Vuc ~T0 @X0 0 e@133 ]
@@ -1345,12 +1343,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "110
 [e $ ! && _ADIF _ADIE 111  ]
 {
-[; ;main.c: 111: adcResult = (ADRESH <<8) | (ADRESL);
-"111
-[e = F1206 | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;main.c: 112: theAlarm.trigger_value = adcResult >> 2;
+[; ;main.c: 112: theAlarm.trigger_value = ADRESH;
 "112
-[e = . _theAlarm 2 -> >> F1206 -> 2 `i `uc ]
+[e = . _theAlarm 2 _ADRESH ]
 [; ;main.c: 113: ADIF = 0;
 "113
 [e = _ADIF -> -> 0 `i `b ]

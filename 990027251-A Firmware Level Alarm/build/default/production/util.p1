@@ -1582,9 +1582,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;util.c: 197: ADCON0bits.CHS = 0x00;
 "197
 [e = . . _ADCON0bits 0 3 -> -> 0 `i `uc ]
-[; ;util.c: 199: ADCON1bits.ADFM = 1;
+[; ;util.c: 199: ADCON1bits.ADFM = 0;
 "199
-[e = . . _ADCON1bits 0 2 -> -> 1 `i `uc ]
+[e = . . _ADCON1bits 0 2 -> -> 0 `i `uc ]
 [; ;util.c: 200: ADCON1bits.PCFG = 0x00;
 "200
 [e = . . _ADCON1bits 0 0 -> -> 0 `i `uc ]

@@ -1679,7 +1679,7 @@ void adc_init_CH0(){
 ADCON0bits.ADCS = 0x00;
 ADCON0bits.CHS = 0x00;
 
-ADCON1bits.ADFM = 1;
+ADCON1bits.ADFM = 0;
 ADCON1bits.PCFG = 0x00;
 
 }
